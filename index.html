@@ -64,108 +64,7 @@
       align-items: center;
       transition: none;
     }
-    /* --- Mobile improvements --- */
-    @media (max-width: 700px) {
-      body {
-        padding: 0;
-        margin: 0;
-      }
-      header {
-        padding: 0 0 0 8px;
-        height: 56px;
-        min-height: 56px;
-        border-radius: 0 0 18px 18px;
-      }
-      .logo span {
-        font-size: 1.05rem !important;
-      }
-      .hero {
-        padding-top: 64px !important;
-        padding-bottom: 18px !important;
-      }
-      .hero-content {
-        min-height: 220px !important;
-        padding: 0 8vw 0 8vw !important;
-        align-items: flex-start !important;
-      }
-      .hero-content h1 {
-        font-size: 1.25rem !important;
-      }
-      .hero-content h2 {
-        font-size: 1.05rem !important;
-      }
-      .hero-content p {
-        font-size: 1rem !important;
-        max-width: 98vw !important;
-      }
-      .hero-img-float {
-        width: 120px !important;
-        height: 120px !important;
-        margin-left: 0 !important;
-      }
-      .hero-img-circle {
-        width: 100px !important;
-        height: 100px !important;
-      }
-      .hero-img-glow {
-        width: 150px !important;
-        height: 90px !important;
-      }
-      .hero-actions {
-        flex-direction: column !important;
-        gap: 10px !important;
-        width: 100%;
-        align-items: flex-start !important;
-      }
-      .btn-primary, .btn-outline {
-        width: 100%;
-        font-size: 1rem !important;
-        padding: 13px 0 !important;
-        margin-right: 0 !important;
-      }
-      .scroll-down {
-        font-size: 1.1rem !important;
-        gap: 2px !important;
-      }
-      .section-title {
-        font-size: 1.15rem !important;
-        padding-left: 2vw;
-      }
-      .projects, .about, .skills {
-        flex-direction: column !important;
-        gap: 12px !important;
-        padding: 0 4vw !important;
-      }
-      .project-card {
-        padding: 16px 8px !important;
-        font-size: 0.98rem !important;
-      }
-      .about-img img {
-        width: 90px !important;
-        height: 90px !important;
-      }
-      .about-content h3 {
-        font-size: 1.08rem !important;
-      }
-      .about-content p {
-        font-size: 0.98rem !important;
-      }
-      .skills {
-        flex-wrap: wrap !important;
-        gap: 6px !important;
-      }
-      .skill {
-        font-size: 0.92rem !important;
-        padding: 4px 10px !important;
-      }
-      section {
-        padding-bottom: 18px !important;
-      }
-      footer {
-        font-size: 0.95rem !important;
-        padding: 18px 4vw !important;
-      }
-    }
+    /* --- Mobile improvements removed: all text, photo, and button sizes now match laptop view --- */
     @media (max-width: 700px) {
       .hamburger {
         display: flex;
@@ -236,7 +135,7 @@
       <h2 style="margin-bottom:18px;">Full Stack Developer &amp; UI/UX Enthusiast</h2>
         <p style="font-size:1.18rem;color:#bfc7d5;margin-bottom:22px;max-width:480px;">I build beautiful, performant web apps and digital experiences.<br>I love solving real-world problems with code, design, and a touch of creativity.</p>
         <div style="display:flex;gap:24px;margin-bottom:22px;">
-          <a href="https://github.com/WentiQ" target="_blank" rel="noopener" title="GitHub" style="color:#f3f6fa;font-size:1.7rem;"><svg height="28" width="28" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.01.08-2.11 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.91.08 2.11.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.19 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+          <a href="https://github.com/WentiQ" target="_blank" rel="noopener" title="GitHub" style="color:#4f8cff;font-size:1.7rem;"><svg height="28" width="28" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.01.08-2.11 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.91.08 2.11.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.19 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
           <a href="https://www.linkedin.com/in/dinesh-polavarapu-134029306" target="_blank" rel="noopener" title="LinkedIn" style="color:#0a66c2;font-size:1.7rem;"><svg height="28" width="28" fill="currentColor" viewBox="0 0 16 16"><path d="M1.146 1.146C.417 1.875.417 3.125 1.146 3.854c.729.729 1.979.729 2.708 0 .729-.729.729-1.979 0-2.708-.729-.729-1.979-.729-2.708 0zM0 5.5h3V16H0V5.5zm5.5 0h2.75v1.43h.04c.38-.72 1.3-1.48 2.68-1.48C14.42 5.45 16 7.13 16 10.08V16h-3V10.5c0-1.31-.02-3-1.83-3-1.83 0-2.11 1.43-2.11 2.9V16h-3V5.5z"/></svg></a>
           <a href="https://facebook.com/" target="_blank" rel="noopener" title="Facebook" style="color:#1877f3;font-size:1.7rem;"><svg height="28" width="28" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0h-21.35C.595 0 0 .592 0 1.326v21.348C0 23.408.595 24 1.326 24h11.495v-9.294H9.691v-3.622h3.13V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.797.143v3.24l-1.918.001c-1.504 0-1.797.715-1.797 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116C23.406 24 24 23.408 24 22.674V1.326C24 .592 23.406 0 22.675 0"/></svg></a>
         </div>
