@@ -8,9 +8,18 @@
   <link rel="stylesheet" href="styles.css">  <!-- Updated to use styles.css -->
 </head>
 <body>
+  <div class="fluid-bg">
+    <div class="fluid-blob fluid-blob1"></div>
+    <div class="fluid-blob fluid-blob2"></div>
+    <div class="fluid-blob fluid-blob3"></div>
+    <div class="fluid-blob fluid-blob4"></div>
+  </div>
   <header>
-    <div class="logo">Dinesh Polavarapu <span style="font-size:1.2rem;color:#f3f6fa;">Portfolio</span></div>
-    <nav>
+    <div class="logo"> <span style="font-size:1.2rem;color:#f3f6fa;">Portfolio</span></div>
+    <button class="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav-menu">
       <a href="#home">Home</a>
       <a href="#projects">Projects</a>
       <a href="#about">About</a>
@@ -18,22 +27,249 @@
     </nav>
   </header>
   <script src="script.js"></script> <!-- Added script.js for interactivity -->
+  <style>
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 44px;
+      height: 44px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 120;
+    }
+    .hamburger span {
+      display: block;
+      width: 28px;
+      height: 3.5px;
+      margin: 4px 0;
+      background: #4f8cff;
+      border-radius: 2px;
+      transition: all 0.3s cubic-bezier(.4,1.4,.6,1);
+    }
+    .hamburger.active span:nth-child(1) {
+      transform: translateY(7.5px) rotate(45deg);
+    }
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.active span:nth-child(3) {
+      transform: translateY(-7.5px) rotate(-45deg);
+    }
+    nav.nav-menu {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+      transition: none;
+    }
+    /* --- Mobile improvements --- */
+    @media (max-width: 700px) {
+      body {
+        padding: 0;
+        margin: 0;
+      }
+      header {
+        padding: 0 0 0 8px;
+        height: 56px;
+        min-height: 56px;
+        border-radius: 0 0 18px 18px;
+      }
+      .logo span {
+        font-size: 1.05rem !important;
+      }
+      .hero {
+        padding-top: 64px !important;
+        padding-bottom: 18px !important;
+      }
+      .hero-content {
+        min-height: 220px !important;
+        padding: 0 8vw 0 8vw !important;
+        align-items: flex-start !important;
+      }
+      .hero-content h1 {
+        font-size: 1.25rem !important;
+      }
+      .hero-content h2 {
+        font-size: 1.05rem !important;
+      }
+      .hero-content p {
+        font-size: 1rem !important;
+        max-width: 98vw !important;
+      }
+      .hero-img-float {
+        width: 120px !important;
+        height: 120px !important;
+        margin-left: 0 !important;
+      }
+      .hero-img-circle {
+        width: 100px !important;
+        height: 100px !important;
+      }
+      .hero-img-glow {
+        width: 150px !important;
+        height: 90px !important;
+      }
+      .hero-actions {
+        flex-direction: column !important;
+        gap: 10px !important;
+        width: 100%;
+        align-items: flex-start !important;
+      }
+      .btn-primary, .btn-outline {
+        width: 100%;
+        font-size: 1rem !important;
+        padding: 13px 0 !important;
+        margin-right: 0 !important;
+      }
+      .scroll-down {
+        font-size: 1.1rem !important;
+        gap: 2px !important;
+      }
+      .section-title {
+        font-size: 1.15rem !important;
+        padding-left: 2vw;
+      }
+      .projects, .about, .skills {
+        flex-direction: column !important;
+        gap: 12px !important;
+        padding: 0 4vw !important;
+      }
+      .project-card {
+        padding: 16px 8px !important;
+        font-size: 0.98rem !important;
+      }
+      .about-img img {
+        width: 90px !important;
+        height: 90px !important;
+      }
+      .about-content h3 {
+        font-size: 1.08rem !important;
+      }
+      .about-content p {
+        font-size: 0.98rem !important;
+      }
+      .skills {
+        flex-wrap: wrap !important;
+        gap: 6px !important;
+      }
+      .skill {
+        font-size: 0.92rem !important;
+        padding: 4px 10px !important;
+      }
+      section {
+        padding-bottom: 18px !important;
+      }
+      footer {
+        font-size: 0.95rem !important;
+        padding: 18px 4vw !important;
+      }
+    }
+    @media (max-width: 700px) {
+      .hamburger {
+        display: flex;
+      }
+      nav.nav-menu {
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        width: 220px;
+        background: rgba(28,32,38,0.98);
+        box-shadow: -2px 0 24px 0 rgba(79,140,255,0.13);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 84px 24px 24px 24px;
+        gap: 18px;
+        transform: translateX(100%);
+        transition: transform 0.32s cubic-bezier(.4,1.4,.6,1);
+        z-index: 110;
+      }
+      nav.nav-menu.open {
+        transform: translateX(0);
+      }
+      header nav.nav-menu a {
+        font-size: 1.18rem;
+        color: #f3f6fa;
+        width: 100%;
+        padding: 12px 0;
+        border-bottom: 1px solid #23272b;
+      }
+      header nav.nav-menu a:last-child {
+        border-bottom: none;
+      }
+      header {
+        padding-right: 0;
+      }
+    }
+    @media (max-width: 400px) {
+      nav.nav-menu {
+        width: 100vw;
+        padding: 84px 8vw 24px 8vw;
+      }
+    }
+  </style>
+  <script>
+    // Hamburger menu toggle
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('nav.nav-menu');
+    hamburger.addEventListener('click', function() {
+      const isOpen = navMenu.classList.toggle('open');
+      hamburger.classList.toggle('active');
+      hamburger.setAttribute('aria-expanded', isOpen);
+    });
+    // Close menu on link click (mobile)
+    navMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('open');
+        hamburger.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', false);
+      });
+    });
+  </script>
   <main>
-    <section class="hero" id="home">
-      <div class="hero-content">
-        <h1>Hello, I'm <span style="color:#4f8cff;">Dinesh Polavarapu</span></h1>
-        <h2>Full Stack Developer & UI/UX Enthusiast</h2>
-        <p>I build beautiful, performant web apps and digital experiences. I love solving real-world problems with code, design, and a touch of creativity.</p>
+    <section class="hero scroll-fade-up" id="home">
+      <div class="hero-content" style="display:flex;flex-direction:column;align-items:flex-start;justify-content:center;min-height:340px;">
+        <!-- <h1 style="margin-bottom:10px;">Hello, I'm <span style="color:#4f8cff;">Dinesh Polavarapu</span></h1> -->
+      <h1 style="margin-bottom:10px;">Hello, I'm <span class="fluid-gradient-text">Dinesh Polavarapu</span></h1>
+      <h2 style="margin-bottom:18px;">Full Stack Developer &amp; UI/UX Enthusiast</h2>
+        <p style="font-size:1.18rem;color:#bfc7d5;margin-bottom:22px;max-width:480px;">I build beautiful, performant web apps and digital experiences.<br>I love solving real-world problems with code, design, and a touch of creativity.</p>
+        <div style="display:flex;gap:24px;margin-bottom:22px;">
+          <a href="https://github.com/WentiQ" target="_blank" rel="noopener" title="GitHub" style="color:#f3f6fa;font-size:1.7rem;"><svg height="28" width="28" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.01.08-2.11 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.91.08 2.11.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.19 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+          <a href="https://www.linkedin.com/in/dinesh-polavarapu-134029306" target="_blank" rel="noopener" title="LinkedIn" style="color:#0a66c2;font-size:1.7rem;"><svg height="28" width="28" fill="currentColor" viewBox="0 0 16 16"><path d="M1.146 1.146C.417 1.875.417 3.125 1.146 3.854c.729.729 1.979.729 2.708 0 .729-.729.729-1.979 0-2.708-.729-.729-1.979-.729-2.708 0zM0 5.5h3V16H0V5.5zm5.5 0h2.75v1.43h.04c.38-.72 1.3-1.48 2.68-1.48C14.42 5.45 16 7.13 16 10.08V16h-3V10.5c0-1.31-.02-3-1.83-3-1.83 0-2.11 1.43-2.11 2.9V16h-3V5.5z"/></svg></a>
+          <a href="https://facebook.com/" target="_blank" rel="noopener" title="Facebook" style="color:#1877f3;font-size:1.7rem;"><svg height="28" width="28" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0h-21.35C.595 0 0 .592 0 1.326v21.348C0 23.408.595 24 1.326 24h11.495v-9.294H9.691v-3.622h3.13V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.797.143v3.24l-1.918.001c-1.504 0-1.797.715-1.797 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116C23.406 24 24 23.408 24 22.674V1.326C24 .592 23.406 0 22.675 0"/></svg></a>
+        </div>
         <div class="hero-actions">
           <a href="#projects" class="btn-primary">View Projects</a>
           <a href="#contact" class="btn-outline">Contact Me</a>
+          <a href="resume.pdf" class="btn-primary" style="background:#23272b;color:#4f8cff;border:2px solid #4f8cff;" download>Download Resume</a>
         </div>
       </div>
       <div class="hero-img">
-        <img src="images/dinesh.webp" alt="Profile Photo" />
+        <div class="hero-img-float">
+          <div class="hero-img-glow"></div>
+          <img src="images/dinesh.webp" alt="Profile Photo" class="hero-img-circle" />
+        </div>
+      </div>
+      <div style="width:100%;display:flex;justify-content:center;align-items:end;position:absolute;left:0;bottom:24px;">
+        <a href="#projects" class="scroll-down" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+          <span style="color:#4f8cff;font-size:2.2rem;animation:bounce 1.5s infinite alternate;">&#8595;</span>
+          <span style="color:#bfc7d5;font-size:0.98rem;">Scroll Down</span>
+        </a>
       </div>
     </section>
-    <section id="projects">
+</main>
+<style>
+@keyframes bounce {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(18px); }
+}
+.scroll-down:hover span:first-child {
+  color: #2563eb;
+}
+</style>
+    <section id="projects" class="scroll-fade-up">
       <div class="section-title">Featured Projects</div>
       <div class="projects">
         <div class="project-card">
@@ -77,7 +313,7 @@
         </div>
       </div>
     </section>
-    <section id="about">
+    <section id="about" class="scroll-fade-up">
       <div class="section-title">About Me</div>
       <div class="about">
         <div class="about-img">
@@ -101,7 +337,25 @@
         </div>
       </div>
     </section>
-    <section id="contact">
+    <section id="contact" class="scroll-fade-up">
+  <script src="script.js"></script> <!-- Added script.js for interactivity -->
+  <script>
+    // Scroll fade-in-up animation for sections
+    function revealOnScroll() {
+      const reveals = document.querySelectorAll('.scroll-fade-up');
+      const windowHeight = window.innerHeight;
+      for (const el of reveals) {
+        const top = el.getBoundingClientRect().top;
+        if (top < windowHeight - 80) {
+          el.classList.add('visible');
+        } else {
+          el.classList.remove('visible');
+        }
+      }
+    }
+    window.addEventListener('scroll', revealOnScroll);
+    window.addEventListener('DOMContentLoaded', revealOnScroll);
+  </script>
       <div class="section-title">Contact</div>
       <div style="display:flex;justify-content:center;align-items:center;min-height:120px;">
         <a href="mailto:dineshpolavarapu66@gmail.com" class="btn-primary" style="padding:16px 40px;font-size:1.15rem;border-radius:8px;text-decoration:none;">Email Me</a>
