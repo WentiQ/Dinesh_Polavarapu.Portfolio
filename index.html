@@ -8,19 +8,185 @@
   <link rel="stylesheet" href="styles.css">  <!-- Updated to use styles.css -->
 </head>
 <body>
-  <div class="fluid-bg">
-    <div class="fluid-blob fluid-blob1"></div>
-    <div class="fluid-blob fluid-blob2"></div>
-    <div class="fluid-blob fluid-blob3"></div>
-    <div class="fluid-blob fluid-blob4"></div>
+  <div class="cs-ai-entre-bg">
+    <canvas id="csAiEntreCanvas"></canvas>
   </div>
+  <style>
+    .cs-ai-entre-bg {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+      background: linear-gradient(120deg, #181b1f 70%, #23272b 100%);
+    }
+    #csAiEntreCanvas {
+      width: 100vw;
+      height: 100vh;
+      display: block;
+    }
+  </style>
+  <script>
+  // Computer Science, AI, and Entrepreneurship Animated Background
+  document.addEventListener('DOMContentLoaded', function() {
+    const canvas = document.getElementById('csAiEntreCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let w = window.innerWidth, h = window.innerHeight;
+    function resize() {
+      w = window.innerWidth; h = window.innerHeight;
+      canvas.width = w; canvas.height = h;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    // --- Animated Elements ---
+    // 1. Floating code snippets (<> { } AI)
+    // 2. Neural network nodes/links
+    // 3. Circuit lines
+    // 4. Lightbulbs, rockets, graphs
+
+    // --- Helper functions ---
+    function rand(a, b) { return a + Math.random() * (b - a); }
+    function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+    // --- Code Snippets ---
+    const codeSnippets = ['<AI>', '{ }', 'def', 'λ', 'if()', 'while()', 'Σ', 'π', 'data', '1010', '0xFF', '∑', '∫', 'f(x)', 'AI', 'ML', 'NN', 'SaaS', 'API', '🚀', '💡', '📈'];
+    const codeObjs = Array.from({length: 18}, () => ({
+      x: rand(0, w),
+      y: rand(0, h),
+      vy: rand(0.12, 0.32),
+      vx: rand(-0.08, 0.08),
+      txt: pick(codeSnippets),
+      size: rand(18, 38),
+      color: pick(['#4f8cff','#22c55e','#00e0d3','#7f53ff','#fff','#bfc7d5']),
+      rot: rand(-0.2,0.2),
+      rotSpeed: rand(-0.002,0.002)
+    }));
+
+    // --- Neural Network Nodes ---
+    const nodes = Array.from({length: 13}, (_,i) => ({
+      x: rand(0.12*w, 0.88*w),
+      y: rand(0.12*h, 0.88*h),
+      r: rand(7, 16),
+      vx: rand(-0.09,0.09),
+      vy: rand(-0.09,0.09),
+      color: pick(['#00e0d3','#4f8cff','#22c55e','#7f53ff'])
+    }));
+    // Links between nodes
+    const links = [];
+    for(let i=0;i<nodes.length;i++){
+      for(let j=i+1;j<nodes.length;j++){
+        if(Math.random()<0.32) links.push([i,j]);
+      }
+    }
+
+    // --- Circuit Lines ---
+    const circuits = Array.from({length: 8}, () => ({
+      x: rand(0,w),
+      y: rand(0,h),
+      len: rand(80, 220),
+      angle: rand(0, Math.PI*2),
+      speed: rand(-0.003,0.003),
+      color: pick(['#00e0d3','#4f8cff','#22c55e','#7f53ff','#fff'])
+    }));
+
+    // --- Entrepreneurship Icons ---
+    const icons = [
+      {draw: (x,y,s)=>{ctx.save();ctx.translate(x,y);ctx.scale(s,s);ctx.rotate(-0.1);ctx.beginPath();ctx.arc(0,0,12,0,2*Math.PI);ctx.fillStyle='#ffe066';ctx.shadowColor='#fff8';ctx.shadowBlur=8;ctx.fill();ctx.beginPath();ctx.moveTo(0,12);ctx.lineTo(0,22);ctx.strokeStyle='#bfc7d5';ctx.lineWidth=3;ctx.stroke();ctx.restore();}, vy:0.18, emoji:'💡'}, // lightbulb
+      {draw: (x,y,s)=>{ctx.save();ctx.translate(x,y);ctx.scale(s,s);ctx.rotate(0.1);ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(0,-18);ctx.lineTo(7,-10);ctx.lineTo(0,0);ctx.fillStyle='#4f8cff';ctx.shadowColor='#00e0d3';ctx.shadowBlur=8;ctx.fill();ctx.restore();}, vy:0.22, emoji:'🚀'}, // rocket
+      {draw: (x,y,s)=>{ctx.save();ctx.translate(x,y);ctx.scale(s,s);ctx.beginPath();ctx.moveTo(-10,10);ctx.lineTo(0,-10);ctx.lineTo(10,10);ctx.closePath();ctx.fillStyle='#22c55e';ctx.shadowColor='#4f8cff';ctx.shadowBlur=8;ctx.fill();ctx.restore();}, vy:0.15, emoji:'📈'} // graph
+    ];
+    const iconObjs = Array.from({length: 7}, () => {
+      const icon = pick(icons);
+      return {
+        x: rand(0,w),
+        y: rand(0,h),
+        vy: icon.vy * rand(0.8,1.2),
+        s: rand(0.7,1.2),
+        icon
+      };
+    });
+
+    // --- Animation Loop ---
+    function animate() {
+      ctx.clearRect(0,0,w,h);
+      // Draw circuits
+      for(const c of circuits) {
+        ctx.save();
+        ctx.strokeStyle = c.color;
+        ctx.globalAlpha = 0.18;
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        ctx.moveTo(c.x, c.y);
+        ctx.lineTo(c.x + Math.cos(c.angle)*c.len, c.y + Math.sin(c.angle)*c.len);
+        ctx.stroke();
+        ctx.restore();
+        c.angle += c.speed;
+      }
+      // Draw neural network links
+      ctx.save();
+      ctx.globalAlpha = 0.13;
+      ctx.lineWidth = 2;
+      for(const [i,j] of links) {
+        ctx.strokeStyle = '#00e0d3';
+        ctx.beginPath();
+        ctx.moveTo(nodes[i].x, nodes[i].y);
+        ctx.lineTo(nodes[j].x, nodes[j].y);
+        ctx.stroke();
+      }
+      ctx.restore();
+      // Draw nodes
+      for(const n of nodes) {
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.r, 0, 2*Math.PI);
+        ctx.fillStyle = n.color;
+        ctx.globalAlpha = 0.22;
+        ctx.shadowColor = n.color;
+        ctx.shadowBlur = 12;
+        ctx.fill();
+        ctx.restore();
+        n.x += n.vx; n.y += n.vy;
+        if(n.x < 0.1*w || n.x > 0.9*w) n.vx *= -1;
+        if(n.y < 0.1*h || n.y > 0.9*h) n.vy *= -1;
+      }
+      // Draw code snippets
+      for(const c of codeObjs) {
+        ctx.save();
+        ctx.translate(c.x, c.y);
+        ctx.rotate(c.rot);
+        ctx.font = `bold ${c.size}px Inter, Arial, sans-serif`;
+        ctx.globalAlpha = 0.7;
+        ctx.fillStyle = c.color;
+        ctx.shadowColor = c.color+'88';
+        ctx.shadowBlur = 8;
+        ctx.fillText(c.txt, 0, 0);
+        ctx.restore();
+        c.x += c.vx; c.y += c.vy; c.rot += c.rotSpeed;
+        if(c.x < -60) c.x = w+30;
+        if(c.x > w+60) c.x = -30;
+        if(c.y > h+40) { c.y = -20; c.x = rand(0,w); }
+      }
+      // Draw entrepreneurship icons
+      for(const obj of iconObjs) {
+        obj.icon.draw(obj.x, obj.y, obj.s);
+        obj.y += obj.vy;
+        if(obj.y > h+30) { obj.y = -20; obj.x = rand(0,w); }
+      }
+      requestAnimationFrame(animate);
+    }
+    animate();
+  });
+  </script>
   <header>
-    <div class="logo"> <span style="font-size:1.2rem;color:#f3f6fa;">Portfolio</span></div>
+    <div class="logo"> <span style="font-size:1.2rem;color:#f3f6fa;">Portfolio.</span></div>
     <button class="hamburger" aria-label="Open menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
     <nav class="nav-menu">
       <a href="#home">Home</a>
+      <a href="#skills">Skills</a>
       <a href="#projects">Projects</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
@@ -28,6 +194,71 @@
   </header>
   <script src="script.js"></script> <!-- Added script.js for interactivity -->
   <style>
+    /* --- Animated Starfield Background --- */
+    .starfield {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .spaceship-container {
+      position: absolute;
+      left: 60vw;
+      top: 32vh;
+      z-index: 1;
+      pointer-events: none;
+      filter: drop-shadow(0 4px 16px #4f8cff44);
+      transition: transform 0.7s cubic-bezier(.4,1.4,.6,1);
+      /* Responsive: shrink on mobile */
+    }
+    @media (max-width: 700px) {
+      .spaceship-container { left: 50vw; top: 18vh; }
+      .spaceship { width: 60px; height: 40px; }
+    }
+    .spaceship {
+      display: block;
+      transform-style: preserve-3d;
+      will-change: transform;
+      animation: spaceship-float 5.5s ease-in-out infinite alternate, spaceship-tilt 7.5s ease-in-out infinite alternate;
+    }
+    @keyframes spaceship-float {
+      0% { transform: translateY(0) rotateZ(-2deg) scale3d(1,1,1); }
+      50% { transform: translateY(-18px) rotateZ(2deg) scale3d(1.04,1.04,1.04); }
+      100% { transform: translateY(0) rotateZ(-2deg) scale3d(1,1,1); }
+    }
+    @keyframes spaceship-tilt {
+      0% { filter: brightness(1) drop-shadow(0 4px 16px #4f8cff44); }
+      50% { filter: brightness(1.08) drop-shadow(0 8px 24px #00e0d388); }
+      100% { filter: brightness(1) drop-shadow(0 4px 16px #4f8cff44); }
+    }
+    .star {
+      position: absolute;
+      border-radius: 50%;
+      background: white;
+      opacity: 0.7;
+      width: 1.5px;
+      height: 1.5px;
+      box-shadow: 0 0 6px 1px #fff8;
+      animation: twinkle 2.2s infinite;
+    }
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 0.2; }
+    }
+    /* Some stars are bigger and twinkle differently */
+    .star.big {
+      width: 2.5px;
+      height: 2.5px;
+      opacity: 0.9;
+      animation-duration: 3.2s;
+    }
+    .star.tiny {
+      width: 1px;
+      height: 1px;
+      opacity: 0.5;
+      animation-duration: 1.7s;
+    }
     .hamburger {
       display: none;
       flex-direction: column;
@@ -185,7 +416,7 @@
           <a href="resume.pdf" class="btn-primary" style="background:#23272b;color:#4f8cff;border:2px solid #4f8cff;" download>Download Resume</a>
         </div>
       </div>
-      <div class="hero-img">
+      <div class="hero-img" style="display:flex;flex-direction:column;align-items:center;">
         <div class="hero-img-float">
           <div class="hero-img-glow"></div>
           <img src="images/dinesh.webp" alt="Profile Photo" class="hero-img-circle" />
@@ -193,12 +424,304 @@
       </div>
       <div style="width:100%;display:flex;justify-content:center;align-items:end;position:absolute;left:0;bottom:24px;">
         <a href="#projects" class="scroll-down" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
-          <span style="color:#4f8cff;font-size:2.2rem;animation:bounce 1.5s infinite alternate;">&#8595;</span>
+<span style="color:#4f8cff;font-size:2.2rem;animation:bounce 1.5s infinite alternate;">&#8595;</span>
           <span style="color:#bfc7d5;font-size:0.98rem;">Scroll Down</span>
         </a>
       </div>
     </section>
+    <!-- Skills & Technology Stack Section (no stray CSS or text) -->
+    <section id="skills" class="skills-section scroll-fade-up">
+      <div class="skills-container">
+        <div class="skills-header">
+          <h2>Skills &amp; Technology Stack</h2>
+          <p>From foundational infrastructure to cutting-edge platform engineering</p>
+        </div>
+        <div class="skills-categories" id="skills-categories">
+          <button class="skills-cat-btn active" data-cat="foundational">Foundational Skills</button>
+          <button class="skills-cat-btn" data-cat="intermediate">Intermediate &amp; DevOps Core</button>
+          <button class="skills-cat-btn" data-cat="advanced">Advanced &amp; Expert Level</button>
+          <button class="skills-cat-btn" data-cat="cloud">Cloud Platforms</button>
+          <button class="skills-cat-btn" data-cat="security">Security &amp; Compliance</button>
+          <button class="skills-cat-btn" data-cat="emerging">Emerging Technologies</button>
+        </div>
+        <div class="skills-cards" id="skills-cards">
+          <!-- Foundational Skills -->
+          <div class="skills-card-group" data-cat="foundational" style="display:block;">
+            <div class="skills-card">
+              <div class="skills-card-title"><span class="skills-icon">&#128187;</span> Foundational Skills</div>
+              <div class="skills-list">
+                <div class="skill-item"><span>Linux/Unix</span><span class="badge expert">Expert</span><span class="years">8+ yrs</span><div class="bar expert"></div></div>
+                <div class="skill-item"><span>Bash/Python/Go</span><span class="badge expert">Expert</span><span class="years">7+ yrs</span><div class="bar expert"></div></div>
+                <div class="skill-item"><span>Git &amp; Version Control</span><span class="badge expert">Expert</span><span class="years">8+ yrs</span><div class="bar expert"></div></div>
+                <div class="skill-item"><span>Networking (TCP/IP, DNS)</span><span class="badge advanced">Advanced</span><span class="years">6+ yrs</span><div class="bar advanced"></div></div>
+                <div class="skill-item"><span>SQL &amp; NoSQL Databases</span><span class="badge advanced">Advanced</span><span class="years">5+ yrs</span><div class="bar advanced"></div></div>
+                <div class="skill-item"><span>Web Servers (Nginx, Apache)</span><span class="badge advanced">Advanced</span><span class="years">6+ yrs</span><div class="bar advanced"></div></div>
+              </div>
+            </div>
+          </div>
+          <!-- Intermediate & DevOps Core -->
+          <div class="skills-card-group" data-cat="intermediate">
+            <div class="skills-card">
+              <div class="skills-card-title"><span class="skills-icon">&#9881;&#65039;</span> Intermediate &amp; DevOps Core</div>
+              <div class="skills-list">
+                <div class="skill-item"><span>Docker &amp; Containerization</span><span class="badge expert">Expert</span><span class="years">5+ yrs</span><div class="bar expert"></div></div>
+                <div class="skill-item"><span>CI/CD (Jenkins, GitLab, GitHub Actions)</span><span class="badge expert">Expert</span><span class="years">6+ yrs</span><div class="bar expert"></div></div>
+                <div class="skill-item"><span>Terraform &amp; Infrastructure as Code</span><span class="badge expert">Expert</span><span class="years">4+ yrs</span><div class="bar expert"></div></div>
+                <div class="skill-item"><span>Kubernetes Fundamentals</span><span class="badge advanced">Advanced</span><span class="years">3+ yrs</span><div class="bar advanced"></div></div>
+                <div class="skill-item"><span>Configuration Management (Ansible)</span><span class="badge advanced">Advanced</span><span class="years">4+ yrs</span><div class="bar advanced"></div></div>
+                <div class="skill-item"><span>Monitoring (Prometheus, Grafana)</span><span class="badge advanced">Advanced</span><span class="years">3+ yrs</span><div class="bar advanced"></div></div>
+              </div>
+            </div>
+          </div>
+          <!-- Advanced & Expert Level -->
+          <div class="skills-card-group" data-cat="advanced">
+            <div class="skills-card">
+              <div class="skills-card-title"><span class="skills-icon">&#9729;&#65039;</span> Advanced &amp; Expert Level</div>
+              <div class="skills-list">
+                <div class="skill-item"><span>GitOps (ArgoCD, Flux)</span><span class="badge expert">Expert</span><span class="years">2+ yrs</span><div class="bar expert"></div></div>
+                <div class="skill-item"><span>Service Mesh (Istio, Linkerd)</span><span class="badge advanced">Advanced</span><span class="years">2+ yrs</span><div class="bar advanced"></div></div>
+                <div class="skill-item"><span>Platform Engineering</span><span class="badge expert">Expert</span><span class="years">3+ yrs</span><div class="bar expert"></div></div>
+                <div class="skill-item"><span>DevSecOps &amp; Security Automation</span><span class="badge advanced">Advanced</span><span class="years">3+ yrs</span><div class="bar advanced"></div></div>
+                <div class="skill-item"><span>Observability (Jaeger, OpenTelemetry)</span><span class="badge advanced">Advanced</span><span class="years">2+ yrs</span><div class="bar advanced"></div></div>
+                <div class="skill-item"><span>FinOps &amp; Cost Optimization</span><span class="badge intermediate">Intermediate</span><span class="years">1+ yrs</span><div class="bar intermediate"></div></div>
+              </div>
+            </div>
+          </div>
+          <!-- Cloud Platforms -->
+          <div class="skills-card-group" data-cat="cloud">
+            <div class="skills-card">
+              <div class="skills-card-title"><span class="skills-icon">&#128451;</span> Cloud Platforms</div>
+              <div class="skills-list">
+                <div class="skill-item"><span>AWS (EKS, EC2, RDS, S3)</span><span class="badge expert">Expert</span><span class="years">5+ yrs</span><div class="bar expert"></div></div>
+                <div class="skill-item"><span>Azure (AKS, Functions, DevOps)</span><span class="badge advanced">Advanced</span><span class="years">3+ yrs</span><div class="bar advanced"></div></div>
+                <div class="skill-item"><span>Google Cloud Platform</span><span class="badge intermediate">Intermediate</span><span class="years">2+ yrs</span><div class="bar intermediate"></div></div>
+                <div class="skill-item"><span>Multi-Cloud Architecture</span><span class="badge advanced">Advanced</span><span class="years">2+ yrs</span><div class="bar advanced"></div></div>
+                <div class="skill-item"><span>Serverless Technologies</span><span class="badge advanced">Advanced</span><span class="years">3+ yrs</span><div class="bar advanced"></div></div>
+                <div class="skill-item"><span>CDN &amp; Edge Computing</span><span class="badge intermediate">Intermediate</span><span class="years">2+ yrs</span><div class="bar intermediate"></div></div>
+              </div>
+            </div>
+          </div>
+          <!-- Security & Compliance -->
+          <div class="skills-card-group" data-cat="security">
+            <div class="skills-card">
+              <div class="skills-card-title"><span class="skills-icon">&#128274;</span> Security &amp; Compliance</div>
+              <div class="skills-list">
+                <div class="skill-item"><span>SAST/DAST Security Scanning</span><span class="badge advanced">Advanced</span><span class="years">3+ yrs</span><div class="bar advanced"></div></div>
+                <div class="skill-item"><span>Container Security (Twistlock, Aqua)</span><span class="badge advanced">Advanced</span><span class="years">2+ yrs</span><div class="bar advanced"></div></div>
+                <div class="skill-item"><span>Policy as Code (OPA, Gatekeeper)</span><span class="badge intermediate">Intermediate</span><span class="years">1+ yrs</span><div class="bar intermediate"></div></div>
+                <div class="skill-item"><span>RBAC &amp; IAM</span><span class="badge advanced">Advanced</span><span class="years">4+ yrs</span><div class="bar advanced"></div></div>
+                <div class="skill-item"><span>Compliance (SOC2, PCI DSS)</span><span class="badge intermediate">Intermediate</span><span class="years">2+ yrs</span><div class="bar intermediate"></div></div>
+                <div class="skill-item"><span>Zero Trust Architecture</span><span class="badge intermediate">Intermediate</span><span class="years">1+ yrs</span><div class="bar intermediate"></div></div>
+              </div>
+            </div>
+          </div>
+          <!-- Emerging Technologies -->
+          <div class="skills-card-group" data-cat="emerging">
+            <div class="skills-card">
+              <div class="skills-card-title"><span class="skills-icon">&#128421;</span> Emerging Technologies</div>
+              <div class="skills-list">
+                <div class="skill-item"><span>eBPF &amp; System Observability</span><span class="badge beginner">Beginner</span><span class="years">0.5+ yrs</span><div class="bar beginner"></div></div>
+                <div class="skill-item"><span>AI/ML Operations (MLOps)</span><span class="badge intermediate">Intermediate</span><span class="years">1+ yrs</span><div class="bar intermediate"></div></div>
+                <div class="skill-item"><span>SLSA &amp; Supply Chain Security</span><span class="badge intermediate">Intermediate</span><span class="years">1+ yrs</span><div class="bar intermediate"></div></div>
+                <div class="skill-item"><span>Backstage Developer Portal</span><span class="badge intermediate">Intermediate</span><span class="years">1+ yrs</span><div class="bar intermediate"></div></div>
+                <div class="skill-item"><span>WebAssembly (WASM)</span><span class="badge beginner">Beginner</span><span class="years">0.5+ yrs</span><div class="bar beginner"></div></div>
+                <div class="skill-item"><span>Chaos Engineering</span><span class="badge intermediate">Intermediate</span><span class="years">1+ yrs</span><div class="bar intermediate"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 </main>
+<style>
+/* --- Skills & Technology Stack Section --- */
+.skills-section {
+  padding: 64px 0 48px 0;
+  position: relative;
+  z-index: 1;
+}
+.skills-container {
+  width: 95vw;
+  max-width: 1700px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0 24px;
+}
+.skills-header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+.skills-header h2 {
+  font-size: 2.3rem;
+  font-weight: 800;
+  background: linear-gradient(90deg, #4f8cff 10%, #7f53ff 50%, #00e0d3 90%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  margin-bottom: 10px;
+}
+.skills-header p {
+  color: #bfc7d5;
+  font-size: 1.18rem;
+  max-width: 520px;
+  margin: 0 auto;
+}
+.skills-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+.skills-cat-btn {
+  background: #181b1f;
+  color: #4f8cff;
+  border: 1.5px solid #4f8cff;
+  border-radius: 8px;
+  padding: 8px 20px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+  outline: none;
+}
+.skills-cat-btn.active, .skills-cat-btn:hover {
+  background: linear-gradient(90deg, #4f8cff 10%, #00e0d3 90%);
+  color: #fff;
+  box-shadow: 0 2px 12px 0 rgba(79,140,255,0.13);
+}
+.skills-cards {
+  min-height: 340px;
+  width: 95vw;
+  max-width: 1700px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.skills-card-group {
+  display: none;
+  width: 100%;
+}
+.skills-card-group[style*="display:block"] {
+  display: block;
+}
+.skills-card {
+  background: rgba(35,39,43,0.98);
+  border-radius: 18px;
+  box-shadow: 0 4px 32px 0 rgba(79,140,255,0.10), 0 1.5px 8px 0 rgba(0,0,0,0.10);
+  padding: 32px 24px 24px 24px;
+  margin: 0;
+  width: 100%;
+  position: relative;
+  box-sizing: border-box;
+  border: 2.5px solid #22c55e;
+}
+.skills-card-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #4f8cff;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.skills-icon {
+  font-size: 1.5rem;
+  background: linear-gradient(90deg, #4f8cff 10%, #00e0d3 90%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+.skills-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 18px 24px;
+}
+@media (max-width: 700px) {
+  .skills-list {
+    grid-template-columns: 1fr;
+  }
+}
+.skill-item {
+  background: rgba(79,140,255,0.07);
+  border-radius: 10px;
+  padding: 14px 16px 10px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  position: relative;
+  box-shadow: 0 1px 4px 0 rgba(79,140,255,0.07);
+  transition: background 0.18s;
+}
+.skill-item .badge {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.93rem;
+  font-weight: 700;
+  margin: 0;
+  white-space: nowrap;
+  z-index: 2;
+  min-width: unset;
+  max-width: 90%;
+  text-align: right;
+}
+.skill-item:hover {
+  background: rgba(79,140,255,0.13);
+}
+.skill-item span {
+  font-size: 1.07rem;
+  font-weight: 600;
+  color: #f3f6fa;
+}
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.93rem;
+  font-weight: 700;
+  margin: 0;
+}
+.badge.expert {
+  background: linear-gradient(90deg, #4f8cff 10%, #00e0d3 90%);
+  color: #fff;
+}
+.badge.advanced {
+  background: linear-gradient(90deg, #7f53ff 10%, #4f8cff 90%);
+  color: #fff;
+}
+.badge.intermediate {
+  background: #23272b;
+  color: #4f8cff;
+}
+.badge.beginner {
+  background: #23272b;
+  color: #bfc7d5;
+}
+.years {
+  font-size: 0.98rem;
+  color: #bfc7d5;
+  margin-left: auto;
+  font-weight: 500;
+}
+.bar {
+  height: 7px;
+  border-radius: 6px;
+  margin-top: 7px;
+  background: #23272b;
+  width: 0;
+  transition: width 1.1s cubic-bezier(.4,1.4,.6,1);
+}
+.bar.expert { background: linear-gradient(90deg, #4f8cff 10%, #00e0d3 90%); width: 100%; }
+.bar.advanced { background: linear-gradient(90deg, #7f53ff 10%, #4f8cff 90%); width: 80%; }
+.bar.intermediate { background: #4f8cff; width: 60%; }
+.bar.beginner { background: #bfc7d5; width: 35%; }
+</style>
 <style>
 @keyframes bounce {
   0% { transform: translateY(0); }
@@ -219,47 +742,71 @@
   0%, 60% { opacity: 1; }
   61%, 100% { opacity: 0; }
 }
+/* Gradient text for name under photo */
+.photo-name-gradient {
+  background: linear-gradient(90deg, #4f8cff 10%, #7f53ff 50%, #00e0d3 90%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+</style>
 </style>
     <section id="projects" class="scroll-fade-up">
-      <div class="section-title">Featured Projects</div>
-      <div class="projects">
+      <div class="section-title" style="font-size:2.2rem;letter-spacing:0.5px;margin-bottom:32px;">Featured Projects</div>
+      <div class="projects-grid">
         <div class="project-card">
-          <div class="project-title">Project One</div>
-          <div class="project-desc">A modern web app for managing tasks with real-time collaboration and offline support.</div>
-          <div class="project-tags">
-            <span class="project-tag">React</span>
-            <span class="project-tag">Firebase</span>
-            <span class="project-tag">PWA</span>
+          <div class="project-img-placeholder">
+            <span>Image</span>
           </div>
-          <div class="project-links">
-            <a href="#" target="_blank">Live Demo</a>
-            <a href="#" target="_blank">GitHub</a>
+          <div class="project-card-content">
+            <div class="project-title">Project One</div>
+            <div class="project-desc">A modern web app for managing tasks with real-time collaboration and offline support.</div>
+            <div class="project-tags">
+              <span class="project-tag">React</span>
+              <span class="project-tag">Firebase</span>
+              <span class="project-tag">PWA</span>
+            </div>
+            <div class="project-links">
+              <a href="#" target="_blank">Live Demo</a>
+              <a href="#" target="_blank">GitHub</a>
+            </div>
           </div>
         </div>
         <div class="project-card">
-          <div class="project-title">Project Two</div>
-          <div class="project-desc">A beautiful portfolio template with advanced animations and dark mode support.</div>
-          <div class="project-tags">
-            <span class="project-tag">HTML</span>
-            <span class="project-tag">CSS</span>
-            <span class="project-tag">GSAP</span>
+          <div class="project-img-placeholder">
+            <span>Image</span>
           </div>
-          <div class="project-links">
-            <a href="#" target="_blank">Live Demo</a>
-            <a href="#" target="_blank">GitHub</a>
+          <div class="project-card-content">
+            <div class="project-title">Project Two</div>
+            <div class="project-desc">A beautiful portfolio template with advanced animations and dark mode support.</div>
+            <div class="project-tags">
+              <span class="project-tag">HTML</span>
+              <span class="project-tag">CSS</span>
+              <span class="project-tag">GSAP</span>
+            </div>
+            <div class="project-links">
+              <a href="#" target="_blank">Live Demo</a>
+              <a href="#" target="_blank">GitHub</a>
+            </div>
           </div>
         </div>
         <div class="project-card">
-          <div class="project-title">Project Three</div>
-          <div class="project-desc">A RESTful API for e-commerce with JWT authentication and Stripe integration.</div>
-          <div class="project-tags">
-            <span class="project-tag">Node.js</span>
-            <span class="project-tag">Express</span>
-            <span class="project-tag">Stripe</span>
+          <div class="project-img-placeholder">
+            <span>Image</span>
           </div>
-          <div class="project-links">
-            <a href="#" target="_blank">Live Demo</a>
-            <a href="#" target="_blank">GitHub</a>
+          <div class="project-card-content">
+            <div class="project-title">Project Three</div>
+            <div class="project-desc">A RESTful API for e-commerce with JWT authentication and Stripe integration.</div>
+            <div class="project-tags">
+              <span class="project-tag">Node.js</span>
+              <span class="project-tag">Express</span>
+              <span class="project-tag">Stripe</span>
+            </div>
+            <div class="project-links">
+              <a href="#" target="_blank">Live Demo</a>
+              <a href="#" target="_blank">GitHub</a>
+            </div>
           </div>
         </div>
       </div>
@@ -291,6 +838,59 @@
     <section id="contact" class="scroll-fade-up">
   <script src="script.js"></script> <!-- Added script.js for interactivity -->
   <script>
+    // Starfield animation
+    document.addEventListener('DOMContentLoaded', function() {
+      const starfield = document.querySelector('.starfield');
+      if (!starfield) return;
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      const numStars = Math.floor((w * h) / 1800); // density
+      for (let i = 0; i < numStars; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        // Random size
+        const r = Math.random();
+        if (r > 0.92) star.classList.add('big');
+        else if (r < 0.18) star.classList.add('tiny');
+        // Random position
+        star.style.left = (Math.random() * 100) + 'vw';
+        star.style.top = (Math.random() * 100) + 'vh';
+        // Random animation delay
+        star.style.animationDelay = (Math.random() * 2.5) + 's';
+        starfield.appendChild(star);
+      }
+
+      // Spaceship custom path movement on scroll (avoids main content area)
+      const spaceship = document.querySelector('.spaceship-container');
+      if (spaceship) {
+        function moveSpaceship() {
+          // Get scroll progress (0 = top, 1 = bottom)
+          const scrollY = window.scrollY;
+          const docHeight = document.body.scrollHeight - window.innerHeight;
+          const t = docHeight > 0 ? scrollY / docHeight : 0;
+          // Path: top-right (start), right-middle (mid), bottom-right (end)
+          // We'll use a quadratic Bezier curve for a smooth arc
+          // P0 (start): (90vw, 8vh), P1 (control): (98vw, 50vh), P2 (end): (90vw, 92vh)
+          function bezier(t, p0, p1, p2) {
+            return (
+              (1 - t) * (1 - t) * p0 +
+              2 * (1 - t) * t * p1 +
+              t * t * p2
+            );
+          }
+          const x = bezier(t, 90, 98, 90); // vw
+          const y = bezier(t, 8, 50, 92);  // vh
+          spaceship.style.left = x + 'vw';
+          spaceship.style.top = y + 'vh';
+          spaceship.style.transform = '';
+        }
+        moveSpaceship();
+        window.addEventListener('scroll', moveSpaceship);
+        window.addEventListener('resize', moveSpaceship);
+      }
+    });
+  </script>
+  <script>
     // Scroll fade-in-up animation for sections
     function revealOnScroll() {
       const reveals = document.querySelectorAll('.scroll-fade-up');
@@ -317,4 +917,146 @@
     &copy; 2025 Dinesh Polavarapu. All rights reserved. | <a href="https://www.linkedin.com/in/dinesh-polavarapu-134029306" style="color:#4f8cff;text-decoration:none;" target="_blank" rel="noopener">LinkedIn</a> | <a href="https://github.com/WentiQ" style="color:#4f8cff;text-decoration:none;" target="_blank" rel="noopener">GitHub</a>
   </footer>
 </body>
+<style>
+/* --- Featured Projects Block Modern UI --- */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 32px;
+  margin-bottom: 32px;
+}
+.project-card {
+  background: linear-gradient(120deg, #23272b 80%, #2e3540 100%);
+  border-radius: 18px;
+  box-shadow: 0 4px 32px 0 rgba(79,140,255,0.10), 0 1.5px 8px 0 rgba(0,0,0,0.10);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.18s cubic-bezier(.4,1.4,.6,1), box-shadow 0.18s;
+  position: relative;
+  min-height: 370px;
+}
+.project-card:hover {
+  transform: translateY(-8px) scale(1.025);
+  box-shadow: 0 8px 40px 0 rgba(79,140,255,0.18), 0 2px 12px 0 rgba(0,0,0,0.13);
+}
+.project-img-placeholder {
+  background: linear-gradient(90deg, #4f8cff 10%, #7f53ff 90%);
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  border-bottom: 1.5px solid #23272b;
+}
+.project-card-content {
+  padding: 24px 22px 20px 22px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.project-title {
+  font-size: 1.32rem;
+  font-weight: 700;
+  color: #4f8cff;
+  margin-bottom: 8px;
+  letter-spacing: 0.2px;
+}
+.project-desc {
+  color: #bfc7d5;
+  font-size: 1.08rem;
+  margin-bottom: 18px;
+  min-height: 48px;
+}
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+.project-tag {
+  background: linear-gradient(90deg, #4f8cff 10%, #00e0d3 90%);
+  color: #fff;
+  font-size: 0.98rem;
+  font-weight: 600;
+  padding: 4px 14px;
+  border-radius: 16px;
+  letter-spacing: 0.2px;
+  box-shadow: 0 1px 4px 0 rgba(79,140,255,0.10);
+}
+.project-links {
+  display: flex;
+  gap: 18px;
+  margin-top: auto;
+}
+.project-links a {
+  color: #4f8cff;
+  background: #181b1f;
+  border: 1.5px solid #4f8cff;
+  border-radius: 8px;
+  padding: 7px 18px;
+  font-size: 1.01rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.18s, color 0.18s;
+}
+.project-links a:hover {
+  background: #4f8cff;
+  color: #fff;
+}
+@media (max-width: 900px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+  .project-card {
+    min-height: 320px;
+  }
+}
+</style>
+<script>
+// Skills section tab switching and bar animation
+document.addEventListener('DOMContentLoaded', function() {
+  const catBtns = document.querySelectorAll('.skills-cat-btn');
+  const cardGroups = document.querySelectorAll('.skills-card-group');
+  catBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      catBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = btn.getAttribute('data-cat');
+      cardGroups.forEach(group => {
+        if (group.getAttribute('data-cat') === cat) {
+          group.style.display = 'block';
+          // Animate bars
+          setTimeout(() => {
+            group.querySelectorAll('.bar').forEach(bar => {
+              bar.style.width = '';
+              // force reflow
+              void bar.offsetWidth;
+              if (bar.classList.contains('expert')) bar.style.width = '100%';
+              else if (bar.classList.contains('advanced')) bar.style.width = '80%';
+              else if (bar.classList.contains('intermediate')) bar.style.width = '60%';
+              else if (bar.classList.contains('beginner')) bar.style.width = '35%';
+            });
+          }, 50);
+        } else {
+          group.style.display = 'none';
+        }
+      });
+    });
+  });
+  // Animate bars on load for first group
+  setTimeout(() => {
+    document.querySelectorAll('.skills-card-group[data-cat="foundational"] .bar').forEach(bar => {
+      if (bar.classList.contains('expert')) bar.style.width = '100%';
+      else if (bar.classList.contains('advanced')) bar.style.width = '80%';
+      else if (bar.classList.contains('intermediate')) bar.style.width = '60%';
+      else if (bar.classList.contains('beginner')) bar.style.width = '35%';
+    });
+  }, 200);
+});
+</script>
 </html>
