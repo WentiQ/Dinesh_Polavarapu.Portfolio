@@ -753,64 +753,300 @@
 </style>
 </style>
     <section id="projects" class="scroll-fade-up">
-      <div class="section-title" style="font-size:2.2rem;letter-spacing:0.5px;margin-bottom:32px;">Featured Projects</div>
-      <div class="projects-grid">
-        <div class="project-card">
-          <div class="project-img-placeholder">
-            <span>Image</span>
-          </div>
-          <div class="project-card-content">
-            <div class="project-title">Project One</div>
-            <div class="project-desc">A modern web app for managing tasks with real-time collaboration and offline support.</div>
-            <div class="project-tags">
-              <span class="project-tag">React</span>
-              <span class="project-tag">Firebase</span>
-              <span class="project-tag">PWA</span>
-            </div>
-            <div class="project-links">
-              <a href="#" target="_blank">Live Demo</a>
-              <a href="#" target="_blank">GitHub</a>
-            </div>
-          </div>
+      <div class="projects-section-container">
+        <div class="text-center mb-16 animate-slide-up">
+          <h2 class="projects-title">Projects &amp; Case Studies</h2>
+          <p class="projects-desc">Real-world implementations showcasing technical expertise and business impact</p>
         </div>
-        <div class="project-card">
-          <div class="project-img-placeholder">
-            <span>Image</span>
-          </div>
-          <div class="project-card-content">
-            <div class="project-title">Project Two</div>
-            <div class="project-desc">A beautiful portfolio template with advanced animations and dark mode support.</div>
-            <div class="project-tags">
-              <span class="project-tag">HTML</span>
-              <span class="project-tag">CSS</span>
-              <span class="project-tag">GSAP</span>
-            </div>
-            <div class="project-links">
-              <a href="#" target="_blank">Live Demo</a>
-              <a href="#" target="_blank">GitHub</a>
-            </div>
-          </div>
+        <!-- Featured Projects -->
+        <div class="featured-projects">
+          <h3 class="featured-title">Featured Projects</h3>
+          <div class="featured-projects-grid" id="featured-projects-grid"></div>
         </div>
-        <div class="project-card">
-          <div class="project-img-placeholder">
-            <span>Image</span>
-          </div>
-          <div class="project-card-content">
-            <div class="project-title">Project Three</div>
-            <div class="project-desc">A RESTful API for e-commerce with JWT authentication and Stripe integration.</div>
-            <div class="project-tags">
-              <span class="project-tag">Node.js</span>
-              <span class="project-tag">Express</span>
-              <span class="project-tag">Stripe</span>
-            </div>
-            <div class="project-links">
-              <a href="#" target="_blank">Live Demo</a>
-              <a href="#" target="_blank">GitHub</a>
-            </div>
-          </div>
+        <!-- Category Filter (moved below featured) -->
+        <div class="projects-categories">
+          <button class="projects-cat-btn active" data-cat="All">All</button>
+          <button class="projects-cat-btn" data-cat="Advanced">Advanced</button>
+          <button class="projects-cat-btn" data-cat="Intermediate">Intermediate</button>
+          <button class="projects-cat-btn" data-cat="Foundational">Foundational</button>
         </div>
+        <!-- Projects Grid -->
+        <div class="projects-grid" id="projects-grid"></div>
       </div>
     </section>
+    <style>
+      .projects-section-container { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
+      .projects-title { font-size: 2.5rem; font-weight: 800; background: linear-gradient(90deg, #4f8cff 10%, #7f53ff 50%, #00e0d3 90%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-fill-color: transparent; margin-bottom: 10px; text-align: center; display: block; }
+      .projects-desc { color: #bfc7d5; font-size: 1.18rem; max-width: 520px; margin: 0 auto 32px auto; }
+      .projects-categories { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-bottom: 32px; }
+      .projects-cat-btn { background: #181b1f; color: #4f8cff; border: 1.5px solid #4f8cff; border-radius: 8px; padding: 8px 20px; font-size: 1.05rem; font-weight: 600; cursor: pointer; transition: background 0.18s, color 0.18s, box-shadow 0.18s; outline: none; }
+      .projects-cat-btn.active, .projects-cat-btn:hover { background: linear-gradient(90deg, #4f8cff 10%, #00e0d3 90%); color: #fff; box-shadow: 0 2px 12px 0 rgba(79,140,255,0.13); }
+      .featured-title { font-size: 1.6rem; font-weight: 700; background: linear-gradient(90deg, #4f8cff 10%, #00e0d3 90%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-fill-color: transparent; text-align: center; margin-bottom: 18px; }
+      .featured-projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 28px; margin-bottom: 32px; }
+      .projects-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 32px !important;
+        flex-wrap: nowrap !important;
+        width: 100%;
+      }
+      .projects-grid > * {
+        width: 100%;
+        max-width: 100%;
+      }
+      .project-card, .featured-project-card {
+        background: rgba(35,39,43,0.98);
+        border-radius: 18px;
+        box-shadow: 0 4px 32px 0 rgba(79,140,255,0.10), 0 1.5px 8px 0 rgba(0,0,0,0.10);
+        padding: 28px 22px 38px 22px;
+        position: relative;
+        border: 2.5px solid #22c55e;
+        transition: box-shadow 0.18s, border-color 0.18s;
+        overflow: visible;
+        min-height: 0;
+      }
+      .project-card.expanded, .featured-project-card.expanded { border-color: #4f8cff; box-shadow: 0 8px 40px 0 rgba(79,140,255,0.18), 0 2px 12px 0 rgba(0,0,0,0.13); }
+      .project-card .badges, .featured-project-card .badges { display: flex; gap: 8px; margin-bottom: 10px; }
+      .badge { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 0.98rem; font-weight: 700; background: linear-gradient(90deg, #4f8cff 10%, #00e0d3 90%); color: #fff; }
+      .badge.outline { background: #181b1f; color: #4f8cff; border: 1.5px solid #4f8cff; }
+      .badge.featured { background: #22c55e; color: #fff; }
+      .project-title { font-size: 1.32rem; font-weight: 700; color: #4f8cff; margin-bottom: 8px; letter-spacing: 0.2px; }
+      .project-context, .project-problem { color: #bfc7d5; font-size: 1.08rem; margin-bottom: 8px; }
+      .project-problem { color: #ff6b6b; font-size: 1.01rem; margin-bottom: 12px; }
+      .project-metrics {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+        margin-bottom: 12px;
+      }
+      .project-metric { background: #23272b; border-radius: 8px; padding: 10px 0; text-align: center; }
+      .project-metric .metric-value { font-size: 1.18rem; font-weight: 700; color: #4f8cff; }
+      .project-metric .metric-label { font-size: 0.93rem; color: #bfc7d5; }
+      .project-techs { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 10px; }
+      .project-tech { background: #181b1f; color: #4f8cff; border: 1.5px solid #4f8cff; border-radius: 8px; padding: 4px 12px; font-size: 0.98rem; font-weight: 600; }
+      .project-details { border-top: 1.5px solid #23272b; margin-top: 16px; padding-top: 16px; }
+      .project-details h4 { font-size: 1.08rem; font-weight: 700; color: #22c55e; margin-bottom: 6px; }
+      .project-details ul { margin: 0 0 10px 0; padding: 0 0 0 18px; }
+      .project-details li { color: #bfc7d5; font-size: 0.98rem; margin-bottom: 4px; }
+      .project-details .impact-title { color: #4f8cff; font-size: 1.01rem; font-weight: 700; margin-bottom: 4px; }
+      .project-btn { width: 100%; margin-top: 10px; background: #181b1f; color: #4f8cff; border: 1.5px solid #4f8cff; border-radius: 8px; padding: 8px 0; font-size: 1.05rem; font-weight: 600; cursor: pointer; transition: background 0.18s, color 0.18s; }
+      .project-btn:hover { background: #4f8cff; color: #fff; }
+      @media (max-width: 900px) { .projects-grid, .featured-projects-grid { grid-template-columns: 1fr; gap: 22px; } }
+    </style>
+    <script>
+    // Project data (from your React code, adapted for JS)
+    const projects = [
+      {
+        id: "platform-engineering",
+        category: "Advanced",
+        title: "Enterprise Developer Platform",
+        context: "50+ development teams struggling with inconsistent deployment processes and infrastructure complexity",
+        problem: "Developers spending 40% of time on infrastructure concerns instead of feature development",
+        solution: "Built comprehensive platform-as-a-product using Backstage, ArgoCD, and custom automation",
+        technologies: ["Kubernetes", "ArgoCD", "Backstage", "Terraform", "AWS", "GitLab", "Helm"],
+        impact: {
+          business: ["Reduced time-to-market by 60%", "Saved $2M annually in operational costs", "Increased developer productivity by 75%"],
+          technical: ["99.95% platform uptime", "Sub-minute deployments", "Zero-downtime releases", "Automated security compliance"]
+        },
+        metrics: {
+          deployments: "50x faster",
+          uptime: "99.95%",
+          cost_savings: "$2M/year",
+          teams_served: "50+"
+        },
+        featured: true
+      },
+      {
+        id: "cloud-migration",
+        category: "Intermediate",
+        title: "Multi-Cloud Migration & Modernization",
+        context: "Legacy monolithic application running on on-premises infrastructure with scaling limitations",
+        problem: "Manual deployments taking 6+ hours, frequent outages, inability to scale during peak traffic",
+        solution: "Migrated to cloud-native microservices architecture with automated CI/CD and infrastructure as code",
+        technologies: ["AWS", "Docker", "Kubernetes", "Terraform", "Jenkins", "Prometheus", "Grafana"],
+        impact: {
+          business: ["Reduced infrastructure costs by 40%", "Improved application performance by 300%", "Enabled 24/7 global availability"],
+          technical: ["Achieved 99.9% uptime", "Automated scaling", "Comprehensive monitoring", "Security compliance"]
+        },
+        metrics: {
+          cost_reduction: "40%",
+          performance: "3x faster",
+          uptime: "99.9%",
+          deployment_time: "6h → 30min"
+        },
+        featured: true
+      },
+      {
+        id: "gitops-implementation",
+        category: "Advanced",
+        title: "GitOps at Scale Implementation",
+        context: "Multiple teams deploying applications inconsistently across different environments",
+        problem: "Configuration drift, manual deployments, lack of audit trail, and environment inconsistencies",
+        solution: "Implemented GitOps workflow with ArgoCD, standardized deployment patterns, and automated environment synchronization",
+        technologies: ["ArgoCD", "Kubernetes", "Helm", "Kustomize", "Git", "Vault", "RBAC"],
+        impact: {
+          business: ["Improved deployment reliability by 95%", "Reduced rollback time from hours to minutes", "Enhanced security posture"],
+          technical: ["Complete deployment audit trail", "Automated environment sync", "Self-healing infrastructure", "Policy as code"]
+        },
+        metrics: {
+          reliability: "95% improvement",
+          rollback_time: "4h → 5min",
+          environments: "10+ managed",
+          audit_coverage: "100%"
+        },
+        featured: false
+      },
+      {
+        id: "devsecops-pipeline",
+        category: "Advanced",
+        title: "DevSecOps Pipeline & Compliance Automation",
+        context: "Financial services company requiring SOC2 and PCI DSS compliance with rapid development cycles",
+        problem: "Manual security reviews creating bottlenecks, compliance gaps, and delayed releases",
+        solution: "Built automated security pipeline with policy as code, vulnerability scanning, and compliance reporting",
+        technologies: ["Terraform", "OPA/Gatekeeper", "Trivy", "SonarQube", "Vault", "Falco", "AWS Security Hub"],
+        impact: {
+          business: ["Achieved SOC2 compliance", "Reduced security review time by 80%", "Zero security incidents"],
+          technical: ["Automated vulnerability scanning", "Policy enforcement", "Real-time compliance monitoring", "Secure secrets management"]
+        },
+        metrics: {
+          compliance: "SOC2 + PCI DSS",
+          review_time: "80% faster",
+          vulnerabilities: "0 critical",
+          policy_coverage: "100%"
+        },
+        featured: false
+      },
+      {
+        id: "observability-stack",
+        category: "Intermediate",
+        title: "Comprehensive Observability Platform",
+        context: "Microservices architecture with limited visibility into system behavior and performance issues",
+        problem: "High MTTR during incidents, difficulty debugging distributed systems, lack of proactive monitoring",
+        solution: "Implemented full observability stack with metrics, logs, traces, and automated alerting",
+        technologies: ["Prometheus", "Grafana", "Jaeger", "OpenTelemetry", "ELK Stack", "PagerDuty", "Kubernetes"],
+        impact: {
+          business: ["Reduced MTTR from 4 hours to 15 minutes", "Prevented 50+ potential outages", "Improved customer satisfaction"],
+          technical: ["Distributed tracing", "Proactive alerting", "Performance optimization", "Capacity planning"]
+        },
+        metrics: {
+          mttr: "4h → 15min",
+          incidents_prevented: "50+",
+          monitoring_coverage: "100%",
+          sla_compliance: "99.95%"
+        },
+        featured: false
+      },
+      {
+        id: "automation-foundation",
+        category: "Foundational",
+        title: "Infrastructure Automation Foundation",
+        context: "Manual server provisioning and configuration management across multiple environments",
+        problem: "Inconsistent configurations, manual errors, slow provisioning times, and scaling limitations",
+        solution: "Implemented infrastructure as code with automated provisioning, configuration management, and monitoring",
+        technologies: ["Terraform", "Ansible", "Packer", "AWS", "Python", "Bash", "Nagios"],
+        impact: {
+          business: ["Reduced provisioning time from days to minutes", "Eliminated configuration drift", "Improved system reliability"],
+          technical: ["Immutable infrastructure", "Automated backups", "Consistent environments", "Self-healing systems"]
+        },
+        metrics: {
+          provisioning: "3 days → 10min",
+          configuration_drift: "0%",
+          automation: "95%",
+          reliability: "99.5%"
+        },
+        featured: false
+      }
+    ];
+    const categories = ["All", "Advanced", "Intermediate", "Foundational"];
+    let activeCategory = "All";
+    let expandedProjectId = null;
+
+    function renderProjects() {
+      // Featured
+      const featuredGrid = document.getElementById('featured-projects-grid');
+      featuredGrid.innerHTML = '';
+      const featured = projects.filter(p => p.featured);
+      featured.forEach(project => {
+        const card = document.createElement('div');
+        card.className = 'featured-project-card' + (expandedProjectId === project.id ? ' expanded' : '');
+        card.innerHTML = `
+          <div class="badges">
+            <span class="badge">${project.category}</span>
+            <span class="badge featured">Featured</span>
+          </div>
+          <div class="project-title">${project.title}</div>
+          <div class="project-context">${project.context}</div>
+          <div class="project-metrics">
+            <div class="project-metric"><div class="metric-value">${Object.values(project.metrics)[0]}</div><div class="metric-label">${Object.keys(project.metrics)[0].replace('_',' ')}</div></div>
+            <div class="project-metric"><div class="metric-value">${Object.values(project.metrics)[1]}</div><div class="metric-label">${Object.keys(project.metrics)[1].replace('_',' ')}</div></div>
+          </div>
+          <button class="project-btn" data-id="${project.id}">${expandedProjectId === project.id ? 'Hide Details' : 'View Details'}</button>
+          <div class="project-details" style="display:${expandedProjectId === project.id ? 'block' : 'none'}">
+            <h4>Solution Approach</h4>
+            <div class="project-context">${project.solution}</div>
+            <div class="impact-title">Business Impact</div>
+            <ul>${project.impact.business.map(i=>`<li>${i}</li>`).join('')}</ul>
+            <div class="impact-title">Technical Achievements</div>
+            <ul>${project.impact.technical.map(i=>`<li>${i}</li>`).join('')}</ul>
+            <div class="impact-title">Technologies</div>
+            <div class="project-techs">${project.technologies.map(t=>`<span class="project-tech">${t}</span>`).join('')}</div>
+          </div>
+        `;
+        featuredGrid.appendChild(card);
+      });
+      // Projects
+      const grid = document.getElementById('projects-grid');
+      grid.innerHTML = '';
+      let filtered = activeCategory === 'All' ? projects : projects.filter(p => p.category === activeCategory);
+      filtered.forEach(project => {
+        const card = document.createElement('div');
+        card.className = 'project-card' + (expandedProjectId === project.id ? ' expanded' : '');
+        card.innerHTML = `
+          <div class="badges">
+            <span class="badge">${project.category}</span>
+          </div>
+          <div class="project-title">${project.title}</div>
+          <div class="project-context">${project.context}</div>
+          <div class="project-problem">${project.problem}</div>
+          <div class="project-metrics">
+            ${Object.entries(project.metrics).map(([k,v])=>`<div class="project-metric"><div class="metric-value">${v}</div><div class="metric-label">${k.replace('_',' ')}</div></div>`).join('')}
+          </div>
+          <div class="project-techs">${project.technologies.map(t=>`<span class="project-tech">${t}</span>`).join('')}</div>
+          <button class="project-btn" data-id="${project.id}">${expandedProjectId === project.id ? 'Hide Details' : 'View Full Case Study'}</button>
+          <div class="project-details" style="display:${expandedProjectId === project.id ? 'block' : 'none'}">
+            <h4>Solution Approach</h4>
+            <div class="project-context">${project.solution}</div>
+            <div class="impact-title">Business Impact</div>
+            <ul>${project.impact.business.map(i=>`<li>${i}</li>`).join('')}</ul>
+            <div class="impact-title">Technical Achievements</div>
+            <ul>${project.impact.technical.map(i=>`<li>${i}</li>`).join('')}</ul>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+      // Button listeners
+      document.querySelectorAll('.project-btn').forEach(btn => {
+        btn.onclick = function() {
+          const id = this.getAttribute('data-id');
+          expandedProjectId = expandedProjectId === id ? null : id;
+          renderProjects();
+        };
+      });
+    }
+    // Category filter
+    document.addEventListener('DOMContentLoaded', function() {
+      renderProjects();
+      document.querySelectorAll('.projects-cat-btn').forEach(btn => {
+        btn.onclick = function() {
+          document.querySelectorAll('.projects-cat-btn').forEach(b=>b.classList.remove('active'));
+          btn.classList.add('active');
+          activeCategory = btn.getAttribute('data-cat');
+          expandedProjectId = null;
+          renderProjects();
+        };
+      });
+    });
+    </script>
     <section id="about" class="scroll-fade-up">
       <div class="section-title">About Me</div>
       <div class="about">
