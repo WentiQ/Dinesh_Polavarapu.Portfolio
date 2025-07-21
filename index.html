@@ -132,8 +132,48 @@
       <div class="hero-content" style="display:flex;flex-direction:column;align-items:flex-start;justify-content:center;min-height:340px;">
         <!-- <h1 style="margin-bottom:10px;">Hello, I'm <span style="color:#4f8cff;">Dinesh Polavarapu</span></h1> -->
       <h1 style="margin-bottom:10px;">Hello, I'm <span class="fluid-gradient-text">Dinesh Polavarapu</span></h1>
-      <h2 style="margin-bottom:18px;">Full Stack Developer &amp; UI/UX Enthusiast</h2>
+      <!-- <h2 style="margin-bottom:18px;">Full Stack Developer &amp; UI/UX Enthusiast</h2> -->
+        <h2 style="margin-bottom:18px;min-height:32px;">
+          <span id="typed-role"></span>
+        </h2>
         <p style="font-size:1.18rem;color:#bfc7d5;margin-bottom:22px;max-width:480px;">I build beautiful, performant web apps and digital experiences.<br>I love solving real-world problems with code, design, and a touch of creativity.</p>
+
+  <script>
+    // Typing effect for roles
+    const roles = [
+      "Full Stack Developer",
+      "UI/UX Enthusiast",
+      "Web App Architect",
+      "Creative Coder"
+    ];
+    let roleIndex = 0, charIndex = 0, typing = true;
+    function typeRole() {
+      const typedRole = document.getElementById('typed-role');
+      if (!typedRole) return;
+      const current = roles[roleIndex];
+      if (typing) {
+        typedRole.textContent = current.slice(0, charIndex + 1);
+        charIndex++;
+        if (charIndex === current.length) {
+          typing = false;
+          setTimeout(typeRole, 1200);
+        } else {
+          setTimeout(typeRole, 70);
+        }
+      } else {
+        typedRole.textContent = current.slice(0, charIndex - 1);
+        charIndex--;
+        if (charIndex === 0) {
+          typing = true;
+          roleIndex = (roleIndex + 1) % roles.length;
+          setTimeout(typeRole, 400);
+        } else {
+          setTimeout(typeRole, 30);
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', () => setTimeout(typeRole, 600));
+  </script>
         <div style="display:flex;gap:24px;margin-bottom:22px;">
           <a href="https://github.com/WentiQ" target="_blank" rel="noopener" title="GitHub" style="color:#4f8cff;font-size:1.7rem;"><svg height="28" width="28" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.01.08-2.11 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.91.08 2.11.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.19 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
           <a href="https://www.linkedin.com/in/dinesh-polavarapu-134029306" target="_blank" rel="noopener" title="LinkedIn" style="color:#0a66c2;font-size:1.7rem;"><svg height="28" width="28" fill="currentColor" viewBox="0 0 16 16"><path d="M1.146 1.146C.417 1.875.417 3.125 1.146 3.854c.729.729 1.979.729 2.708 0 .729-.729.729-1.979 0-2.708-.729-.729-1.979-.729-2.708 0zM0 5.5h3V16H0V5.5zm5.5 0h2.75v1.43h.04c.38-.72 1.3-1.48 2.68-1.48C14.42 5.45 16 7.13 16 10.08V16h-3V10.5c0-1.31-.02-3-1.83-3-1.83 0-2.11 1.43-2.11 2.9V16h-3V5.5z"/></svg></a>
