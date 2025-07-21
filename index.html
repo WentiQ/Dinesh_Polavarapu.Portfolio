@@ -187,7 +187,12 @@
     <nav class="nav-menu">
       <a href="#home">Home</a>
       <a href="#skills">Skills</a>
+      <a href="#timeline">Journey</a>
       <a href="#projects">Projects</a>
+      <a href="#innovation">Innovation</a>
+      <a href="#team">Impact</a>
+      <a href="#leadership">Leadership</a>
+      <a href="#certifications">Learning</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -429,6 +434,7 @@
         </a>
       </div>
     </section>
+
     <!-- Skills & Technology Stack Section (no stray CSS or text) -->
     <section id="skills" class="skills-section scroll-fade-up">
       <div class="skills-container">
@@ -752,6 +758,300 @@
 }
 </style>
 </style>
+    
+     
+        <!-- Professional Journey Timeline Section -->
+    <section id="timeline" class="scroll-fade-up">
+      <div class="projects-section-container">
+        <div class="text-center mb-16 animate-slide-up">
+          <h2 class="projects-title">Professional Journey</h2>
+          <p class="projects-desc">Career timeline showcasing growth from systems administration to platform engineering leadership</p>
+        </div>
+        <div class="timeline-relative">
+          <div class="timeline-line"></div>
+          <div class="timeline-list"></div>
+        </div>
+        <div class="mt-16 text-center animate-slide-up">
+          <div class="timeline-summary-card">
+            <h3 class="timeline-summary-title">Career Progression Summary</h3>
+            <div class="timeline-summary-grid">
+              <div>
+                <div class="timeline-summary-num primary">8+</div>
+                <div class="timeline-summary-label">Years Experience</div>
+              </div>
+              <div>
+                <div class="timeline-summary-num accent">5</div>
+                <div class="timeline-summary-label">Role Progressions</div>
+              </div>
+              <div>
+                <div class="timeline-summary-num secondary">3</div>
+                <div class="timeline-summary-label">Promotions</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <style>
+      .timeline-relative { position: relative; }
+      .timeline-line {
+        position: absolute;
+        left: -60px;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        background: linear-gradient(180deg, #4f8cff 0%, #00e0d3 100%);
+        opacity: 0.18;
+        border-radius: 2px;
+        display: none;
+      }
+      @media (min-width: 768px) {
+        .timeline-line { display: block; }
+      }
+      .timeline-list { position: relative; z-index: 1; }
+      .timeline-card {
+        background: rgba(35,39,43,0.98);
+        border-radius: 18px;
+        box-shadow: 0 4px 32px 0 rgba(79,140,255,0.10), 0 1.5px 8px 0 rgba(0,0,0,0.10);
+        padding: 28px 22px 32px 22px;
+        margin-bottom: 32px;
+        border-left: 6px solid #4f8cff22;
+        position: relative;
+        transition: box-shadow 0.18s, border-color 0.18s;
+      }
+      .timeline-dot {
+        position: absolute;
+        left: -74px; /* Center the dot on the 4px line at left: 18px */
+        top: 32px;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: linear-gradient(90deg, #4f8cff 10%, #00e0d3 90%);
+        border: 4px solid #23272b;
+        z-index: 2;
+        display: none;
+        box-sizing: border-box;
+      }
+      @media (min-width: 768px) {
+        .timeline-dot { display: block; }
+      }
+      .timeline-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 8px;
+      }
+      .timeline-year, .timeline-duration {
+        background: #23272b;
+        color: #4f8cff;
+        border-radius: 8px;
+        padding: 2px 10px;
+        font-size: 0.98rem;
+        font-weight: 600;
+        margin-right: 4px;
+      }
+      .timeline-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #4f8cff;
+        margin-bottom: 8px;
+      }
+      .timeline-meta {
+        display: flex;
+        gap: 18px;
+        color: #bfc7d5;
+        font-size: 1.05rem;
+        margin-bottom: 8px;
+      }
+      .timeline-achievements {
+        margin-bottom: 10px;
+      }
+      .timeline-achievements-title {
+        font-size: 1.08rem;
+        font-weight: 700;
+        color: #22c55e;
+        margin-bottom: 6px;
+      }
+      .timeline-achievements-list {
+        margin: 0 0 10px 0;
+        padding: 0 0 0 18px;
+      }
+      .timeline-achievements-list li {
+        color: #bfc7d5;
+        font-size: 0.98rem;
+        margin-bottom: 4px;
+      }
+      .timeline-techs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+        margin-bottom: 10px;
+      }
+      .timeline-tech {
+        background: #181b1f;
+        color: #4f8cff;
+        border: 1.5px solid #4f8cff;
+        border-radius: 8px;
+        padding: 4px 12px;
+        font-size: 0.98rem;
+        font-weight: 600;
+      }
+      .timeline-summary-card {
+        background: rgba(35,39,43,0.98);
+        border-radius: 18px;
+        box-shadow: 0 4px 32px 0 rgba(79,140,255,0.10), 0 1.5px 8px 0 rgba(0,0,0,0.10);
+        padding: 32px 22px 32px 22px;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+      .timeline-summary-title {
+        font-size: 1.6rem;
+        font-weight: 700;
+        background: linear-gradient(90deg, #4f8cff 10%, #00e0d3 90%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+        text-align: center;
+        margin-bottom: 18px;
+      }
+      .timeline-summary-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 32px;
+      }
+      .timeline-summary-num {
+        font-size: 2.2rem;
+        font-weight: 800;
+        margin-bottom: 6px;
+      }
+      .timeline-summary-num.primary { color: #4f8cff; }
+      .timeline-summary-num.accent { color: #22c55e; }
+      .timeline-summary-num.secondary { color: #ffe156; }
+      .timeline-summary-label { color: #bfc7d5; font-size: 1.08rem; }
+    </style>
+    <script>
+    // Timeline data (from your React code, adapted for JS)
+    const timelineData = [
+      {
+        year: "2024",
+        role: "Senior Platform Engineer",
+        company: "TechCorp Enterprise",
+        location: "San Francisco, CA",
+        duration: "Present",
+        type: "promotion",
+        achievements: [
+          "Leading platform engineering initiative for 50+ development teams",
+          "Architected multi-cloud GitOps platform reducing deployment time by 80%",
+          "Implemented comprehensive observability stack with 99.95% uptime",
+          "Established FinOps practices saving $2M annually"
+        ],
+        technologies: ["Kubernetes", "ArgoCD", "Terraform", "AWS", "Backstage"]
+      },
+      {
+        year: "2022",
+        role: "DevOps Engineer III",
+        company: "TechCorp Enterprise",
+        location: "San Francisco, CA",
+        duration: "2 years",
+        type: "promotion",
+        achievements: [
+          "Migrated legacy monolith to microservices on Kubernetes",
+          "Built self-service developer platform using Backstage",
+          "Implemented comprehensive CI/CD pipelines for 30+ services",
+          "Reduced MTTR from 4 hours to 15 minutes through automation"
+        ],
+        technologies: ["Docker", "Kubernetes", "Jenkins", "Terraform", "Prometheus"]
+      },
+      {
+        year: "2020",
+        role: "DevOps Engineer II",
+        company: "CloudScale Solutions",
+        location: "Austin, TX",
+        duration: "2 years",
+        type: "role",
+        achievements: [
+          "Designed and implemented multi-region AWS infrastructure",
+          "Automated deployment processes reducing manual effort by 90%",
+          "Led security initiatives implementing DevSecOps practices",
+          "Mentored junior engineers and established best practices"
+        ],
+        technologies: ["AWS", "Ansible", "GitLab CI", "Docker", "Terraform"]
+      },
+      {
+        year: "2018",
+        role: "DevOps Engineer",
+        company: "StartupTech Inc",
+        location: "Denver, CO",
+        duration: "2 years",
+        type: "role",
+        achievements: [
+          "Built first CI/CD pipeline reducing deployment time from 6 hours to 30 minutes",
+          "Containerized applications and orchestrated with Docker Swarm",
+          "Implemented monitoring and alerting stack using ELK and Prometheus",
+          "Established infrastructure as code practices with Terraform"
+        ],
+        technologies: ["Linux", "Docker", "Jenkins", "AWS", "Python"]
+      },
+      {
+        year: "2016",
+        role: "Systems Administrator",
+        company: "Enterprise Solutions LLC",
+        location: "Chicago, IL",
+        duration: "2 years",
+        type: "start",
+        achievements: [
+          "Managed hybrid cloud infrastructure supporting 500+ users",
+          "Automated server provisioning and configuration management",
+          "Implemented backup and disaster recovery procedures",
+          "Optimized system performance improving response times by 40%"
+        ],
+        technologies: ["Linux", "VMware", "Bash", "Nagios", "MySQL"]
+      }
+    ];
+    function getTypeIcon(type) {
+      switch (type) {
+        case "promotion": return '⬆️';
+        case "role": return '🏆';
+        default: return '📅';
+      }
+    }
+    function renderTimeline() {
+      const list = document.querySelector('.timeline-list');
+      if (!list) return;
+      list.innerHTML = '';
+      timelineData.forEach((item, index) => {
+        const card = document.createElement('div');
+        card.className = 'timeline-card';
+        card.innerHTML = `
+          <div class="timeline-dot">${getTypeIcon(item.type)}</div>
+          <div class="timeline-header">
+            <span class="timeline-year">${item.year}</span>
+            <span class="timeline-duration">${item.duration}</span>
+          </div>
+          <div class="timeline-title">${item.role}</div>
+          <div class="timeline-meta">
+            <span>🏢 ${item.company}</span>
+            <span>📍 ${item.location}</span>
+          </div>
+          <div class="timeline-achievements">
+            <div class="timeline-achievements-title">Key Achievements</div>
+            <ul class="timeline-achievements-list">
+              ${item.achievements.map(a=>`<li>${a}</li>`).join('')}
+            </ul>
+          </div>
+          <div class="timeline-techs">
+            ${item.technologies.map(t=>`<span class=\"timeline-tech\">${t}</span>`).join('')}
+          </div>
+        `;
+        list.appendChild(card);
+      });
+    }
+    document.addEventListener('DOMContentLoaded', renderTimeline);
+    </script>
+ 
+
     <section id="projects" class="scroll-fade-up">
       <div class="projects-section-container">
         <div class="text-center mb-16 animate-slide-up">
@@ -1047,6 +1347,1342 @@
       });
     });
     </script>
+
+        <!-- Innovation & Emerging Tech Section -->
+    <section id="innovation" class="scroll-fade-up">
+      <div class="projects-section-container">
+        <div class="text-center mb-16 animate-slide-up">
+          <h2 class="projects-title">Innovation &amp; Emerging Tech</h2>
+          <p class="projects-desc">Exploring cutting-edge technologies and future-facing solutions to stay ahead of the curve</p>
+        </div>
+        <div class="innovation-grid">
+          <!-- Cards will be injected by JS -->
+        </div>
+        <div class="mt-16 text-center animate-slide-up">
+          <div class="innovation-philosophy-card">
+            <h3 class="innovation-philosophy-title">Innovation Philosophy</h3>
+            <div class="innovation-philosophy-grid">
+              <div class="innovation-philosophy-item">
+                <div class="innovation-icon innovation-icon-lightbulb">💡</div>
+                <h4>Experiment Early</h4>
+                <p>Continuously explore emerging technologies through POCs and research projects</p>
+              </div>
+              <div class="innovation-philosophy-item">
+                <div class="innovation-icon innovation-icon-zap">⚡</div>
+                <h4>Fail Fast</h4>
+                <p>Rapid prototyping and iteration to validate concepts before full implementation</p>
+              </div>
+              <div class="innovation-philosophy-item">
+                <div class="innovation-icon innovation-icon-brain">🧠</div>
+                <h4>Share Knowledge</h4>
+                <p>Document learnings and share insights with the broader engineering community</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <style>
+      .innovation-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+        gap: 32px;
+        margin-bottom: 32px;
+      }
+      .innovation-card {
+        background: rgba(35,39,43,0.98);
+        border-radius: 18px;
+        box-shadow: 0 4px 32px 0 rgba(79,140,255,0.10), 0 1.5px 8px 0 rgba(0,0,0,0.10);
+        padding: 28px 22px 32px 22px;
+        position: relative;
+        border: 2.5px solid #4f8cff22;
+        transition: box-shadow 0.18s, border-color 0.18s;
+        overflow: visible;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+      .innovation-card .innovation-badges {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 10px;
+        align-items: center;
+      }
+      .innovation-badge {
+        display: inline-block;
+        padding: 2px 10px;
+        border-radius: 12px;
+        font-size: 0.98rem;
+        font-weight: 700;
+        background: linear-gradient(90deg, #4f8cff 10%, #00e0d3 90%);
+        color: #fff;
+      }
+      .innovation-badge.status {
+        background: #23272b;
+        color: #4f8cff;
+        border: 1.5px solid #4f8cff;
+      }
+      .innovation-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #4f8cff;
+        margin-bottom: 8px;
+      }
+      .innovation-desc {
+        color: #bfc7d5;
+        font-size: 1.05rem;
+        margin-bottom: 8px;
+      }
+      .innovation-techs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+        margin-bottom: 10px;
+      }
+      .innovation-tech {
+        background: #181b1f;
+        color: #4f8cff;
+        border: 1.5px solid #4f8cff;
+        border-radius: 8px;
+        padding: 4px 12px;
+        font-size: 0.98rem;
+        font-weight: 600;
+      }
+      .innovation-outcomes {
+        margin-bottom: 8px;
+      }
+      .innovation-outcomes ul {
+        margin: 0 0 10px 0;
+        padding: 0 0 0 18px;
+      }
+      .innovation-outcomes li {
+        color: #bfc7d5;
+        font-size: 0.98rem;
+        margin-bottom: 4px;
+      }
+      .innovation-future {
+        padding: 12px;
+        border-radius: 10px;
+        background: linear-gradient(90deg, #4f8cff11 10%, #00e0d311 90%);
+        border: 1.5px solid #4f8cff22;
+        margin-top: 8px;
+      }
+      .innovation-future-title {
+        color: #4f8cff;
+        font-size: 1.01rem;
+        font-weight: 700;
+        margin-bottom: 4px;
+      }
+      .innovation-philosophy-card {
+        background: rgba(35,39,43,0.98);
+        border-radius: 18px;
+        box-shadow: 0 4px 32px 0 rgba(79,140,255,0.10), 0 1.5px 8px 0 rgba(0,0,0,0.10);
+        padding: 32px 22px 32px 22px;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+      .innovation-philosophy-title {
+        font-size: 1.6rem;
+        font-weight: 700;
+        background: linear-gradient(90deg, #4f8cff 10%, #00e0d3 90%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+        text-align: center;
+        margin-bottom: 18px;
+      }
+      .innovation-philosophy-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 32px;
+      }
+      .innovation-philosophy-item {
+        text-align: center;
+      }
+      .innovation-icon {
+        font-size: 2.2rem;
+        width: 56px;
+        height: 56px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 12px auto;
+        border-radius: 50%;
+        background: linear-gradient(90deg, #4f8cff 10%, #00e0d3 90%);
+        color: #fff;
+      }
+      .innovation-icon-zap { background: linear-gradient(90deg, #ffe156 10%, #ff6ec4 90%); color: #23272b; }
+      .innovation-icon-brain { background: linear-gradient(90deg, #7f53ff 10%, #00e0d3 90%); color: #fff; }
+    </style>
+    <script>
+    // Data for innovations (from your React code, adapted for JS)
+    const innovations = [
+      {
+        id: "ebpf-observability",
+        title: "eBPF-Based System Observability",
+        category: "Emerging Tech",
+        status: "Proof of Concept",
+        icon: "🖥️",
+        description: "Exploring kernel-level observability for deep system insights without performance overhead",
+        technologies: ["eBPF", "Cilium", "Pixie", "Falco", "Kubernetes"],
+        outcomes: [
+          "99.99% application visibility with <1% overhead",
+          "Real-time security threat detection",
+          "Zero-instrumentation observability for legacy apps"
+        ],
+        futureImpact: "Revolutionary system observability capabilities"
+      },
+      {
+        id: "ai-driven-ops",
+        title: "AI-Driven Operations & Predictive Scaling",
+        category: "MLOps",
+        status: "In Development",
+        icon: "🧠",
+        description: "Implementing machine learning models for predictive infrastructure scaling and anomaly detection",
+        technologies: ["TensorFlow", "Prometheus", "Grafana", "Python", "Kubernetes HPA"],
+        outcomes: [
+          "60% reduction in over-provisioning",
+          "Proactive incident detection before failure",
+          "Automated capacity planning and optimization"
+        ],
+        futureImpact: "Self-managing infrastructure platforms"
+      },
+      {
+        id: "slsa-security",
+        title: "SLSA Framework Implementation",
+        category: "Supply Chain Security",
+        status: "Pilot",
+        icon: "🛡️",
+        description: "Building secure software supply chain with provenance tracking and attestation",
+        technologies: ["SLSA", "Tekton", "Cosign", "Rekor", "in-toto"],
+        outcomes: [
+          "100% build provenance tracking",
+          "Automated supply chain threat detection",
+          "Compliance with NIST security standards"
+        ],
+        futureImpact: "Zero-trust software supply chains"
+      },
+      {
+        id: "backstage-platform",
+        title: "Developer Portal & Service Catalog",
+        category: "Platform Engineering",
+        status: "Production",
+        icon: "🔧",
+        description: "Custom Backstage implementation for developer self-service and organizational knowledge",
+        technologies: ["Backstage", "React", "Node.js", "PostgreSQL", "Kubernetes"],
+        outcomes: [
+          "Developer onboarding time reduced by 80%",
+          "Centralized service discovery and documentation",
+          "Automated scaffold generation for new services"
+        ],
+        futureImpact: "Complete developer experience transformation"
+      },
+      {
+        id: "wasm-edge",
+        title: "WebAssembly Edge Computing",
+        category: "Edge Technologies",
+        status: "Research",
+        icon: "⚡",
+        description: "Exploring WASM for secure, lightweight edge computing and serverless functions",
+        technologies: ["WebAssembly", "Wasmtime", "WASI", "Kubernetes", "Istio"],
+        outcomes: [
+          "90% faster cold start times vs containers",
+          "Enhanced security through sandboxing",
+          "Universal runtime across platforms"
+        ],
+        futureImpact: "Next-generation serverless computing"
+      },
+      {
+        id: "chaos-automation",
+        title: "Automated Chaos Engineering",
+        category: "Reliability Engineering",
+        status: "Implementation",
+        icon: "💡",
+        description: "Implementing chaos engineering practices with automated failure injection and recovery testing",
+        technologies: ["Chaos Monkey", "Gremlin", "Kubernetes", "Prometheus", "PagerDuty"],
+        outcomes: [
+          "95% improvement in system resilience",
+          "Proactive weakness identification",
+          "Automated disaster recovery validation"
+        ],
+        futureImpact: "Self-healing, antifragile systems"
+      }
+    ];
+    function getStatusBadge(status) {
+      switch (status) {
+        case "Production": return '<span class="innovation-badge status" style="background:linear-gradient(90deg,#22c55e 10%,#4f8cff 90%);color:#fff;">'+status+'</span>';
+        case "In Development": return '<span class="innovation-badge status" style="background:linear-gradient(90deg,#4f8cff 10%,#00e0d3 90%);color:#fff;">'+status+'</span>';
+        case "Pilot": return '<span class="innovation-badge status" style="background:#ffe156;color:#23272b;">'+status+'</span>';
+        case "Implementation": return '<span class="innovation-badge status" style="background:linear-gradient(90deg,#ff6ec4 10%,#ffe156 90%);color:#23272b;">'+status+'</span>';
+        case "Research": return '<span class="innovation-badge status" style="background:linear-gradient(90deg,#7f53ff 10%,#00e0d3 90%);color:#fff;">'+status+'</span>';
+        case "Proof of Concept": return '<span class="innovation-badge status" style="background:#23272b;color:#4f8cff;border:1.5px solid #4f8cff;">'+status+'</span>';
+        default: return '<span class="innovation-badge status">'+status+'</span>';
+      }
+    }
+    function getCategoryIcon(category) {
+      switch (category) {
+        case "Emerging Tech": return '🖥️';
+        case "MLOps": return '🧠';
+        case "Supply Chain Security": return '🛡️';
+        case "Platform Engineering": return '🔧';
+        case "Edge Technologies": return '⚡';
+        case "Reliability Engineering": return '💡';
+        default: return '💡';
+      }
+    }
+    function renderInnovations() {
+      const grid = document.querySelector('.innovation-grid');
+      if (!grid) return;
+      grid.innerHTML = '';
+      innovations.forEach(innovation => {
+        const card = document.createElement('div');
+        card.className = 'innovation-card';
+        card.innerHTML = `
+          <div class="innovation-badges">
+            <span class="innovation-badge">${getCategoryIcon(innovation.category)} ${innovation.category}</span>
+            ${getStatusBadge(innovation.status)}
+          </div>
+          <div class="innovation-title">${innovation.title}</div>
+          <div class="innovation-desc">${innovation.description}</div>
+          <div class="innovation-techs">${innovation.technologies.map(t=>`<span class=\"innovation-tech\">${t}</span>`).join('')}</div>
+          <div class="innovation-outcomes">
+            <div class="innovation-future-title">Current Outcomes</div>
+            <ul>${innovation.outcomes.map(o=>`<li>${o}</li>`).join('')}</ul>
+          </div>
+          <div class="innovation-future">
+            <div class="innovation-future-title">Future Impact</div>
+            <div>${innovation.futureImpact}</div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+    document.addEventListener('DOMContentLoaded', renderInnovations);
+    </script>
+
+        <!-- Team Impact & Cultural Contribution Section -->
+    <section id="team" class="scroll-fade-up">
+      <div class="projects-section-container">
+        <div class="text-center mb-16 animate-slide-up">
+          <h2 class="projects-title">Team Impact &amp; Cultural Contribution</h2>
+          <p class="projects-desc">Building high-performing teams through mentorship, cultural transformation, and enabling others to succeed</p>
+        </div>
+
+        <!-- Culture Initiatives -->
+        <div class="space-y-8 mb-16">
+          <h3 class="text-2xl font-bold text-gradient text-center">Cultural Transformation Initiatives</h3>
+          <div class="team-culture-list"></div>
+        </div>
+
+        <!-- Team Enablement Activities -->
+        <div class="mb-16">
+          <h3 class="text-2xl font-bold text-gradient text-center mb-8">Team Enablement Activities</h3>
+          <div class="team-activities-grid"></div>
+        </div>
+
+        <!-- Testimonials -->
+        <div class="mb-16">
+          <h3 class="text-2xl font-bold text-gradient text-center mb-8">Team Member Testimonials</h3>
+          <div class="team-testimonials-grid"></div>
+        </div>
+
+        <!-- Impact Summary -->
+        <div class="animate-slide-up" style="margin-top: 56px;">
+          <div class="timeline-summary-card">
+            <h3 class="timeline-summary-title">Overall Team Impact</h3>
+            <div class="timeline-summary-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">
+              <div>
+                <div class="timeline-summary-num primary">50+</div>
+                <div class="timeline-summary-label">Engineers Impacted</div>
+              </div>
+              <div>
+                <div class="timeline-summary-num accent">95%</div>
+                <div class="timeline-summary-label">Team Retention Rate</div>
+              </div>
+              <div>
+                <div class="timeline-summary-num secondary">60%</div>
+                <div class="timeline-summary-label">Promotion Rate Increase</div>
+              </div>
+              <div>
+                <div class="timeline-summary-num warning">25+</div>
+                <div class="timeline-summary-label">Innovation Projects</div>
+              </div>
+            </div>
+            <div class="p-6 rounded-lg bg-gradient-primary/10 border border-primary/20 mt-6">
+              <h4 class="font-semibold text-primary mb-3">Leadership Philosophy</h4>
+              <p class="text-muted-foreground text-center">
+                "Great engineering leaders don't just build great systems—they build great people. 
+                My focus is on creating environments where engineers can do their best work, learn continuously, 
+                and feel empowered to drive meaningful change."
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <style>
+      .team-culture-list {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .team-culture-card {
+        background: rgba(35,39,43,0.98);
+        border-radius: 18px;
+        box-shadow: 0 4px 32px 0 rgba(79,140,255,0.10), 0 1.5px 8px 0 rgba(0,0,0,0.10);
+        padding: 28px 22px 32px 22px;
+        position: relative;
+        border: 2.5px solid #4f8cff22;
+        transition: box-shadow 0.18s, border-color 0.18s;
+        overflow: visible;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+      .team-culture-header {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        margin-bottom: 8px;
+      }
+      .team-culture-icon {
+        font-size: 1.6rem;
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        background: linear-gradient(90deg, #4f8cff 10%, #00e0d3 90%);
+        color: #fff;
+      }
+      .team-culture-badges {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+      .team-culture-badge {
+        background: #23272b;
+        color: #4f8cff;
+        border-radius: 8px;
+        padding: 2px 10px;
+        font-size: 0.98rem;
+        font-weight: 600;
+        margin-bottom: 2px;
+        display: inline-block;
+      }
+      .team-culture-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #4f8cff;
+        margin-bottom: 8px;
+      }
+      .team-culture-desc {
+        color: #bfc7d5;
+        font-size: 1.05rem;
+        margin-bottom: 8px;
+      }
+      .team-culture-achievements, .team-culture-metrics {
+        margin-bottom: 8px;
+      }
+      .team-culture-achievements-title, .team-culture-metrics-title {
+        font-size: 1.08rem;
+        font-weight: 700;
+        color: #22c55e;
+        margin-bottom: 6px;
+      }
+      .team-culture-achievements-list, .team-culture-metrics-list {
+        margin: 0 0 10px 0;
+        padding: 0 0 0 18px;
+      }
+      .team-culture-achievements-list li, .team-culture-metrics-list li {
+        color: #bfc7d5;
+        font-size: 0.98rem;
+        margin-bottom: 4px;
+      }
+      .team-culture-metrics-list {
+        list-style: none;
+        padding-left: 0;
+      }
+      .team-culture-metric-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 6px 0;
+        border-bottom: 1px solid #23272b;
+      }
+      .team-culture-metric-label {
+        font-size: 0.98rem;
+        color: #bfc7d5;
+      }
+      .team-culture-metric-value {
+        font-size: 0.98rem;
+        font-weight: 700;
+        color: #4f8cff;
+      }
+      .team-activities-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+        gap: 28px;
+      }
+      .team-activities-card {
+        background: rgba(35,39,43,0.98);
+        border-radius: 18px;
+        box-shadow: 0 4px 32px 0 rgba(79,140,255,0.10), 0 1.5px 8px 0 rgba(0,0,0,0.10);
+        padding: 24px 20px 24px 20px;
+        position: relative;
+        border: 2.5px solid #4f8cff22;
+        transition: box-shadow 0.18s, border-color 0.18s;
+        overflow: visible;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .team-activities-title {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: #4f8cff;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .team-activities-icon {
+        font-size: 1.2rem;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        background: linear-gradient(90deg, #22c55e 10%, #4f8cff 90%);
+        color: #fff;
+      }
+      .team-activities-list {
+        margin: 0;
+        padding: 0 0 0 18px;
+      }
+      .team-activities-list li {
+        color: #bfc7d5;
+        font-size: 0.98rem;
+        margin-bottom: 4px;
+      }
+      .team-testimonials-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 24px;
+      }
+      .team-testimonial-card {
+        background: rgba(35,39,43,0.98);
+        border-radius: 18px;
+        box-shadow: 0 4px 32px 0 rgba(79,140,255,0.10), 0 1.5px 8px 0 rgba(0,0,0,0.10);
+        padding: 24px 20px 24px 20px;
+        position: relative;
+        border: 2.5px solid #4f8cff22;
+        transition: box-shadow 0.18s, border-color 0.18s;
+        overflow: visible;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .team-testimonial-quote {
+        color: #bfc7d5;
+        font-style: italic;
+        margin-bottom: 8px;
+      }
+      .team-testimonial-meta {
+        border-top: 1px solid #23272b;
+        padding-top: 8px;
+        margin-top: 8px;
+      }
+      .team-testimonial-name {
+        font-weight: 700;
+        color: #4f8cff;
+      }
+      .team-testimonial-role {
+        font-size: 0.98rem;
+        color: #bfc7d5;
+      }
+      .team-testimonial-impact {
+        background: linear-gradient(90deg, #22c55e 10%, #4f8cff 90%);
+        color: #fff;
+        border-radius: 8px;
+        padding: 2px 10px;
+        font-size: 0.92rem;
+        font-weight: 600;
+        display: inline-block;
+        margin-top: 4px;
+      }
+    </style>
+    <script>
+    // Data for team impact section (from your React code, adapted for JS)
+    const cultureInitiatives = [
+      {
+        id: "devops-transformation",
+        title: "DevOps Culture Transformation",
+        icon: "⬆️",
+        impact: "Organization-wide",
+        timeframe: "2022-2024",
+        description: "Led cultural shift from traditional IT operations to collaborative DevOps practices",
+        achievements: [
+          "Reduced blame culture through blameless post-mortems",
+          "Established shared responsibility for production systems",
+          "Implemented cross-functional team structures",
+          "Created feedback loops between development and operations"
+        ],
+        metrics: {
+          "Team Satisfaction": "85% → 95%",
+          "Cross-team Collaboration": "40% → 90%", 
+          "Knowledge Sharing": "20% → 80%",
+          "Incident Response": "4h → 15min MTTR"
+        }
+      },
+      {
+        id: "mentorship-program",
+        title: "Engineering Mentorship & Career Development",
+        icon: "👥",
+        impact: "50+ Engineers",
+        timeframe: "Ongoing",
+        description: "Established comprehensive mentorship program for junior and mid-level engineers",
+        achievements: [
+          "Created structured career development pathways",
+          "Implemented peer mentoring and buddy systems",
+          "Designed technical interview preparation workshops",
+          "Established regular 1:1 coaching sessions"
+        ],
+        metrics: {
+          "Engineers Mentored": "20+",
+          "Promotion Rate": "60% increase",
+          "Retention Rate": "95%",
+          "Internal Mobility": "40% increase"
+        }
+      },
+      {
+        id: "learning-culture",
+        title: "Continuous Learning & Innovation Culture",
+        icon: "💡",
+        impact: "5 Development Teams",
+        timeframe: "2023-Present",
+        description: "Fostered environment of continuous learning and experimentation",
+        achievements: [
+          "Instituted 20% time for innovation projects",
+          "Created internal tech talks and knowledge sharing sessions",
+          "Established innovation hackathons and proof-of-concepts",
+          "Built internal learning resources and documentation"
+        ],
+        metrics: {
+          "Innovation Projects": "25+ POCs",
+          "Internal Presentations": "50+ talks",
+          "Knowledge Articles": "100+ published",
+          "Learning Hours": "40h/engineer/quarter"
+        }
+      },
+      {
+        id: "psychological-safety",
+        title: "Psychological Safety & Inclusive Environment",
+        icon: "❤️",
+        impact: "Cross-functional Teams",
+        timeframe: "2021-Present",
+        description: "Created safe environment for risk-taking, learning from failures, and open communication",
+        achievements: [
+          "Implemented blameless post-mortem culture",
+          "Established anonymous feedback channels",
+          "Created inclusive decision-making processes",
+          "Promoted diverse perspectives in technical discussions"
+        ],
+        metrics: {
+          "Psychological Safety Score": "7.2/10 → 9.1/10",
+          "Team Engagement": "70% → 92%",
+          "Idea Contribution": "3x increase",
+          "Voluntary Feedback": "5x increase"
+        }
+      }
+    ];
+    const teamEnablementActivities = [
+      {
+        category: "Knowledge Transfer",
+        icon: "💬",
+        activities: [
+          "Weekly DevOps office hours for Q&A and troubleshooting",
+          "Monthly lunch & learn sessions on emerging technologies",
+          "Quarterly architecture reviews and best practice sharing",
+          "On-demand workshops for new tools and processes"
+        ]
+      },
+      {
+        category: "Process Improvement", 
+        icon: "⬆️",
+        activities: [
+          "Led adoption of agile retrospectives and continuous improvement",
+          "Implemented value stream mapping for delivery optimization",
+          "Established metrics-driven decision making processes",
+          "Created standardized incident response procedures"
+        ]
+      },
+      {
+        category: "Tool & Platform Adoption",
+        icon: "💡",
+        activities: [
+          "Self-service infrastructure provisioning platforms",
+          "Automated CI/CD pipeline templates and best practices",
+          "Observability and monitoring tool training programs",
+          "Security and compliance automation workshops"
+        ]
+      },
+      {
+        category: "Career Development",
+        icon: "🏆",
+        activities: [
+          "Individual career planning and goal setting sessions",
+          "Technical skill assessment and development roadmaps",
+          "Leadership and soft skills training programs",
+          "Conference speaking and community contribution support"
+        ]
+      }
+    ];
+    const testimonials = [
+      {
+        name: "Sarah Chen",
+        role: "Senior Software Engineer",
+        quote: "The mentorship and platform engineering guidance transformed how our team approaches infrastructure. Deployment confidence increased dramatically.",
+        impact: "Team Lead Promotion"
+      },
+      {
+        name: "Michael Rodriguez", 
+        role: "DevOps Engineer II",
+        quote: "The blameless culture and learning environment made it safe to experiment and fail fast. This accelerated my growth exponentially.",
+        impact: "35% Salary Increase"
+      },
+      {
+        name: "Lisa Park",
+        role: "Product Manager",
+        quote: "Cross-functional collaboration improved significantly. Engineering and product teams now work together seamlessly on delivery goals.",
+        impact: "50% Faster Delivery"
+      }
+    ];
+    function renderTeamCulture() {
+      const list = document.querySelector('.team-culture-list');
+      if (!list) return;
+      list.innerHTML = '';
+      cultureInitiatives.forEach(initiative => {
+        const card = document.createElement('div');
+        card.className = 'team-culture-card';
+        card.innerHTML = `
+          <div class="team-culture-header">
+            <span class="team-culture-icon">${initiative.icon}</span>
+            <span class="team-culture-badges">
+              <span class="team-culture-badge">${initiative.impact}</span>
+              <span class="team-culture-badge">${initiative.timeframe}</span>
+            </span>
+          </div>
+          <div class="team-culture-title">${initiative.title}</div>
+          <div class="team-culture-desc">${initiative.description}</div>
+          <div class="team-culture-achievements">
+            <div class="team-culture-achievements-title">Key Achievements</div>
+            <ul class="team-culture-achievements-list">
+              ${initiative.achievements.map(a=>`<li>${a}</li>`).join('')}
+            </ul>
+          </div>
+          <div class="team-culture-metrics">
+            <div class="team-culture-metrics-title">Impact Metrics</div>
+            <ul class="team-culture-metrics-list">
+              ${Object.entries(initiative.metrics).map(([k,v])=>`<li class=\"team-culture-metric-row\"><span class=\"team-culture-metric-label\">${k}</span><span class=\"team-culture-metric-value\">${v}</span></li>`).join('')}
+            </ul>
+          </div>
+        `;
+        list.appendChild(card);
+      });
+    }
+    function renderTeamActivities() {
+      const grid = document.querySelector('.team-activities-grid');
+      if (!grid) return;
+      grid.innerHTML = '';
+      teamEnablementActivities.forEach(category => {
+        const card = document.createElement('div');
+        card.className = 'team-activities-card';
+        card.innerHTML = `
+          <div class="team-activities-title"><span class="team-activities-icon">${category.icon}</span>${category.category}</div>
+          <ul class="team-activities-list">
+            ${category.activities.map(a=>`<li>${a}</li>`).join('')}
+          </ul>
+        `;
+        grid.appendChild(card);
+      });
+    }
+    function renderTestimonials() {
+      const grid = document.querySelector('.team-testimonials-grid');
+      if (!grid) return;
+      grid.innerHTML = '';
+      testimonials.forEach(testimonial => {
+        const card = document.createElement('div');
+        card.className = 'team-testimonial-card';
+        card.innerHTML = `
+          <div class="team-testimonial-quote">"${testimonial.quote}"</div>
+          <div class="team-testimonial-meta">
+            <div class="team-testimonial-name">${testimonial.name}</div>
+            <div class="team-testimonial-role">${testimonial.role}</div>
+            <span class="team-testimonial-impact">${testimonial.impact}</span>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+      renderTeamCulture();
+      renderTeamActivities();
+      renderTestimonials();
+    });
+    </script>
+
+        <!-- Thought Leadership & Community Section -->
+    <section id="leadership" class="scroll-fade-up">
+      <div class="projects-section-container">
+        <div class="text-center mb-16 animate-slide-up">
+          <h2 class="projects-title">Thought Leadership &amp; Community</h2>
+          <p class="projects-desc">Sharing knowledge, contributing to the community, and advancing the field through content creation and mentorship</p>
+        </div>
+        <div class="leadership-categories-list"></div>
+        <div class="mt-32 animate-slide-up">
+          <div class="timeline-summary-card">
+            <h3 class="timeline-summary-title">Community Impact</h3>
+            <div class="timeline-summary-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">
+              <div>
+                <div class="timeline-summary-num primary">35K+</div>
+                <div class="timeline-summary-label">Article Views</div>
+              </div>
+              <div>
+                <div class="timeline-summary-num accent">1000+</div>
+                <div class="timeline-summary-label">Conference Attendees</div>
+              </div>
+              <div>
+                <div class="timeline-summary-num secondary">350+</div>
+                <div class="timeline-summary-label">GitHub Stars</div>
+              </div>
+              <div>
+                <div class="timeline-summary-num warning">20+</div>
+                <div class="timeline-summary-label">Engineers Mentored</div>
+              </div>
+            </div>
+            <div class="mt-8 p-6 rounded-lg bg-gradient-primary/10 border border-primary/20">
+              <h4 class="font-semibold text-primary mb-3">Speaking &amp; Content Strategy</h4>
+              <div class="grid md:grid-cols-2 gap-4 text-sm text-muted-foreground">
+                <div>• Focus on practical, real-world implementations</div>
+                <div>• Share lessons learned from production experience</div>
+                <div>• Bridge the gap between theory and practice</div>
+                <div>• Encourage adoption of best practices</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <style>
+      .leadership-categories-list {
+        display: flex;
+        flex-direction: column;
+        gap: 48px;
+        margin-bottom: 48px;
+      }
+      .leadership-category-card {
+        background: rgba(35,39,43,0.98);
+        border-radius: 18px;
+        box-shadow: 0 4px 32px 0 rgba(79,140,255,0.10), 0 1.5px 8px 0 rgba(0,0,0,0.10);
+        padding: 28px 22px 32px 22px;
+        position: relative;
+        border: 2.5px solid #4f8cff22;
+        transition: box-shadow 0.18s, border-color 0.18s;
+        overflow: visible;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+      .leadership-category-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #4f8cff;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .leadership-category-icon {
+        font-size: 1.4rem;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        background: linear-gradient(90deg, #4f8cff 10%, #00e0d3 90%);
+        color: #fff;
+      }
+      .leadership-items-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 24px;
+      }
+      .leadership-item-card {
+        background: #23272b;
+        border-radius: 12px;
+        box-shadow: 0 2px 12px 0 rgba(79,140,255,0.08);
+        padding: 20px 18px 18px 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        border: 1.5px solid #4f8cff22;
+        transition: box-shadow 0.18s, border-color 0.18s;
+      }
+      .leadership-item-title {
+        font-size: 1.08rem;
+        font-weight: 700;
+        color: #f3f6fa;
+        margin-bottom: 2px;
+      }
+      .leadership-item-meta {
+        display: flex;
+        gap: 12px;
+        font-size: 0.98rem;
+        color: #bfc7d5;
+        margin-bottom: 2px;
+      }
+      .leadership-item-desc {
+        color: #bfc7d5;
+        font-size: 0.98rem;
+        margin-bottom: 2px;
+      }
+      .leadership-item-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+      }
+      .leadership-item-tag {
+        background: #181b1f;
+        color: #4f8cff;
+        border: 1.2px solid #4f8cff;
+        border-radius: 8px;
+        padding: 2px 8px;
+        font-size: 0.92rem;
+        font-weight: 600;
+      }
+    </style>
+    <script>
+    // Data for leadership section (from your React code, adapted for JS)
+    const contentCategories = [
+      {
+        id: "articles",
+        title: "Technical Articles & Blog Posts",
+        icon: "📖",
+        items: [
+          {
+            title: "GitOps at Scale: Lessons from Managing 50+ Microservices",
+            platform: "Medium Engineering",
+            date: "2024-03",
+            views: "15K+ views",
+            tags: ["GitOps", "Kubernetes", "DevOps"],
+            description: "Deep dive into implementing GitOps practices across a large organization with real-world challenges and solutions."
+          },
+          {
+            title: "The Platform Engineering Mindset: Building Developer-Centric Infrastructure",
+            platform: "Dev.to",
+            date: "2024-01",
+            views: "8K+ views", 
+            tags: ["Platform Engineering", "Developer Experience", "Infrastructure"],
+            description: "Exploring the shift from traditional DevOps to platform engineering and its impact on developer productivity."
+          },
+          {
+            title: "Zero-Downtime Deployments with ArgoCD and Progressive Delivery",
+            platform: "CNCF Blog",
+            date: "2023-11",
+            views: "12K+ views",
+            tags: ["ArgoCD", "Progressive Delivery", "CI/CD"],
+            description: "Comprehensive guide to implementing safe deployment strategies using GitOps and progressive delivery techniques."
+          }
+        ]
+      },
+      {
+        id: "speaking",
+        title: "Conference Talks & Presentations",
+        icon: "🎤",
+        items: [
+          {
+            title: "From Chaos to Control: Scaling DevOps in Enterprise Environments",
+            platform: "DevOps World 2024",
+            date: "2024-06",
+            audience: "500+ attendees",
+            tags: ["DevOps", "Enterprise", "Scaling"],
+            description: "Keynote presentation on enterprise DevOps transformation strategies and overcoming organizational challenges."
+          },
+          {
+            title: "eBPF in Production: Next-Generation Observability",
+            platform: "KubeCon + CloudNativeCon",
+            date: "2024-03",
+            audience: "300+ attendees",
+            tags: ["eBPF", "Observability", "Kubernetes"],
+            description: "Technical deep-dive into implementing eBPF-based observability solutions for cloud-native applications."
+          },
+          {
+            title: "Building Internal Developer Platforms: A Practical Guide",
+            platform: "Platform Engineering Summit",
+            date: "2023-10",
+            audience: "250+ attendees",
+            tags: ["Platform Engineering", "Developer Experience", "Internal Tools"],
+            description: "Workshop on designing and implementing internal developer platforms using modern toolchains."
+          }
+        ]
+      },
+      {
+        id: "opensource",
+        title: "Open Source Contributions",
+        icon: "💻",
+        items: [
+          {
+            title: "ArgoCD Application Health Dashboard",
+            platform: "GitHub",
+            date: "2024-02",
+            stars: "150+ stars",
+            tags: ["ArgoCD", "Monitoring", "Go", "React"],
+            description: "Custom health monitoring dashboard for ArgoCD applications with advanced alerting and metrics visualization."
+          },
+          {
+            title: "Terraform AWS EKS Module",
+            platform: "Terraform Registry",
+            date: "2023-08", 
+            downloads: "5K+ downloads",
+            tags: ["Terraform", "AWS", "EKS", "Infrastructure"],
+            description: "Production-ready Terraform module for deploying secure and scalable EKS clusters with best practices."
+          },
+          {
+            title: "Kubernetes Policy Validator",
+            platform: "GitHub",
+            date: "2023-05",
+            stars: "200+ stars",
+            tags: ["Kubernetes", "Policy", "Security", "Python"],
+            description: "CLI tool for validating Kubernetes manifests against organizational policies and security standards."
+          }
+        ]
+      },
+      {
+        id: "mentorship",
+        title: "Community & Mentorship",
+        icon: "👥",
+        items: [
+          {
+            title: "DevOps Mentorship Program",
+            platform: "TechCorp Internal",
+            date: "Ongoing",
+            impact: "20+ engineers mentored",
+            tags: ["Mentorship", "Career Development", "DevOps"],
+            description: "Established and lead mentorship program for engineers transitioning into DevOps and platform engineering roles."
+          },
+          {
+            title: "Cloud Native Community Meetup",
+            platform: "San Francisco Bay Area",
+            date: "Monthly",
+            impact: "500+ members",
+            tags: ["Community", "Kubernetes", "Cloud Native"],
+            description: "Co-organize monthly meetups featuring technical talks, workshops, and networking for cloud-native practitioners."
+          },
+          {
+            title: "University Guest Lectures",
+            platform: "Stanford & UC Berkeley",
+            date: "2023-2024",
+            impact: "200+ students",
+            tags: ["Education", "DevOps", "Career Guidance"],
+            description: "Regular guest lectures on modern software delivery practices and career paths in cloud engineering."
+          }
+        ]
+      }
+    ];
+    function renderLeadershipCategories() {
+      const list = document.querySelector('.leadership-categories-list');
+      if (!list) return;
+      list.innerHTML = '';
+      contentCategories.forEach(category => {
+        const card = document.createElement('div');
+        card.className = 'leadership-category-card';
+        card.innerHTML = `
+          <div class="leadership-category-title"><span class="leadership-category-icon">${category.icon}</span>${category.title}</div>
+          <div class="leadership-items-grid">
+            ${category.items.map(item => `
+              <div class=\"leadership-item-card\">
+                <div class=\"leadership-item-title\">${item.title}</div>
+                <div class=\"leadership-item-meta\">
+                  <span>${item.platform}</span>
+                  <span>${item.date}</span>
+                  <span>${item.views || item.audience || item.stars || item.downloads || item.impact || ''}</span>
+                </div>
+                <div class=\"leadership-item-desc\">${item.description}</div>
+                <div class=\"leadership-item-tags\">
+                  ${item.tags.map(tag => `<span class=\"leadership-item-tag\">${tag}</span>`).join('')}
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+        list.appendChild(card);
+      });
+    }
+    document.addEventListener('DOMContentLoaded', renderLeadershipCategories);
+    </script>
+
+        <!-- Certifications & Continuous Learning Section -->
+    <section id="certifications" class="scroll-fade-up">
+      <div class="projects-section-container">
+        <div class="text-center mb-16 animate-slide-up">
+          <h2 class="projects-title">Certifications &amp; Continuous Learning</h2>
+          <p class="projects-desc">Professional certifications and ongoing learning initiatives to stay current with evolving technologies</p>
+        </div>
+        <div class="mb-16">
+          <h3 class="text-2xl font-bold text-gradient mb-8 text-center">Professional Certifications</h3>
+          <div class="certifications-grid"></div>
+        </div>
+        <div class="space-y-8">
+          <h3 class="text-2xl font-bold text-gradient text-center">Continuous Learning Journey</h3>
+          <div class="learning-grid"></div>
+        </div>
+        <div class="mt-16 animate-slide-up">
+          <div class="learning-philosophy-card">
+            <h3 class="text-2xl font-bold text-gradient mb-6 text-center">Learning Philosophy</h3>
+            <div class="learning-philosophy-grid">
+              <div>
+                <div class="learning-icon learning-icon-target">🎯</div>
+                <h4 class="font-semibold mb-2">Stay Current</h4>
+                <p class="text-sm text-muted-foreground">Continuously learning emerging technologies and industry best practices</p>
+              </div>
+              <div>
+                <div class="learning-icon learning-icon-star">⭐</div>
+                <h4 class="font-semibold mb-2">Hands-On Learning</h4>
+                <p class="text-sm text-muted-foreground">Prefer practical, project-based learning over theoretical knowledge</p>
+              </div>
+              <div>
+                <div class="learning-icon learning-icon-award">🏆</div>
+                <h4 class="font-semibold mb-2">Share Knowledge</h4>
+                <p class="text-sm text-muted-foreground">Teaching others reinforces learning and contributes to the community</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <style>
+      .certifications-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+        gap: 28px;
+      }
+      .certification-card {
+        background: rgba(35,39,43,0.98);
+        border-radius: 18px;
+        box-shadow: 0 4px 32px 0 rgba(79,140,255,0.10), 0 1.5px 8px 0 rgba(0,0,0,0.10);
+        padding: 28px 22px 32px 22px;
+        border: 2.5px solid #4f8cff22;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        min-height: 0;
+      }
+      .certification-title {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: #4f8cff;
+        margin-bottom: 4px;
+      }
+      .certification-provider {
+        font-size: 0.98rem;
+        color: #bfc7d5;
+        margin-bottom: 6px;
+      }
+      .certification-description {
+        color: #bfc7d5;
+        font-size: 0.98rem;
+        margin-bottom: 6px;
+      }
+      .certification-meta {
+        display: flex;
+        gap: 24px;
+        font-size: 0.97rem;
+        color: #bfc7d5;
+        margin-bottom: 6px;
+      }
+      .certification-skills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-bottom: 6px;
+      }
+      .certification-skill {
+        background: #181b1f;
+        color: #4f8cff;
+        border: 1.2px solid #4f8cff;
+        border-radius: 8px;
+        padding: 2px 8px;
+        font-size: 0.92rem;
+        font-weight: 600;
+      }
+      .certification-id {
+        font-size: 0.92rem;
+        color: #bfc7d5;
+        font-family: monospace;
+      }
+      .learning-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+        gap: 28px;
+      }
+      .learning-card {
+        background: rgba(35,39,43,0.98);
+        border-radius: 18px;
+        box-shadow: 0 4px 32px 0 rgba(79,140,255,0.10), 0 1.5px 8px 0 rgba(0,0,0,0.10);
+        padding: 24px 20px 24px 20px;
+        border: 2.5px solid #4f8cff22;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        min-height: 0;
+      }
+      .learning-category-title {
+        font-size: 1.08rem;
+        font-weight: 700;
+        color: #22c55e;
+        margin-bottom: 8px;
+      }
+      .learning-items-list {
+        margin: 0;
+        padding: 0 0 0 18px;
+      }
+      .learning-item {
+        color: #bfc7d5;
+        font-size: 0.98rem;
+        margin-bottom: 4px;
+      }
+      .learning-status {
+        font-size: 0.92rem;
+        font-weight: 600;
+        margin-left: 8px;
+      }
+      .learning-status.completed { color: #22c55e; }
+      .learning-status.inprogress { color: #4f8cff; }
+      .learning-status.planned { color: #bfc7d5; }
+      .learning-philosophy-card {
+        background: rgba(35,39,43,0.98);
+        border-radius: 18px;
+        box-shadow: 0 4px 32px 0 rgba(79,140,255,0.10), 0 1.5px 8px 0 rgba(0,0,0,0.10);
+        padding: 32px 22px 32px 22px;
+        max-width: 900px;
+        margin: 64px auto 0 auto;
+      }
+      .learning-philosophy-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 32px;
+      }
+      .learning-icon {
+        font-size: 2.2rem;
+        width: 56px;
+        height: 56px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 12px auto;
+        border-radius: 50%;
+        background: linear-gradient(90deg, #4f8cff 10%, #00e0d3 90%);
+        color: #fff;
+      }
+      .learning-icon-target { background: linear-gradient(90deg, #ffe156 10%, #ff6ec4 90%); color: #23272b; }
+      .learning-icon-star { background: linear-gradient(90deg, #7f53ff 10%, #00e0d3 90%); color: #fff; }
+      .learning-icon-award { background: linear-gradient(90deg, #22c55e 10%, #4f8cff 90%); color: #fff; }
+    </style>
+    <script>
+    // Data for certifications
+    const certifications = [
+      { id: "aws-devops-pro", title: "AWS Certified DevOps Engineer - Professional", provider: "Amazon Web Services", level: "Professional", earned: "2023-08", expires: "2026-08", credentialId: "AWS-DEVOPS-2023-001", skills: ["AWS", "CI/CD", "Infrastructure as Code", "Monitoring", "Security"], description: "Advanced certification covering deployment, management, and operations on AWS platform" },
+      { id: "cka", title: "Certified Kubernetes Administrator (CKA)", provider: "Cloud Native Computing Foundation", level: "Professional", earned: "2023-03", expires: "2026-03", credentialId: "CKA-2023-001", skills: ["Kubernetes", "Container Orchestration", "Cluster Management", "Troubleshooting"], description: "Hands-on certification demonstrating Kubernetes administration and troubleshooting skills" },
+      { id: "terraform-associate", title: "HashiCorp Certified: Terraform Associate", provider: "HashiCorp", level: "Associate", earned: "2022-11", expires: "2024-11", credentialId: "TERRA-2022-001", skills: ["Infrastructure as Code", "Terraform", "State Management", "Modules"], description: "Demonstrates proficiency in Terraform for infrastructure automation and management" },
+      { id: "azure-devops", title: "Microsoft Certified: Azure DevOps Engineer Expert", provider: "Microsoft", level: "Expert", earned: "2022-06", expires: "2025-06", credentialId: "AZ-400-2022-001", skills: ["Azure", "DevOps", "CI/CD", "Application Monitoring", "Security"], description: "Expert-level certification for implementing DevOps practices using Microsoft Azure" },
+      { id: "docker-certified", title: "Docker Certified Associate (DCA)", provider: "Docker Inc.", level: "Associate", earned: "2021-09", expires: "2024-09", credentialId: "DCA-2021-001", skills: ["Docker", "Containerization", "Image Management", "Networking", "Security"], description: "Certification validating skills in Docker containerization platform" },
+      { id: "gcp-ace", title: "Google Cloud Associate Cloud Engineer", provider: "Google Cloud", level: "Associate", earned: "2021-04", expires: "2024-04", credentialId: "GCP-ACE-2021-001", skills: ["Google Cloud Platform", "Compute Engine", "Kubernetes Engine", "Cloud Storage"], description: "Foundational certification for Google Cloud Platform services and operations" }
+    ];
+    // Data for continuous learning
+    const continuousLearning = [
+      { category: "Current Learning (2024)", items: [ { title: "Platform Engineering Fundamentals", provider: "Linux Foundation", status: "In Progress" }, { title: "eBPF for System Observability", provider: "Isovalent", status: "In Progress" }, { title: "AI/ML Operations (MLOps)", provider: "Coursera", status: "Planned" } ] },
+      { category: "Recent Completions (2023)", items: [ { title: "GitOps with ArgoCD", provider: "CNCF", status: "Completed" }, { title: "Advanced Kubernetes Security", provider: "Aqua Security", status: "Completed" }, { title: "FinOps Certified Practitioner", provider: "FinOps Foundation", status: "Completed" } ] },
+      { category: "Books & Resources", items: [ { title: "Platform Engineering: Patterns and Practices", author: "Charity Majors", status: "Completed" }, { title: "Learning eBPF", author: "Liz Rice", status: "In Progress" }, { title: "The Phoenix Project", author: "Gene Kim", status: "Completed" } ] }
+    ];
+    function getLevelClass(level) {
+      switch (level) {
+        case "Expert": return "certification-skill certification-skill-expert";
+        case "Professional": return "certification-skill certification-skill-professional";
+        case "Associate": return "certification-skill certification-skill-associate";
+        default: return "certification-skill";
+      }
+    }
+    function getStatusClass(status) {
+      switch (status) {
+        case "Completed": return "learning-status completed";
+        case "In Progress": return "learning-status inprogress";
+        case "Planned": return "learning-status planned";
+        default: return "learning-status";
+      }
+    }
+    function renderCertifications() {
+      const grid = document.querySelector('.certifications-grid');
+      if (!grid) return;
+      grid.innerHTML = '';
+      certifications.forEach(cert => {
+        const card = document.createElement('div');
+        card.className = 'certification-card';
+        card.innerHTML = `
+          <div class="certification-title">${cert.title}</div>
+          <div class="certification-provider">${cert.provider}</div>
+          <div class="certification-description">${cert.description}</div>
+          <div class="certification-meta">
+            <span><b>Level:</b> ${cert.level}</span>
+            <span><b>Earned:</b> ${cert.earned}</span>
+            <span><b>Expires:</b> ${cert.expires}</span>
+          </div>
+          <div class="certification-skills">
+            ${cert.skills.map(skill => `<span class="certification-skill">${skill}</span>`).join('')}
+          </div>
+          <div class="certification-id">ID: ${cert.credentialId}</div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+    function renderLearning() {
+      const grid = document.querySelector('.learning-grid');
+      if (!grid) return;
+      grid.innerHTML = '';
+      continuousLearning.forEach(section => {
+        const card = document.createElement('div');
+        card.className = 'learning-card';
+        card.innerHTML = `
+          <div class="learning-category-title">${section.category}</div>
+          <ul class="learning-items-list">
+            ${section.items.map(item => `<li class="learning-item">${item.title} <span class="learning-status ${getStatusClass(item.status)}">${item.status}</span> <span style="color:#bfc7d5;font-size:0.95em;">${item.provider ? item.provider : (item.author || '')}</span></li>`).join('')}
+          </ul>
+        `;
+        grid.appendChild(card);
+      });
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+      renderCertifications();
+      renderLearning();
+    });
+    </script>
+
+
+
+
+
     <section id="about" class="scroll-fade-up">
       <div class="section-title">About Me</div>
       <div class="about">
