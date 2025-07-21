@@ -134,7 +134,7 @@
       <h1 style="margin-bottom:10px;">Hello, I'm <span class="fluid-gradient-text">Dinesh Polavarapu</span></h1>
       <!-- <h2 style="margin-bottom:18px;">Full Stack Developer &amp; UI/UX Enthusiast</h2> -->
         <h2 style="margin-bottom:18px;min-height:32px;">
-          <span id="typed-role"></span>
+          <span id="typed-role" class="typed-cursor"></span>
         </h2>
         <p style="font-size:1.18rem;color:#bfc7d5;margin-bottom:22px;max-width:480px;">I build beautiful, performant web apps and digital experiences.<br>I love solving real-world problems with code, design, and a touch of creativity.</p>
 
@@ -206,6 +206,18 @@
 }
 .scroll-down:hover span:first-child {
   color: #2563eb;
+}
+/* Blinking type cursor for #typed-role */
+#typed-role.typed-cursor::after {
+  content: '|';
+  animation: blink-cursor 0.9s steps(1) infinite;
+  color: #4f8cff;
+  font-weight: 600;
+  margin-left: 2px;
+}
+@keyframes blink-cursor {
+  0%, 60% { opacity: 1; }
+  61%, 100% { opacity: 0; }
 }
 </style>
     <section id="projects" class="scroll-fade-up">
