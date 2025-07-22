@@ -1,1 +1,83 @@
-[]
+{
+  "description": "From foundational infrastructure to cutting-edge platform engineering",
+  "categories": [
+    {
+      "category": "foundational",
+      "title": "Foundational Skills",
+      "icon": "\uD83D\uDCBB",
+      "skills": [
+      {"name": "Linux/Unix", "level": "Expert", "years": "8+ yrs"},
+      {"name": "Bash/Python/Go", "level": "Expert", "years": "7+ yrs"},
+      {"name": "Git & Version Control", "level": "Expert", "years": "8+ yrs"},
+      {"name": "Networking (TCP/IP, DNS)", "level": "Advanced", "years": "6+ yrs"},
+      {"name": "SQL & NoSQL Databases", "level": "Advanced", "years": "5+ yrs"},
+      {"name": "Web Servers (Nginx, Apache)", "level": "Advanced", "years": "6+ yrs"}
+    ]
+  },
+    {
+      "category": "intermediate",
+      "title": "Intermediate & DevOps Core",
+      "icon": "⚙️",
+      "skills": [
+      {"name": "Docker & Containerization", "level": "Expert", "years": "5+ yrs"},
+      {"name": "CI/CD (Jenkins, GitLab, GitHub Actions)", "level": "Expert", "years": "6+ yrs"},
+      {"name": "Terraform & Infrastructure as Code", "level": "Expert", "years": "4+ yrs"},
+      {"name": "Kubernetes Fundamentals", "level": "Advanced", "years": "3+ yrs"},
+      {"name": "Configuration Management (Ansible)", "level": "Advanced", "years": "4+ yrs"},
+      {"name": "Monitoring (Prometheus, Grafana)", "level": "Advanced", "years": "3+ yrs"}
+    ]
+  },
+    {
+      "category": "advanced",
+      "title": "Advanced & Expert Level",
+      "icon": "\u2601\uFE0F",
+      "skills": [
+      {"name": "GitOps (ArgoCD, Flux)", "level": "Expert", "years": "2+ yrs"},
+      {"name": "Service Mesh (Istio, Linkerd)", "level": "Advanced", "years": "2+ yrs"},
+      {"name": "Platform Engineering", "level": "Expert", "years": "3+ yrs"},
+      {"name": "DevSecOps & Security Automation", "level": "Advanced", "years": "3+ yrs"},
+      {"name": "Observability (Jaeger, OpenTelemetry)", "level": "Advanced", "years": "2+ yrs"},
+      {"name": "FinOps & Cost Optimization", "level": "Intermediate", "years": "1+ yrs"}
+    ]
+  },
+    {
+      "category": "cloud",
+      "title": "Cloud Platforms",
+      "icon": "\uD83D\uDDC3",
+      "skills": [
+      {"name": "AWS (EKS, EC2, RDS, S3)", "level": "Expert", "years": "5+ yrs"},
+      {"name": "Azure (AKS, Functions, DevOps)", "level": "Advanced", "years": "3+ yrs"},
+      {"name": "Google Cloud Platform", "level": "Intermediate", "years": "2+ yrs"},
+      {"name": "Multi-Cloud Architecture", "level": "Advanced", "years": "2+ yrs"},
+      {"name": "Serverless Technologies", "level": "Advanced", "years": "3+ yrs"},
+      {"name": "CDN & Edge Computing", "level": "Intermediate", "years": "2+ yrs"}
+    ]
+  },
+    {
+      "category": "security",
+      "title": "Security & Compliance",
+      "icon": "\uD83D\uDD10",
+      "skills": [
+      {"name": "SAST/DAST Security Scanning", "level": "Advanced", "years": "3+ yrs"},
+      {"name": "Container Security (Twistlock, Aqua)", "level": "Advanced", "years": "2+ yrs"},
+      {"name": "Policy as Code (OPA, Gatekeeper)", "level": "Intermediate", "years": "1+ yrs"},
+      {"name": "RBAC & IAM", "level": "Advanced", "years": "4+ yrs"},
+      {"name": "Compliance (SOC2, PCI DSS)", "level": "Intermediate", "years": "2+ yrs"},
+      {"name": "Zero Trust Architecture", "level": "Intermediate", "years": "1+ yrs"}
+    ]
+  },
+    {
+      "category": "emerging",
+      "title": "Emerging Technologies",
+      "icon": "\uD83D\uDD15",
+      "skills": [
+        {"name": "eBPF & System Observability", "level": "Beginner", "years": "0.5+ yrs"},
+        {"name": "AI/ML Operations (MLOps)", "level": "Intermediate", "years": "1+ yrs"},
+        {"name": "SLSA & Supply Chain Security", "level": "Intermediate", "years": "1+ yrs"},
+        {"name": "Backstage Developer Portal", "level": "Intermediate", "years": "1+ yrs"},
+        {"name": "WebAssembly (WASM)", "level": "Beginner", "years": "0.5+ yrs"},
+        {"name": "Chaos Engineering", "level": "Intermediate", "years": "1+ yrs"}
+      ]
+    }
+  ]
+}
