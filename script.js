@@ -1,4 +1,34 @@
 // --- Portfolio Advanced UI Interactivity ---
+// --- About Section Dynamic Rendering ---
+async function renderAboutSection() {
+  try {
+    const res = await fetch('data/about.json');
+    if (!res.ok) throw new Error('Failed to load about.json');
+    const about = await res.json();
+    const aboutSection = document.querySelector('section#about .about');
+    if (!aboutSection) return;
+    aboutSection.innerHTML = `
+      <div class="about-img">
+        <img src="${about.photo}" alt="About Photo" />
+      </div>
+      <div class="about-content">
+        <h3>${about.title}</h3>
+        <p>${about.description}</p>
+        <div class="skills">
+          ${about.skills.map(skill => `<span class="skill">${skill}</span>`).join('')}
+        </div>
+      </div>
+    `;
+    // Optionally update the section title and name if needed
+    const sectionTitle = document.querySelector('section#about .section-title');
+    if (sectionTitle) sectionTitle.textContent = `About ${about.name}`;
+  } catch (err) {
+    // fallback: show error in about section
+    const aboutSection = document.querySelector('section#about .about');
+    if (aboutSection) aboutSection.innerHTML = '<p style="color:#ff6b6b;">Failed to load About info.</p>';
+  }
+}
+document.addEventListener('DOMContentLoaded', renderAboutSection);
 
 // Smooth scroll for nav links
 document.querySelectorAll('a').forEach(link => {

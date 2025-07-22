@@ -1,0 +1,19 @@
+{
+  "name": "",
+  "photo": "images/dinesh.webp",
+  "title": "Who Am I?",
+  "description": "I'm a passionate developer with a knack for building scalable, user-friendly web applications. I enjoy working across the stack, from crafting pixel-perfect UIs to architecting robust backends. My focus is on delivering value, learning new technologies, and collaborating with great teams.",
+  "skills": [
+    "JavaScript",
+    "TypeScript",
+    "React",
+    "Node.js",
+    "UI/UX",
+    "Figma",
+    "Python",
+    "SQL",
+    "APIs",
+    "Cloud"
+
+  ]
+}
