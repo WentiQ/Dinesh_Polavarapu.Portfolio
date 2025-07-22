@@ -734,7 +734,6 @@ fetch('data/skills.json')
   text-fill-color: transparent;
 }
 </style>
-</style>
     
      
         <!-- Professional Journey Timeline Section -->
@@ -742,7 +741,8 @@ fetch('data/skills.json')
       <div class="projects-section-container">
         <div class="text-center mb-16 animate-slide-up">
           <h2 class="projects-title">Professional Journey</h2>
-          <p class="projects-desc">Career timeline showcasing growth from systems administration to platform engineering leadership</p>
+          <p class="projects-desc" id="timeline-desc"></p>
+          
         </div>
         <div class="timeline-relative">
           <div class="timeline-line"></div>
@@ -753,15 +753,15 @@ fetch('data/skills.json')
             <h3 class="timeline-summary-title">Career Progression Summary</h3>
             <div class="timeline-summary-grid">
               <div>
-                <div class="timeline-summary-num primary">8+</div>
+                <div class="timeline-summary-num primary" id="summary-years"></div>
                 <div class="timeline-summary-label">Years Experience</div>
               </div>
               <div>
-                <div class="timeline-summary-num accent">5</div>
+                <div class="timeline-summary-num accent" id="summary-roles"></div>
                 <div class="timeline-summary-label">Role Progressions</div>
               </div>
               <div>
-                <div class="timeline-summary-num secondary">3</div>
+                <div class="timeline-summary-num secondary" id="summary-promotions"></div>
                 <div class="timeline-summary-label">Promotions</div>
               </div>
             </div>
@@ -799,19 +799,26 @@ fetch('data/skills.json')
       }
       .timeline-dot {
         position: absolute;
-        left: -74px; /* Center the dot on the 4px line at left: 18px */
+        left: -74px;
         top: 32px;
-        width: 20px;
-        height: 20px;
+        width: 18px;
+        height: 18px;
         border-radius: 50%;
         background: linear-gradient(90deg, #4f8cff 10%, #00e0d3 90%);
         border: 4px solid #23272b;
         z-index: 2;
         display: none;
         box-sizing: border-box;
+        animation: timeline-dot-blink 1.2s infinite alternate;
+        box-shadow: 0 0 12px 2px #4f8cff66;
       }
       @media (min-width: 768px) {
         .timeline-dot { display: block; }
+      }
+      @keyframes timeline-dot-blink {
+        0% { opacity: 1; box-shadow: 0 0 12px 2px #4f8cff66; }
+        60% { opacity: 1; box-shadow: 0 0 18px 6px #00e0d3cc; }
+        100% { opacity: 0.4; box-shadow: 0 0 6px 1px #4f8cff33; }
       }
       .timeline-header {
         display: flex;
@@ -909,123 +916,216 @@ fetch('data/skills.json')
       .timeline-summary-label { color: #bfc7d5; font-size: 1.08rem; }
     </style>
     <script>
-    // Timeline data (from your React code, adapted for JS)
-    const timelineData = [
-      {
-        year: "2024",
-        role: "Senior Platform Engineer",
-        company: "TechCorp Enterprise",
-        location: "San Francisco, CA",
-        duration: "Present",
-        type: "promotion",
-        achievements: [
-          "Leading platform engineering initiative for 50+ development teams",
-          "Architected multi-cloud GitOps platform reducing deployment time by 80%",
-          "Implemented comprehensive observability stack with 99.95% uptime",
-          "Established FinOps practices saving $2M annually"
-        ],
-        technologies: ["Kubernetes", "ArgoCD", "Terraform", "AWS", "Backstage"]
-      },
-      {
-        year: "2022",
-        role: "DevOps Engineer III",
-        company: "TechCorp Enterprise",
-        location: "San Francisco, CA",
-        duration: "2 years",
-        type: "promotion",
-        achievements: [
-          "Migrated legacy monolith to microservices on Kubernetes",
-          "Built self-service developer platform using Backstage",
-          "Implemented comprehensive CI/CD pipelines for 30+ services",
-          "Reduced MTTR from 4 hours to 15 minutes through automation"
-        ],
-        technologies: ["Docker", "Kubernetes", "Jenkins", "Terraform", "Prometheus"]
-      },
-      {
-        year: "2020",
-        role: "DevOps Engineer II",
-        company: "CloudScale Solutions",
-        location: "Austin, TX",
-        duration: "2 years",
-        type: "role",
-        achievements: [
-          "Designed and implemented multi-region AWS infrastructure",
-          "Automated deployment processes reducing manual effort by 90%",
-          "Led security initiatives implementing DevSecOps practices",
-          "Mentored junior engineers and established best practices"
-        ],
-        technologies: ["AWS", "Ansible", "GitLab CI", "Docker", "Terraform"]
-      },
-      {
-        year: "2018",
-        role: "DevOps Engineer",
-        company: "StartupTech Inc",
-        location: "Denver, CO",
-        duration: "2 years",
-        type: "role",
-        achievements: [
-          "Built first CI/CD pipeline reducing deployment time from 6 hours to 30 minutes",
-          "Containerized applications and orchestrated with Docker Swarm",
-          "Implemented monitoring and alerting stack using ELK and Prometheus",
-          "Established infrastructure as code practices with Terraform"
-        ],
-        technologies: ["Linux", "Docker", "Jenkins", "AWS", "Python"]
-      },
-      {
-        year: "2016",
-        role: "Systems Administrator",
-        company: "Enterprise Solutions LLC",
-        location: "Chicago, IL",
-        duration: "2 years",
-        type: "start",
-        achievements: [
-          "Managed hybrid cloud infrastructure supporting 500+ users",
-          "Automated server provisioning and configuration management",
-          "Implemented backup and disaster recovery procedures",
-          "Optimized system performance improving response times by 40%"
-        ],
-        technologies: ["Linux", "VMware", "Bash", "Nagios", "MySQL"]
-      }
-    ];
-    function getTypeIcon(type) {
-      switch (type) {
-        case "promotion": return '⬆️';
-        case "role": return '🏆';
-        default: return '📅';
-      }
+    // Timeline data will be loaded from timeline.json
+    let timelineData = { description: '', summary: {}, entries: [] };
+    function fetchTimelineData() {
+      return fetch('data/timeline.json')
+        .then(r => r.json())
+        .then(data => { timelineData = data; return data; });
     }
     function renderTimeline() {
+      // Description
+      document.getElementById('timeline-desc').textContent = timelineData.description || '';
+      // Summary (dynamic rendering for all key-value pairs)
+      const summaryGrid = document.querySelector('.timeline-summary-grid');
+      if (summaryGrid) {
+        summaryGrid.innerHTML = '';
+        if (timelineData.summary && typeof timelineData.summary === 'object') {
+          Object.entries(timelineData.summary).forEach(([key, value], idx) => {
+            // Pick a color class for the number (cycle through known ones)
+            const colorClasses = ['primary', 'accent', 'secondary', 'warning', 'info'];
+            const colorClass = colorClasses[idx % colorClasses.length];
+            // Make label more readable
+            const label = key.replace(/([A-Z])/g, ' $1').replace(/^./, s => s.toUpperCase());
+            summaryGrid.innerHTML += `
+              <div>
+                <div class="timeline-summary-num ${colorClass}">${value}</div>
+                <div class="timeline-summary-label">${label}</div>
+              </div>
+            `;
+          });
+        }
+      }
+      // Entries
       const list = document.querySelector('.timeline-list');
       if (!list) return;
       list.innerHTML = '';
-      timelineData.forEach((item, index) => {
+      (timelineData.entries || []).forEach((item, index) => {
         const card = document.createElement('div');
         card.className = 'timeline-card';
         card.innerHTML = `
-          <div class="timeline-dot">${getTypeIcon(item.type)}</div>
+          <div class="timeline-dot"></div>
           <div class="timeline-header">
             <span class="timeline-year">${item.year}</span>
             <span class="timeline-duration">${item.duration}</span>
           </div>
           <div class="timeline-title">${item.role}</div>
           <div class="timeline-meta">
-            <span>🏢 ${item.company}</span>
-            <span>📍 ${item.location}</span>
+            <span>${item.company}</span>
+            <span>${item.location}</span>
           </div>
           <div class="timeline-achievements">
             <div class="timeline-achievements-title">Key Achievements</div>
             <ul class="timeline-achievements-list">
-              ${item.achievements.map(a=>`<li>${a}</li>`).join('')}
+              ${(item.achievements||[]).map(a=>`<li>${a}</li>`).join('')}
             </ul>
           </div>
           <div class="timeline-techs">
-            ${item.technologies.map(t=>`<span class=\"timeline-tech\">${t}</span>`).join('')}
+            ${(item.technologies||[]).map(t=>`<span class=\"timeline-tech\">${t}</span>`).join('')}
           </div>
+
         `;
         list.appendChild(card);
       });
+
     }
-    document.addEventListener('DOMContentLoaded', renderTimeline);
+
+    // Modal for editing timeline entry
+    function openEditModal(index) {
+      let modal = document.getElementById('timeline-edit-modal');
+      if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'timeline-edit-modal';
+        modal.style.position = 'fixed';
+        modal.style.top = '0';
+        modal.style.left = '0';
+        modal.style.width = '100vw';
+        modal.style.height = '100vh';
+        modal.style.background = 'rgba(0,0,0,0.5)';
+        modal.style.display = 'flex';
+        modal.style.alignItems = 'center';
+        modal.style.justifyContent = 'center';
+        modal.style.zIndex = '9999';
+        modal.innerHTML = `
+          <div style="background:#23272b;padding:32px 24px;border-radius:16px;min-width:320px;max-width:95vw;box-shadow:0 8px 40px #0008;">
+            <h3 style="color:#4f8cff;margin-bottom:18px;">Edit Timeline Entry</h3>
+            <form id="timeline-edit-form" style="display:flex;flex-direction:column;gap:12px;">
+              <input name="year" placeholder="Year" style="padding:8px;border-radius:6px;border:1px solid #4f8cff;" required />
+              <input name="role" placeholder="Role" style="padding:8px;border-radius:6px;border:1px solid #4f8cff;" required />
+              <input name="company" placeholder="Company" style="padding:8px;border-radius:6px;border:1px solid #4f8cff;" required />
+              <input name="location" placeholder="Location" style="padding:8px;border-radius:6px;border:1px solid #4f8cff;" required />
+              <input name="duration" placeholder="Duration" style="padding:8px;border-radius:6px;border:1px solid #4f8cff;" required />
+              <input name="type" placeholder="Type (promotion/role/start)" style="padding:8px;border-radius:6px;border:1px solid #4f8cff;" required />
+              <textarea name="achievements" placeholder="Achievements (comma separated)" style="padding:8px;border-radius:6px;border:1px solid #4f8cff;min-height:48px;" required></textarea>
+              <input name="technologies" placeholder="Technologies (comma separated)" style="padding:8px;border-radius:6px;border:1px solid #4f8cff;" required />
+              <div style="display:flex;gap:12px;justify-content:flex-end;margin-top:8px;">
+                <button type="button" id="timeline-cancel-btn" style="background:#23272b;color:#bfc7d5;border:1px solid #4f8cff;padding:7px 18px;border-radius:8px;">Cancel</button>
+                <button type="submit" style="background:#4f8cff;color:#fff;border:none;padding:7px 18px;border-radius:8px;">Save</button>
+              </div>
+            </form>
+          </div>
+        `;
+        document.body.appendChild(modal);
+      }
+      // Fill form with current data
+      const entry = timelineData.entries[index];
+      const form = modal.querySelector('#timeline-edit-form');
+      form.year.value = entry.year;
+      form.role.value = entry.role;
+      form.company.value = entry.company;
+      form.location.value = entry.location;
+      form.duration.value = entry.duration;
+      form.type.value = entry.type;
+      form.achievements.value = (entry.achievements||[]).join(', ');
+      form.technologies.value = (entry.technologies||[]).join(', ');
+      modal.style.display = 'flex';
+      // Cancel button
+      modal.querySelector('#timeline-cancel-btn').onclick = () => { modal.style.display = 'none'; };
+      // Save handler
+      form.onsubmit = function(e) {
+        e.preventDefault();
+        timelineData.entries[index] = {
+          year: form.year.value,
+          role: form.role.value,
+          company: form.company.value,
+          location: form.location.value,
+          duration: form.duration.value,
+          type: form.type.value,
+          achievements: form.achievements.value.split(',').map(s=>s.trim()).filter(Boolean),
+          technologies: form.technologies.value.split(',').map(s=>s.trim()).filter(Boolean)
+        };
+        if (window.location.protocol === 'file:') {
+          localStorage.setItem('timelineData', JSON.stringify(timelineData));
+        } else {
+          // TODO: send to backend via fetch/POST
+        }
+        modal.style.display = 'none';
+        renderTimeline();
+      };
+    }
+
+    // Modal for editing description and summary
+    function openEditDescModal() {
+      let modal = document.getElementById('timeline-desc-modal');
+      if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'timeline-desc-modal';
+        modal.style.position = 'fixed';
+        modal.style.top = '0';
+        modal.style.left = '0';
+        modal.style.width = '100vw';
+        modal.style.height = '100vh';
+        modal.style.background = 'rgba(0,0,0,0.5)';
+        modal.style.display = 'flex';
+        modal.style.alignItems = 'center';
+        modal.style.justifyContent = 'center';
+        modal.style.zIndex = '9999';
+        modal.innerHTML = `
+          <div style="background:#23272b;padding:32px 24px;border-radius:16px;min-width:320px;max-width:95vw;box-shadow:0 8px 40px #0008;">
+            <h3 style="color:#4f8cff;margin-bottom:18px;">Edit Timeline Description & Summary</h3>
+            <form id="timeline-desc-form" style="display:flex;flex-direction:column;gap:12px;">
+              <textarea name="description" placeholder="Section Description" style="padding:8px;border-radius:6px;border:1px solid #4f8cff;min-height:48px;" required></textarea>
+              <input name="yearsExperience" placeholder="Years Experience (e.g. 8+)" style="padding:8px;border-radius:6px;border:1px solid #4f8cff;" required />
+              <input name="roleProgressions" placeholder="Role Progressions (e.g. 5)" style="padding:8px;border-radius:6px;border:1px solid #4f8cff;" required />
+              <input name="promotions" placeholder="Promotions (e.g. 3)" style="padding:8px;border-radius:6px;border:1px solid #4f8cff;" required />
+              <div style="display:flex;gap:12px;justify-content:flex-end;margin-top:8px;">
+                <button type="button" id="timeline-desc-cancel-btn" style="background:#23272b;color:#bfc7d5;border:1px solid #4f8cff;padding:7px 18px;border-radius:8px;">Cancel</button>
+                <button type="submit" style="background:#4f8cff;color:#fff;border:none;padding:7px 18px;border-radius:8px;">Save</button>
+              </div>
+            </form>
+          </div>
+        `;
+        document.body.appendChild(modal);
+      }
+      // Fill form with current data
+      const form = modal.querySelector('#timeline-desc-form');
+      form.description.value = timelineData.description || '';
+      form.yearsExperience.value = timelineData.summary?.yearsExperience || '';
+      form.roleProgressions.value = timelineData.summary?.roleProgressions || '';
+      form.promotions.value = timelineData.summary?.promotions || '';
+      modal.style.display = 'flex';
+      // Cancel button
+      modal.querySelector('#timeline-desc-cancel-btn').onclick = () => { modal.style.display = 'none'; };
+      // Save handler
+      form.onsubmit = function(e) {
+        e.preventDefault();
+        timelineData.description = form.description.value;
+        timelineData.summary = {
+          yearsExperience: form.yearsExperience.value,
+          roleProgressions: form.roleProgressions.value,
+          promotions: form.promotions.value
+        };
+        if (window.location.protocol === 'file:') {
+          localStorage.setItem('timelineData', JSON.stringify(timelineData));
+        } else {
+          // TODO: send to backend via fetch/POST
+        }
+        modal.style.display = 'none';
+        renderTimeline();
+      };
+    }
+
+    // On load, fetch timeline data and render
+    document.addEventListener('DOMContentLoaded', function() {
+      // For static demo: check localStorage first
+      if (window.location.protocol === 'file:' && localStorage.getItem('timelineData')) {
+        timelineData = JSON.parse(localStorage.getItem('timelineData'));
+        renderTimeline();
+      } else {
+        fetchTimelineData().then(renderTimeline);
+      }
+
+    });
     </script>
  
 
