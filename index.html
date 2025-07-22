@@ -366,74 +366,86 @@
   <main>
     <section class="hero scroll-fade-up" id="home">
       <div class="hero-content" style="display:flex;flex-direction:column;align-items:flex-start;justify-content:center;min-height:340px;">
-        <!-- <h1 style="margin-bottom:10px;">Hello, I'm <span style="color:#4f8cff;">Dinesh Polavarapu</span></h1> -->
-      <h1 style="margin-bottom:10px;">Hello, I'm <span class="fluid-gradient-text">Dinesh Polavarapu</span></h1>
-      <!-- <h2 style="margin-bottom:18px;">Full Stack Developer &amp; UI/UX Enthusiast</h2> -->
+        <h1 id="home-name" style="margin-bottom:10px;">Hello, I'm <span class="fluid-gradient-text"></span></h1>
         <h2 style="margin-bottom:18px;min-height:32px;">
           <span id="typed-role" class="typed-cursor"></span>
         </h2>
-        <p style="font-size:1.18rem;color:#bfc7d5;margin-bottom:22px;max-width:480px;">I build beautiful, performant web apps and digital experiences.<br>I love solving real-world problems with code, design, and a touch of creativity.</p>
-
-  <script>
-    // Typing effect for roles
-    const roles = [
-      "Full Stack Developer",
-      "UI/UX Enthusiast",
-      "Web App Architect",
-      "Creative Coder"
-    ];
-    let roleIndex = 0, charIndex = 0, typing = true;
-    function typeRole() {
-      const typedRole = document.getElementById('typed-role');
-      if (!typedRole) return;
-      const current = roles[roleIndex];
-      if (typing) {
-        typedRole.textContent = current.slice(0, charIndex + 1);
-        charIndex++;
-        if (charIndex === current.length) {
-          typing = false;
-          setTimeout(typeRole, 1200);
-        } else {
-          setTimeout(typeRole, 70);
-        }
-      } else {
-        typedRole.textContent = current.slice(0, charIndex - 1);
-        charIndex--;
-        if (charIndex === 0) {
-          typing = true;
-          roleIndex = (roleIndex + 1) % roles.length;
-          setTimeout(typeRole, 400);
-        } else {
-          setTimeout(typeRole, 30);
-        }
-      }
-    }
-    window.addEventListener('DOMContentLoaded', () => setTimeout(typeRole, 600));
-  </script>
-        <div style="display:flex;gap:24px;margin-bottom:22px;">
-          <a href="https://github.com/WentiQ" target="_blank" rel="noopener" title="GitHub" style="color:#4f8cff;font-size:1.7rem;"><svg height="28" width="28" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.01.08-2.11 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.91.08 2.11.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.19 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
-          <a href="https://www.linkedin.com/in/dinesh-polavarapu-134029306" target="_blank" rel="noopener" title="LinkedIn" style="color:#0a66c2;font-size:1.7rem;"><svg height="28" width="28" fill="currentColor" viewBox="0 0 16 16"><path d="M1.146 1.146C.417 1.875.417 3.125 1.146 3.854c.729.729 1.979.729 2.708 0 .729-.729.729-1.979 0-2.708-.729-.729-1.979-.729-2.708 0zM0 5.5h3V16H0V5.5zm5.5 0h2.75v1.43h.04c.38-.72 1.3-1.48 2.68-1.48C14.42 5.45 16 7.13 16 10.08V16h-3V10.5c0-1.31-.02-3-1.83-3-1.83 0-2.11 1.43-2.11 2.9V16h-3V5.5z"/></svg></a>
-          <a href="https://facebook.com/" target="_blank" rel="noopener" title="Facebook" style="color:#1877f3;font-size:1.7rem;"><svg height="28" width="28" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0h-21.35C.595 0 0 .592 0 1.326v21.348C0 23.408.595 24 1.326 24h11.495v-9.294H9.691v-3.622h3.13V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.797.143v3.24l-1.918.001c-1.504 0-1.797.715-1.797 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116C23.406 24 24 23.408 24 22.674V1.326C24 .592 23.406 0 22.675 0"/></svg></a>
-        </div>
-        <div class="hero-actions">
-          <a href="#projects" class="btn-primary">View Projects</a>
-          <a href="#contact" class="btn-outline">Contact Me</a>
-          <a href="resume.pdf" class="btn-primary" style="background:#23272b;color:#4f8cff;border:2px solid #4f8cff;" download>Download Resume</a>
-        </div>
+        <p id="home-desc" style="font-size:1.18rem;color:#bfc7d5;margin-bottom:22px;max-width:480px;"></p>
+        <div id="home-social" style="display:flex;gap:24px;margin-bottom:22px;"></div>
+        <div class="hero-actions" id="home-actions"></div>
       </div>
       <div class="hero-img" style="display:flex;flex-direction:column;align-items:center;">
         <div class="hero-img-float">
           <div class="hero-img-glow"></div>
-          <img src="images/dinesh.webp" alt="Profile Photo" class="hero-img-circle" />
+          <img id="home-img" src="" alt="Profile Photo" class="hero-img-circle" />
         </div>
       </div>
-      <div style="width:100%;display:flex;justify-content:center;align-items:end;position:absolute;left:0;bottom:24px;">
-        <a href="#projects" class="scroll-down" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
-<span style="color:#4f8cff;font-size:2.2rem;animation:bounce 1.5s infinite alternate;">&#8595;</span>
-          <span style="color:#bfc7d5;font-size:0.98rem;">Scroll Down</span>
-        </a>
-      </div>
+      <div id="home-scroll" style="width:100%;display:flex;justify-content:center;align-items:end;position:absolute;left:0;bottom:24px;"></div>
     </section>
+    <script>
+    // Dynamically load home section from home.json
+    fetch('data/home.json')
+      .then(r => r.json())
+      .then(data => {
+        // Name
+        document.querySelector('#home-name .fluid-gradient-text').textContent = data.name;
+        // Roles typing effect
+        const roles = data.roles || [];
+        let roleIndex = 0, charIndex = 0, typing = true;
+        function typeRole() {
+          const typedRole = document.getElementById('typed-role');
+          if (!typedRole) return;
+          const current = roles[roleIndex] || '';
+          if (typing) {
+            typedRole.textContent = current.slice(0, charIndex + 1);
+            charIndex++;
+            if (charIndex === current.length) {
+              typing = false;
+              setTimeout(typeRole, 1200);
+            } else {
+              setTimeout(typeRole, 70);
+            }
+          } else {
+            typedRole.textContent = current.slice(0, charIndex - 1);
+            charIndex--;
+            if (charIndex === 0) {
+              typing = true;
+              roleIndex = (roleIndex + 1) % roles.length;
+              setTimeout(typeRole, 400);
+            } else {
+              setTimeout(typeRole, 30);
+            }
+          }
+        }
+        setTimeout(typeRole, 600);
+        // Description
+        document.getElementById('home-desc').innerHTML = data.description || '';
+        // Social links
+        const social = document.getElementById('home-social');
+        social.innerHTML = '';
+        (data.socialLinks||[]).forEach(link => {
+          let icon = '';
+          if(link.icon==="github") icon = `<svg height="28" width="28" fill="currentColor" viewBox="0 0 16 16"><path d='M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.01.08-2.11 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.91.08 2.11.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.19 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z'/></svg>`;
+          if(link.icon==="linkedin") icon = `<svg height="28" width="28" fill="currentColor" viewBox="0 0 16 16"><path d='M1.146 1.146C.417 1.875.417 3.125 1.146 3.854c.729.729 1.979.729 2.708 0 .729-.729.729-1.979 0-2.708-.729-.729-1.979-.729-2.708 0zM0 5.5h3V16H0V5.5zm5.5 0h2.75v1.43h.04c.38-.72 1.3-1.48 2.68-1.48C14.42 5.45 16 7.13 16 10.08V16h-3V10.5c0-1.31-.02-3-1.83-3-1.83 0-2.11 1.43-2.11 2.9V16h-3V5.5z'/></svg>`;
+          if(link.icon==="facebook") icon = `<svg height="28" width="28" fill="currentColor" viewBox="0 0 24 24"><path d='M22.675 0h-21.35C.595 0 0 .592 0 1.326v21.348C0 23.408.595 24 1.326 24h11.495v-9.294H9.691v-3.622h3.13V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.797.143v3.24l-1.918.001c-1.504 0-1.797.715-1.797 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116C23.406 24 24 23.408 24 22.674V1.326C24 .592 23.406 0 22.675 0'/></svg>`;
+          social.innerHTML += `<a href="${link.url}" target="_blank" rel="noopener" title="${link.title}" style="font-size:1.7rem;${link.icon==='github'?'color:#4f8cff;':link.icon==='linkedin'?'color:#0a66c2;':link.icon==='facebook'?'color:#1877f3;':''}">${icon}</a>`;
+        });
+        // Actions
+        const actions = document.getElementById('home-actions');
+        actions.innerHTML = '';
+        (data.actions||[]).forEach(act => {
+          let extra = '';
+          if(act.style) extra += ` style="${act.style}"`;
+          if(act.download) extra += ' download';
+          actions.innerHTML += `<a href="${act.href}" class="${act.class||''}"${extra}>${act.label}</a>`;
+        });
+        // Image
+        document.getElementById('home-img').src = data.image || '';
+        // Scroll down
+        const scroll = document.getElementById('home-scroll');
+        scroll.innerHTML = `<a href="${(data.scrollDown && data.scrollDown.href) || '#projects'}" class="scroll-down" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;"><span style='color:#4f8cff;font-size:2.2rem;animation:bounce 1.5s infinite alternate;'>&#8595;</span><span style='color:#bfc7d5;font-size:0.98rem;'>${(data.scrollDown && data.scrollDown.label) || 'Scroll Down'}</span></a>`;
+      });
+    </script>
 
     <!-- Skills & Technology Stack Section (no stray CSS or text) -->
     <section id="skills" class="skills-section scroll-fade-up">
