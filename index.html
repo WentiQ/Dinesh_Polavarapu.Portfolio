@@ -10,6 +10,7 @@
 <body>
   <div class="cs-ai-entre-bg">
     <canvas id="csAiEntreCanvas"></canvas>
+    <canvas id="stars-bg"></canvas>
   </div>
   <style>
     .cs-ai-entre-bg {
@@ -19,6 +20,13 @@
       pointer-events: none;
       overflow: hidden;
       background: linear-gradient(120deg, #181b1f 70%, #23272b 100%);
+    }
+    #stars-bg {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      display: block;
     }
     #csAiEntreCanvas {
       width: 100vw;
@@ -39,6 +47,49 @@
     }
     resize();
     window.addEventListener('resize', resize);
+    // Blinking Stars Animation
+    const starsCanvas = document.getElementById('stars-bg');
+    if (starsCanvas) {
+      const starsCtx = starsCanvas.getContext('2d');
+      let stars = [];
+      function createStars() {
+        const STAR_COUNT = Math.floor((window.innerWidth * window.innerHeight) / 6000);
+        stars = [];
+        for (let i = 0; i < STAR_COUNT; i++) {
+          stars.push({
+            x: Math.random() * starsCanvas.width,
+            y: Math.random() * starsCanvas.height,
+            r: Math.random() * 0.05 + 0.016,
+            blinkSpeed: Math.random() * 0.05 + 0.01,
+            alpha: Math.random(),
+            phase: Math.random() * Math.PI * 2
+          });
+        }
+      }
+      createStars();
+      window.addEventListener('resize', createStars);
+      function drawStars() {
+        starsCtx.clearRect(0, 0, starsCanvas.width, starsCanvas.height);
+        for (let star of stars) {
+          star.phase += star.blinkSpeed;
+          star.alpha = 0.5 + 0.5 * Math.sin(star.phase);
+          starsCtx.save();
+          starsCtx.globalAlpha = star.alpha;
+          starsCtx.beginPath();
+          starsCtx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
+          starsCtx.fillStyle = '#fff';
+          starsCtx.shadowColor = '#fff';
+          starsCtx.shadowBlur = 8;
+          starsCtx.fill();
+          starsCtx.restore();
+        }
+      }
+      function animateStars() {
+        drawStars();
+        requestAnimationFrame(animateStars);
+      }
+      animateStars();
+    }
 
     // --- Animated Elements ---
     // 1. Floating code snippets (<> { } AI)
@@ -51,7 +102,7 @@
     function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 
     // --- Code Snippets ---
-    const codeSnippets = ['<AI>', '{ }', 'def', 'λ', 'if()', 'while()', 'Σ', 'π', 'data', '1010', '0xFF', '∑', '∫', 'f(x)', 'AI', 'ML', 'NN', 'SaaS', 'API', '🚀', '💡', '📈'];
+    const codeSnippets = ['<AI>', '{ }', 'def', 'λ', 'if()', 'while()', 'Σ', 'π', 'data', '1010', '0xFF', '∑', '∫', 'f(x)', 'AI', 'ML', 'NN', 'SaaS', 'API', '🚀', '💡', '📈', '⚙️', '👽'];
     const codeObjs = Array.from({length: 18}, () => ({
       x: rand(0, w),
       y: rand(0, h),
