@@ -1378,7 +1378,11 @@ fetch('data/skills.json')
       filtered.forEach(project => {
         const card = document.createElement('div');
         card.className = 'project-card' + (expandedProjectId === project.id ? ' expanded' : '');
+        const githubUrl = project.githubUrl || 'https://github.com/';
         card.innerHTML = `
+          <div class="project-github-icon" style="position:absolute;top:18px;right:18px;cursor:pointer;z-index:2;">
+            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub" style="width:28px;height:28px;filter:invert(0.7);" />
+          </div>
           <div class="badges">
             <span class="badge">${project.category}</span>
           </div>
@@ -1399,6 +1403,9 @@ fetch('data/skills.json')
             <ul>${project.impact.technical.map(i=>`<li>${i}</li>`).join('')}</ul>
           </div>
         `;
+        card.querySelector('.project-github-icon').onclick = () => {
+          window.open(githubUrl, '_blank');
+        };
         grid.appendChild(card);
       });
       // Button listeners
@@ -1430,32 +1437,11 @@ fetch('data/skills.json')
       <div class="projects-section-container">
         <div class="text-center mb-16 animate-slide-up">
           <h2 class="projects-title">Innovation &amp; Emerging Tech</h2>
-          <p class="projects-desc">Exploring cutting-edge technologies and future-facing solutions to stay ahead of the curve</p>
+          <p class="projects-desc" id="innovation-desc"></p>
         </div>
-        <div class="innovation-grid">
-          <!-- Cards will be injected by JS -->
-        </div>
+        <div class="innovation-grid"></div>
         <div class="mt-16 text-center animate-slide-up">
-          <div class="innovation-philosophy-card">
-            <h3 class="innovation-philosophy-title">Innovation Philosophy</h3>
-            <div class="innovation-philosophy-grid">
-              <div class="innovation-philosophy-item">
-                <div class="innovation-icon innovation-icon-lightbulb">💡</div>
-                <h4>Experiment Early</h4>
-                <p>Continuously explore emerging technologies through POCs and research projects</p>
-              </div>
-              <div class="innovation-philosophy-item">
-                <div class="innovation-icon innovation-icon-zap">⚡</div>
-                <h4>Fail Fast</h4>
-                <p>Rapid prototyping and iteration to validate concepts before full implementation</p>
-              </div>
-              <div class="innovation-philosophy-item">
-                <div class="innovation-icon innovation-icon-brain">🧠</div>
-                <h4>Share Knowledge</h4>
-                <p>Document learnings and share insights with the broader engineering community</p>
-              </div>
-            </div>
-          </div>
+          <div class="innovation-philosophy-card" id="innovation-philosophy-card"></div>
         </div>
       </div>
     </section>
@@ -1595,99 +1581,14 @@ fetch('data/skills.json')
       .innovation-icon-brain { background: linear-gradient(90deg, #7f53ff 10%, #00e0d3 90%); color: #fff; }
     </style>
     <script>
-    // Data for innovations (from your React code, adapted for JS)
-    const innovations = [
-      {
-        id: "ebpf-observability",
-        title: "eBPF-Based System Observability",
-        category: "Emerging Tech",
-        status: "Proof of Concept",
-        icon: "🖥️",
-        description: "Exploring kernel-level observability for deep system insights without performance overhead",
-        technologies: ["eBPF", "Cilium", "Pixie", "Falco", "Kubernetes"],
-        outcomes: [
-          "99.99% application visibility with <1% overhead",
-          "Real-time security threat detection",
-          "Zero-instrumentation observability for legacy apps"
-        ],
-        futureImpact: "Revolutionary system observability capabilities"
-      },
-      {
-        id: "ai-driven-ops",
-        title: "AI-Driven Operations & Predictive Scaling",
-        category: "MLOps",
-        status: "In Development",
-        icon: "🧠",
-        description: "Implementing machine learning models for predictive infrastructure scaling and anomaly detection",
-        technologies: ["TensorFlow", "Prometheus", "Grafana", "Python", "Kubernetes HPA"],
-        outcomes: [
-          "60% reduction in over-provisioning",
-          "Proactive incident detection before failure",
-          "Automated capacity planning and optimization"
-        ],
-        futureImpact: "Self-managing infrastructure platforms"
-      },
-      {
-        id: "slsa-security",
-        title: "SLSA Framework Implementation",
-        category: "Supply Chain Security",
-        status: "Pilot",
-        icon: "🛡️",
-        description: "Building secure software supply chain with provenance tracking and attestation",
-        technologies: ["SLSA", "Tekton", "Cosign", "Rekor", "in-toto"],
-        outcomes: [
-          "100% build provenance tracking",
-          "Automated supply chain threat detection",
-          "Compliance with NIST security standards"
-        ],
-        futureImpact: "Zero-trust software supply chains"
-      },
-      {
-        id: "backstage-platform",
-        title: "Developer Portal & Service Catalog",
-        category: "Platform Engineering",
-        status: "Production",
-        icon: "🔧",
-        description: "Custom Backstage implementation for developer self-service and organizational knowledge",
-        technologies: ["Backstage", "React", "Node.js", "PostgreSQL", "Kubernetes"],
-        outcomes: [
-          "Developer onboarding time reduced by 80%",
-          "Centralized service discovery and documentation",
-          "Automated scaffold generation for new services"
-        ],
-        futureImpact: "Complete developer experience transformation"
-      },
-      {
-        id: "wasm-edge",
-        title: "WebAssembly Edge Computing",
-        category: "Edge Technologies",
-        status: "Research",
-        icon: "⚡",
-        description: "Exploring WASM for secure, lightweight edge computing and serverless functions",
-        technologies: ["WebAssembly", "Wasmtime", "WASI", "Kubernetes", "Istio"],
-        outcomes: [
-          "90% faster cold start times vs containers",
-          "Enhanced security through sandboxing",
-          "Universal runtime across platforms"
-        ],
-        futureImpact: "Next-generation serverless computing"
-      },
-      {
-        id: "chaos-automation",
-        title: "Automated Chaos Engineering",
-        category: "Reliability Engineering",
-        status: "Implementation",
-        icon: "💡",
-        description: "Implementing chaos engineering practices with automated failure injection and recovery testing",
-        technologies: ["Chaos Monkey", "Gremlin", "Kubernetes", "Prometheus", "PagerDuty"],
-        outcomes: [
-          "95% improvement in system resilience",
-          "Proactive weakness identification",
-          "Automated disaster recovery validation"
-        ],
-        futureImpact: "Self-healing, antifragile systems"
-      }
-    ];
+    // --- Innovation Section Dynamic Data ---
+    let innovationData = { description: '', entries: [] };
+    function fetchInnovationData() {
+      return fetch('data/innovation.json')
+        .then(r => r.json())
+        .then(data => { innovationData = data; return data; })
+        .catch(() => { innovationData = { description: '', entries: [] }; return innovationData; });
+    }
     function getStatusBadge(status) {
       switch (status) {
         case "Production": return '<span class="innovation-badge status" style="background:linear-gradient(90deg,#22c55e 10%,#4f8cff 90%);color:#fff;">'+status+'</span>';
@@ -1711,10 +1612,11 @@ fetch('data/skills.json')
       }
     }
     function renderInnovations() {
+      document.getElementById('innovation-desc').textContent = innovationData.description || '';
       const grid = document.querySelector('.innovation-grid');
       if (!grid) return;
       grid.innerHTML = '';
-      innovations.forEach(innovation => {
+      (innovationData.entries || []).forEach((innovation, idx) => {
         const card = document.createElement('div');
         card.className = 'innovation-card';
         card.innerHTML = `
@@ -1724,20 +1626,152 @@ fetch('data/skills.json')
           </div>
           <div class="innovation-title">${innovation.title}</div>
           <div class="innovation-desc">${innovation.description}</div>
-          <div class="innovation-techs">${innovation.technologies.map(t=>`<span class=\"innovation-tech\">${t}</span>`).join('')}</div>
+          <div class="innovation-techs">${(innovation.technologies||[]).map(t=>`<span class=\"innovation-tech\">${t}</span>`).join('')}</div>
           <div class="innovation-outcomes">
             <div class="innovation-future-title">Current Outcomes</div>
-            <ul>${innovation.outcomes.map(o=>`<li>${o}</li>`).join('')}</ul>
+            <ul>${(innovation.outcomes||[]).map(o=>`<li>${o}</li>`).join('')}</ul>
           </div>
           <div class="innovation-future">
             <div class="innovation-future-title">Future Impact</div>
-            <div>${innovation.futureImpact}</div>
+            <div>${innovation.futureImpact||''}</div>
           </div>
         `;
         grid.appendChild(card);
       });
+      // Render Innovation Philosophy Card dynamically
+      const philosophyCard = document.getElementById('innovation-philosophy-card');
+      if (philosophyCard) {
+        // Only use innovationData.philosophy from innovation.json
+        if (Array.isArray(innovationData.philosophy) && innovationData.philosophy.length > 0) {
+          philosophyCard.innerHTML = `
+            <h3 class="innovation-philosophy-title">Innovation Philosophy</h3>
+            <div class="innovation-philosophy-grid">
+              ${innovationData.philosophy.map(item => `
+                <div class="innovation-philosophy-item">
+                  <div class="innovation-icon">${item.icon || ''}</div>
+                  <h4>${item.title || ''}</h4>
+                  <p>${item.description || ''}</p>
+                </div>
+              `).join('')}
+            </div>
+          `;
+        } else {
+          philosophyCard.innerHTML = '';
+        }
+      }
     }
-    document.addEventListener('DOMContentLoaded', renderInnovations);
+    // --- Edit Modal for Innovation Section ---
+    function openInnovationEditModal() {
+      let modal = document.getElementById('innovation-edit-modal');
+      if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'innovation-edit-modal';
+        modal.style.position = 'fixed';
+        modal.style.top = '0';
+        modal.style.left = '0';
+        modal.style.width = '100vw';
+        modal.style.height = '100vh';
+        modal.style.background = 'rgba(0,0,0,0.5)';
+        modal.style.display = 'flex';
+        modal.style.alignItems = 'center';
+        modal.style.justifyContent = 'center';
+        modal.style.zIndex = '9999';
+        modal.innerHTML = `
+          <div style="background:#23272b;padding:32px 24px;border-radius:16px;min-width:340px;max-width:98vw;box-shadow:0 8px 40px #0008;max-height:90vh;overflow:auto;">
+            <h3 style="color:#4f8cff;margin-bottom:18px;">Edit Innovation Section</h3>
+            <form id="innovation-edit-form" style="display:flex;flex-direction:column;gap:16px;">
+              <label style="color:#bfc7d5;">Section Description</label>
+              <textarea name="description" style="padding:8px;border-radius:6px;border:1px solid #4f8cff;min-height:48px;">${innovationData.description||''}</textarea>
+              <div style="margin-top:10px;margin-bottom:6px;color:#22c55e;font-weight:700;">Innovation Entries</div>
+              <div id="innovation-entries-edit"></div>
+              <button type="button" id="add-innovation-btn" style="background:#22c55e;color:#fff;border:none;padding:7px 18px;border-radius:8px;">Add Entry</button>
+              <div style="display:flex;gap:12px;justify-content:flex-end;margin-top:8px;">
+                <button type="button" id="innovation-cancel-btn" style="background:#23272b;color:#bfc7d5;border:1px solid #4f8cff;padding:7px 18px;border-radius:8px;">Cancel</button>
+                <button type="submit" style="background:#4f8cff;color:#fff;border:none;padding:7px 18px;border-radius:8px;">Save</button>
+              </div>
+            </form>
+          </div>
+        `;
+        document.body.appendChild(modal);
+      }
+      // Render entries edit UI
+      function renderEntriesEdit() {
+        const entriesDiv = modal.querySelector('#innovation-entries-edit');
+        entriesDiv.innerHTML = '';
+        (innovationData.entries||[]).forEach((entry, idx) => {
+          const entryDiv = document.createElement('div');
+          entryDiv.style = 'border:1px solid #4f8cff22;padding:10px 8px;border-radius:8px;margin-bottom:10px;background:#181b1f;';
+          entryDiv.innerHTML = `
+            <input name="title" placeholder="Title" value="${entry.title||''}" style="width:100%;margin-bottom:6px;padding:6px;border-radius:6px;border:1px solid #4f8cff;" required />
+            <input name="category" placeholder="Category" value="${entry.category||''}" style="width:100%;margin-bottom:6px;padding:6px;border-radius:6px;border:1px solid #4f8cff;" required />
+            <input name="status" placeholder="Status" value="${entry.status||''}" style="width:100%;margin-bottom:6px;padding:6px;border-radius:6px;border:1px solid #4f8cff;" required />
+            <input name="icon" placeholder="Icon (emoji)" value="${entry.icon||''}" style="width:100%;margin-bottom:6px;padding:6px;border-radius:6px;border:1px solid #4f8cff;" />
+            <textarea name="description" placeholder="Description" style="width:100%;margin-bottom:6px;padding:6px;border-radius:6px;border:1px solid #4f8cff;min-height:32px;">${entry.description||''}</textarea>
+            <input name="technologies" placeholder="Technologies (comma separated)" value="${(entry.technologies||[]).join(', ')}" style="width:100%;margin-bottom:6px;padding:6px;border-radius:6px;border:1px solid #4f8cff;" />
+            <textarea name="outcomes" placeholder="Outcomes (comma separated)" style="width:100%;margin-bottom:6px;padding:6px;border-radius:6px;border:1px solid #4f8cff;min-height:32px;">${(entry.outcomes||[]).join(', ')}</textarea>
+            <input name="futureImpact" placeholder="Future Impact" value="${entry.futureImpact||''}" style="width:100%;margin-bottom:6px;padding:6px;border-radius:6px;border:1px solid #4f8cff;" />
+            <button type="button" data-idx="${idx}" class="remove-innovation-btn" style="background:#ff6b6b;color:#fff;border:none;padding:4px 12px;border-radius:8px;float:right;">Remove</button>
+          `;
+          entriesDiv.appendChild(entryDiv);
+        });
+        // Remove handlers
+        entriesDiv.querySelectorAll('.remove-innovation-btn').forEach(btn => {
+          btn.onclick = function() {
+            const idx = +this.getAttribute('data-idx');
+            innovationData.entries.splice(idx, 1);
+            renderEntriesEdit();
+          };
+        });
+      }
+      renderEntriesEdit();
+      // Add entry handler
+      modal.querySelector('#add-innovation-btn').onclick = function() {
+        innovationData.entries.push({ title:'', category:'', status:'', icon:'', description:'', technologies:[], outcomes:[], futureImpact:'' });
+        renderEntriesEdit();
+      };
+      // Cancel button
+      modal.querySelector('#innovation-cancel-btn').onclick = () => { modal.style.display = 'none'; };
+      // Save handler
+      modal.querySelector('#innovation-edit-form').onsubmit = function(e) {
+        e.preventDefault();
+        // Save description
+        innovationData.description = this.description.value;
+        // Save entries
+        const entryDivs = modal.querySelectorAll('#innovation-entries-edit > div');
+        innovationData.entries = Array.from(entryDivs).map(div => {
+          return {
+            title: div.querySelector('input[name="title"]').value,
+            category: div.querySelector('input[name="category"]').value,
+            status: div.querySelector('input[name="status"]').value,
+            icon: div.querySelector('input[name="icon"]').value,
+            description: div.querySelector('textarea[name="description"]').value,
+            technologies: div.querySelector('input[name="technologies"]').value.split(',').map(s=>s.trim()).filter(Boolean),
+            outcomes: div.querySelector('textarea[name="outcomes"]').value.split(',').map(s=>s.trim()).filter(Boolean),
+            futureImpact: div.querySelector('input[name="futureImpact"]').value
+          };
+        });
+        // Save to localStorage if file://, else POST to backend (not implemented)
+        if (window.location.protocol === 'file:') {
+          localStorage.setItem('innovationData', JSON.stringify(innovationData));
+        } else {
+          // TODO: send to backend via fetch/POST
+        }
+        modal.style.display = 'none';
+        renderInnovations();
+      };
+      modal.style.display = 'flex';
+    }
+    // On load, fetch innovation data and render
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.location.protocol === 'file:' && localStorage.getItem('innovationData')) {
+        innovationData = JSON.parse(localStorage.getItem('innovationData'));
+        renderInnovations();
+      } else {
+        fetchInnovationData().then(renderInnovations);
+      }
+      // Edit button
+      document.getElementById('innovation-edit-btn').onclick = openInnovationEditModal;
+    });
     </script>
 
         <!-- Team Impact & Cultural Contribution Section -->
