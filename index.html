@@ -2303,163 +2303,76 @@ fetch('data/skills.json')
       }
     </style>
     <script>
-    // Data for leadership section (from your React code, adapted for JS)
-    const contentCategories = [
-      {
-        id: "articles",
-        title: "Technical Articles & Blog Posts",
-        icon: "📖",
-        items: [
-          {
-            title: "GitOps at Scale: Lessons from Managing 50+ Microservices",
-            platform: "Medium Engineering",
-            date: "2024-03",
-            views: "15K+ views",
-            tags: ["GitOps", "Kubernetes", "DevOps"],
-            description: "Deep dive into implementing GitOps practices across a large organization with real-world challenges and solutions."
-          },
-          {
-            title: "The Platform Engineering Mindset: Building Developer-Centric Infrastructure",
-            platform: "Dev.to",
-            date: "2024-01",
-            views: "8K+ views", 
-            tags: ["Platform Engineering", "Developer Experience", "Infrastructure"],
-            description: "Exploring the shift from traditional DevOps to platform engineering and its impact on developer productivity."
-          },
-          {
-            title: "Zero-Downtime Deployments with ArgoCD and Progressive Delivery",
-            platform: "CNCF Blog",
-            date: "2023-11",
-            views: "12K+ views",
-            tags: ["ArgoCD", "Progressive Delivery", "CI/CD"],
-            description: "Comprehensive guide to implementing safe deployment strategies using GitOps and progressive delivery techniques."
-          }
-        ]
-      },
-      {
-        id: "speaking",
-        title: "Conference Talks & Presentations",
-        icon: "🎤",
-        items: [
-          {
-            title: "From Chaos to Control: Scaling DevOps in Enterprise Environments",
-            platform: "DevOps World 2024",
-            date: "2024-06",
-            audience: "500+ attendees",
-            tags: ["DevOps", "Enterprise", "Scaling"],
-            description: "Keynote presentation on enterprise DevOps transformation strategies and overcoming organizational challenges."
-          },
-          {
-            title: "eBPF in Production: Next-Generation Observability",
-            platform: "KubeCon + CloudNativeCon",
-            date: "2024-03",
-            audience: "300+ attendees",
-            tags: ["eBPF", "Observability", "Kubernetes"],
-            description: "Technical deep-dive into implementing eBPF-based observability solutions for cloud-native applications."
-          },
-          {
-            title: "Building Internal Developer Platforms: A Practical Guide",
-            platform: "Platform Engineering Summit",
-            date: "2023-10",
-            audience: "250+ attendees",
-            tags: ["Platform Engineering", "Developer Experience", "Internal Tools"],
-            description: "Workshop on designing and implementing internal developer platforms using modern toolchains."
-          }
-        ]
-      },
-      {
-        id: "opensource",
-        title: "Open Source Contributions",
-        icon: "💻",
-        items: [
-          {
-            title: "ArgoCD Application Health Dashboard",
-            platform: "GitHub",
-            date: "2024-02",
-            stars: "150+ stars",
-            tags: ["ArgoCD", "Monitoring", "Go", "React"],
-            description: "Custom health monitoring dashboard for ArgoCD applications with advanced alerting and metrics visualization."
-          },
-          {
-            title: "Terraform AWS EKS Module",
-            platform: "Terraform Registry",
-            date: "2023-08", 
-            downloads: "5K+ downloads",
-            tags: ["Terraform", "AWS", "EKS", "Infrastructure"],
-            description: "Production-ready Terraform module for deploying secure and scalable EKS clusters with best practices."
-          },
-          {
-            title: "Kubernetes Policy Validator",
-            platform: "GitHub",
-            date: "2023-05",
-            stars: "200+ stars",
-            tags: ["Kubernetes", "Policy", "Security", "Python"],
-            description: "CLI tool for validating Kubernetes manifests against organizational policies and security standards."
-          }
-        ]
-      },
-      {
-        id: "mentorship",
-        title: "Community & Mentorship",
-        icon: "👥",
-        items: [
-          {
-            title: "DevOps Mentorship Program",
-            platform: "TechCorp Internal",
-            date: "Ongoing",
-            impact: "20+ engineers mentored",
-            tags: ["Mentorship", "Career Development", "DevOps"],
-            description: "Established and lead mentorship program for engineers transitioning into DevOps and platform engineering roles."
-          },
-          {
-            title: "Cloud Native Community Meetup",
-            platform: "San Francisco Bay Area",
-            date: "Monthly",
-            impact: "500+ members",
-            tags: ["Community", "Kubernetes", "Cloud Native"],
-            description: "Co-organize monthly meetups featuring technical talks, workshops, and networking for cloud-native practitioners."
-          },
-          {
-            title: "University Guest Lectures",
-            platform: "Stanford & UC Berkeley",
-            date: "2023-2024",
-            impact: "200+ students",
-            tags: ["Education", "DevOps", "Career Guidance"],
-            description: "Regular guest lectures on modern software delivery practices and career paths in cloud engineering."
-          }
-        ]
-      }
-    ];
-    function renderLeadershipCategories() {
+    // Leadership section: fetch and render from leadership.json
+    let leadershipData = { contentCategories: [], communityImpact: {} };
+    function fetchLeadershipData() {
+      return fetch('data/leadership.json')
+        .then(r => r.json())
+        .then(data => { leadershipData = data; return data; })
+        .catch(() => { leadershipData = { contentCategories: [], communityImpact: {} }; return leadershipData; });
+    }
+    function renderLeadershipSection() {
+      // Categories
       const list = document.querySelector('.leadership-categories-list');
-      if (!list) return;
-      list.innerHTML = '';
-      contentCategories.forEach(category => {
-        const card = document.createElement('div');
-        card.className = 'leadership-category-card';
-        card.innerHTML = `
-          <div class="leadership-category-title"><span class="leadership-category-icon">${category.icon}</span>${category.title}</div>
-          <div class="leadership-items-grid">
-            ${category.items.map(item => `
-              <div class=\"leadership-item-card\">
-                <div class=\"leadership-item-title\">${item.title}</div>
-                <div class=\"leadership-item-meta\">
-                  <span>${item.platform}</span>
-                  <span>${item.date}</span>
-                  <span>${item.views || item.audience || item.stars || item.downloads || item.impact || ''}</span>
+      if (list) {
+        list.innerHTML = '';
+        (leadershipData.contentCategories || []).forEach(category => {
+          const card = document.createElement('div');
+          card.className = 'leadership-category-card';
+          card.innerHTML = `
+            <div class="leadership-category-title"><span class="leadership-category-icon">${category.icon || ''}</span>${category.title || ''}</div>
+            <div class="leadership-items-grid">
+              ${(category.items || []).map(item => `
+                <div class="leadership-item-card">
+                  <div class="leadership-item-title">${item.title || ''}</div>
+                  <div class="leadership-item-meta">
+                    <span>${item.platform || ''}</span>
+                    <span>${item.date || ''}</span>
+                    <span>${item.views || item.audience || item.stars || item.downloads || item.impact || ''}</span>
+                    <span>${item.emoji || ''}</span>
+                  </div>
+                  <div class="leadership-item-desc">${item.description || ''}</div>
+                  <div class="leadership-item-tags">
+                    ${(item.tags||[]).map(tag=>`<span class='leadership-item-tag'>${tag}</span>`).join('')}
+                  </div>
                 </div>
-                <div class=\"leadership-item-desc\">${item.description}</div>
-                <div class=\"leadership-item-tags\">
-                  ${item.tags.map(tag => `<span class=\"leadership-item-tag\">${tag}</span>`).join('')}
-                </div>
+              `).join('')}
+            </div>
+          `;
+          list.appendChild(card);
+        });
+      }
+      // Community Impact
+      const impactCard = document.querySelector('.timeline-summary-card');
+      if (impactCard && leadershipData.communityImpact) {
+        impactCard.innerHTML = `
+          <h3 class="timeline-summary-title">${leadershipData.communityImpact.emoji ? leadershipData.communityImpact.emoji + ' ' : ''}${leadershipData.communityImpact.title || 'Community Impact'}</h3>
+          <div class="timeline-summary-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">
+            ${(leadershipData.communityImpact.summary || []).map(item => `
+              <div>
+                <div class="timeline-summary-num ${item.class || ''}">${item.value || ''}</div>
+                <div class="timeline-summary-label">${item.label || ''}</div>
               </div>
             `).join('')}
           </div>
+          <div class="mt-8 p-6 rounded-lg bg-gradient-primary/10 border border-primary/20">
+            <h4 class="font-semibold text-primary mb-3">${leadershipData.communityImpact.philosophyTitle || 'Speaking & Content Strategy'}</h4>
+            <div class="grid md:grid-cols-2 gap-4 text-sm text-muted-foreground">
+              ${(leadershipData.communityImpact.philosophy || []).map(line => `<div>• ${line}</div>`).join('')}
+            </div>
+          </div>
         `;
-        list.appendChild(card);
-      });
+      }
     }
-    document.addEventListener('DOMContentLoaded', renderLeadershipCategories);
+    // On load, fetch and render leadership section
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.location.protocol === 'file:' && localStorage.getItem('leadershipData')) {
+        leadershipData = JSON.parse(localStorage.getItem('leadershipData'));
+        renderLeadershipSection();
+      } else {
+        fetchLeadershipData().then(renderLeadershipSection);
+      }
+    });
     </script>
 
         <!-- Certifications & Continuous Learning Section -->

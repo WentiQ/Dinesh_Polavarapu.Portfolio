@@ -1,1 +1,145 @@
-{"contentCategories":[]}
+{
+  "contentCategories": [
+    {
+      "id": "articles",
+      "title": "Technical Articles & Blog Posts",
+      "icon": "📖",
+      "items": [
+        {
+          "title": "GitOps at Scale: Lessons from Managing 50+ Microservices",
+          "platform": "Medium Engineering",
+          "date": "2024-03",
+          "views": "15K+ views",
+          "tags": ["GitOps", "Kubernetes", "DevOps"],
+          "description": "Deep dive into implementing GitOps practices across a large organization with real-world challenges and solutions."
+        },
+        {
+          "title": "The Platform Engineering Mindset: Building Developer-Centric Infrastructure",
+          "platform": "Dev.to",
+          "date": "2024-01",
+          "views": "8K+ views",
+          "tags": ["Platform Engineering", "Developer Experience", "Infrastructure"],
+          "description": "Exploring the shift from traditional DevOps to platform engineering and its impact on developer productivity."
+        },
+        {
+          "title": "Zero-Downtime Deployments with ArgoCD and Progressive Delivery",
+          "platform": "CNCF Blog",
+          "date": "2023-11",
+          "views": "12K+ views",
+          "tags": ["ArgoCD", "Progressive Delivery", "CI/CD"],
+          "description": "Comprehensive guide to implementing safe deployment strategies using GitOps and progressive delivery techniques."
+        }
+      ]
+    },
+    {
+      "id": "speaking",
+      "title": "Conference Talks & Presentations",
+      "icon": "🎤",
+      "items": [
+        {
+          "title": "From Chaos to Control: Scaling DevOps in Enterprise Environments",
+          "platform": "DevOps World 2024",
+          "date": "2024-06",
+          "audience": "500+ attendees",
+          "tags": ["DevOps", "Enterprise", "Scaling"],
+          "description": "Keynote presentation on enterprise DevOps transformation strategies and overcoming organizational challenges."
+        },
+        {
+          "title": "eBPF in Production: Next-Generation Observability",
+          "platform": "KubeCon + CloudNativeCon",
+          "date": "2024-03",
+          "audience": "300+ attendees",
+          "tags": ["eBPF", "Observability", "Kubernetes"],
+          "description": "Technical deep-dive into implementing eBPF-based observability solutions for cloud-native applications."
+        },
+        {
+          "title": "Building Internal Developer Platforms: A Practical Guide",
+          "platform": "Platform Engineering Summit",
+          "date": "2023-10",
+          "audience": "250+ attendees",
+          "tags": ["Platform Engineering", "Developer Experience", "Internal Tools"],
+          "description": "Workshop on designing and implementing internal developer platforms using modern toolchains."
+        }
+      ]
+    },
+    {
+      "id": "opensource",
+      "title": "Open Source Contributions",
+      "icon": "💻",
+      "items": [
+        {
+          "title": "ArgoCD Application Health Dashboard",
+          "platform": "GitHub",
+          "date": "2024-02",
+          "stars": "150+ stars",
+          "tags": ["ArgoCD", "Monitoring", "Go", "React"],
+          "description": "Custom health monitoring dashboard for ArgoCD applications with advanced alerting and metrics visualization."
+        },
+        {
+          "title": "Terraform AWS EKS Module",
+          "platform": "Terraform Registry",
+          "date": "2023-08",
+          "downloads": "5K+ downloads",
+          "tags": ["Terraform", "AWS", "EKS", "Infrastructure"],
+          "description": "Production-ready Terraform module for deploying secure and scalable EKS clusters with best practices."
+        },
+        {
+          "title": "Kubernetes Policy Validator",
+          "platform": "GitHub",
+          "date": "2023-05",
+          "stars": "200+ stars",
+          "tags": ["Kubernetes", "Policy", "Security", "Python"],
+          "description": "CLI tool for validating Kubernetes manifests against organizational policies and security standards."
+        }
+      ]
+    },
+    {
+      "id": "mentorship",
+      "title": "Community & Mentorship",
+      "icon": "👥",
+      "items": [
+        {
+          "title": "DevOps Mentorship Program",
+          "platform": "TechCorp Internal",
+          "date": "Ongoing",
+          "impact": "20+ engineers mentored",
+          "tags": ["Mentorship", "Career Development", "DevOps"],
+          "description": "Established and lead mentorship program for engineers transitioning into DevOps and platform engineering roles."
+        },
+        {
+          "title": "Cloud Native Community Meetup",
+          "platform": "San Francisco Bay Area",
+          "date": "Monthly",
+          "impact": "500+ members",
+          "tags": ["Community", "Kubernetes", "Cloud Native"],
+          "description": "Co-organize monthly meetups featuring technical talks, workshops, and networking for cloud-native practitioners."
+        },
+        {
+          "title": "University Guest Lectures",
+          "platform": "Stanford & UC Berkeley",
+          "date": "2023-2024",
+          "impact": "200+ students",
+          "tags": ["Education", "DevOps", "Career Guidance"],
+          "description": "Regular guest lectures on modern software delivery practices and career paths in cloud engineering."
+        }
+      ]
+    }
+  ],
+  "communityImpact": {
+    "emoji": "🌍",
+    "title": "Community Impact",
+    "summary": [
+      { "emoji": "📝", "label": "Article Views", "value": "35K+", "class": "primary" },
+      { "emoji": "🎤", "label": "Conference Attendees", "value": "1000+", "class": "accent" },
+      { "emoji": "💻", "label": "GitHub Stars", "value": "350+", "class": "secondary" },
+      { "emoji": "👥", "label": "Engineers Mentored", "value": "20+", "class": "warning" }
+    ],
+    "philosophyTitle": "Speaking & Content Strategy",
+    "philosophy": [
+      "Focus on practical, real-world implementations",
+      "Share lessons learned from production experience",
+      "Bridge the gap between theory and practice",
+      "Encourage adoption of best practices"
+    ]
+  }
+}
