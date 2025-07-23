@@ -162,5 +162,21 @@
       ]
     }
   ],
-  "Learning Philosophy": []
+  "Learning Philosophy": [
+    {
+      "icon": "🎯",
+      "title": "Stay Current",
+      "description": "Continuously learning emerging technologies and industry best practices"
+    },
+    {
+      "icon": "⭐",
+      "title": "Hands-On Learning",
+      "description": "Prefer practical, project-based learning over theoretical knowledge"
+    },
+    {
+      "icon": "🏆",
+      "title": "Share Knowledge",
+      "description": "Teaching others reinforces learning and contributes to the community"
+    }
+  ]
 }

@@ -126,13 +126,13 @@
     }
   ],
   "communityImpact": {
-    "emoji": "🌍",
+    "emoji": "",
     "title": "Community Impact",
     "summary": [
-      { "emoji": "📝", "label": "Article Views", "value": "35K+", "class": "primary" },
-      { "emoji": "🎤", "label": "Conference Attendees", "value": "1000+", "class": "accent" },
-      { "emoji": "💻", "label": "GitHub Stars", "value": "350+", "class": "secondary" },
-      { "emoji": "👥", "label": "Engineers Mentored", "value": "20+", "class": "warning" }
+      { "label": "Article Views", "value": "35K+", "class": "primary" },
+      { "label": "Conference Attendees", "value": "1000+", "class": "accent" },
+      { "label": "GitHub Stars", "value": "350+", "class": "secondary" },
+      { "label": "Engineers Mentored", "value": "20+", "class": "warning" }
     ],
     "philosophyTitle": "Speaking & Content Strategy",
     "philosophy": [

@@ -2178,36 +2178,7 @@ fetch('data/skills.json')
         </div>
         <div class="leadership-categories-list"></div>
         <div class="mt-32 animate-slide-up">
-          <div class="timeline-summary-card">
-            <h3 class="timeline-summary-title">Community Impact</h3>
-            <div class="timeline-summary-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">
-              <div>
-                <div class="timeline-summary-num primary">35K+</div>
-                <div class="timeline-summary-label">Article Views</div>
-              </div>
-              <div>
-                <div class="timeline-summary-num accent">1000+</div>
-                <div class="timeline-summary-label">Conference Attendees</div>
-              </div>
-              <div>
-                <div class="timeline-summary-num secondary">350+</div>
-                <div class="timeline-summary-label">GitHub Stars</div>
-              </div>
-              <div>
-                <div class="timeline-summary-num warning">20+</div>
-                <div class="timeline-summary-label">Engineers Mentored</div>
-              </div>
-            </div>
-            <div class="mt-8 p-6 rounded-lg bg-gradient-primary/10 border border-primary/20">
-              <h4 class="font-semibold text-primary mb-3">Speaking &amp; Content Strategy</h4>
-              <div class="grid md:grid-cols-2 gap-4 text-sm text-muted-foreground">
-                <div>• Focus on practical, real-world implementations</div>
-                <div>• Share lessons learned from production experience</div>
-                <div>• Bridge the gap between theory and practice</div>
-                <div>• Encourage adoption of best practices</div>
-              </div>
-            </div>
-          </div>
+          <div class="timeline-summary-card" id="community-impact-card"></div>
         </div>
       </div>
     </section>
@@ -2343,12 +2314,13 @@ fetch('data/skills.json')
         });
       }
       // Community Impact
-      const impactCard = document.querySelector('.timeline-summary-card');
+      const impactCard = document.getElementById('community-impact-card');
       if (impactCard && leadershipData.communityImpact) {
+        const ci = leadershipData.communityImpact;
         impactCard.innerHTML = `
-          <h3 class="timeline-summary-title">${leadershipData.communityImpact.emoji ? leadershipData.communityImpact.emoji + ' ' : ''}${leadershipData.communityImpact.title || 'Community Impact'}</h3>
+          <h3 class="timeline-summary-title">${ci.emoji ? ci.emoji + ' ' : ''}${ci.title || 'Community Impact'}</h3>
           <div class="timeline-summary-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">
-            ${(leadershipData.communityImpact.summary || []).map(item => `
+            ${(ci.summary || []).map(item => `
               <div>
                 <div class="timeline-summary-num ${item.class || ''}">${item.value || ''}</div>
                 <div class="timeline-summary-label">${item.label || ''}</div>
@@ -2356,9 +2328,9 @@ fetch('data/skills.json')
             `).join('')}
           </div>
           <div class="mt-8 p-6 rounded-lg bg-gradient-primary/10 border border-primary/20">
-            <h4 class="font-semibold text-primary mb-3">${leadershipData.communityImpact.philosophyTitle || 'Speaking & Content Strategy'}</h4>
+            <h4 class="font-semibold text-primary mb-3">${ci.philosophyTitle || 'Speaking & Content Strategy'}</h4>
             <div class="grid md:grid-cols-2 gap-4 text-sm text-muted-foreground">
-              ${(leadershipData.communityImpact.philosophy || []).map(line => `<div>• ${line}</div>`).join('')}
+              ${(ci.philosophy || []).map(line => `<div>• ${line}</div>`).join('')}
             </div>
           </div>
         `;
@@ -2391,26 +2363,7 @@ fetch('data/skills.json')
           <div class="learning-grid"></div>
         </div>
         <div class="mt-16 animate-slide-up">
-          <div class="learning-philosophy-card">
-            <h3 class="text-2xl font-bold text-gradient mb-6 text-center">Learning Philosophy</h3>
-            <div class="learning-philosophy-grid">
-              <div>
-                <div class="learning-icon learning-icon-target">🎯</div>
-                <h4 class="font-semibold mb-2">Stay Current</h4>
-                <p class="text-sm text-muted-foreground">Continuously learning emerging technologies and industry best practices</p>
-              </div>
-              <div>
-                <div class="learning-icon learning-icon-star">⭐</div>
-                <h4 class="font-semibold mb-2">Hands-On Learning</h4>
-                <p class="text-sm text-muted-foreground">Prefer practical, project-based learning over theoretical knowledge</p>
-              </div>
-              <div>
-                <div class="learning-icon learning-icon-award">🏆</div>
-                <h4 class="font-semibold mb-2">Share Knowledge</h4>
-                <p class="text-sm text-muted-foreground">Teaching others reinforces learning and contributes to the community</p>
-              </div>
-            </div>
-          </div>
+          <div class="learning-philosophy-card" id="learning-philosophy-card"></div>
         </div>
       </div>
     </section>
@@ -2543,17 +2496,40 @@ fetch('data/skills.json')
       .learning-icon-award { background: linear-gradient(90deg, #22c55e 10%, #4f8cff 90%); color: #fff; }
     </style>
     <script>
-    // Fetch certifications and continuous learning data from certifications.json
+    // Fetch certifications, continuous learning, and philosophy data from certifications.json
     let certifications = [];
     let continuousLearning = [];
+    let learningPhilosophy = [];
     fetch('data/certifications.json')
       .then(r => r.json())
       .then(data => {
         certifications = data.certifications || [];
         continuousLearning = data.continuousLearning || [];
+        learningPhilosophy = data["Learning Philosophy"] || [];
         renderCertifications();
         renderLearning();
+        renderLearningPhilosophy();
       });
+    function renderLearningPhilosophy() {
+      const card = document.getElementById('learning-philosophy-card');
+      if (!card) return;
+      if (!learningPhilosophy.length) {
+        card.innerHTML = '';
+        return;
+      }
+      card.innerHTML = `
+        <h3 class="text-2xl font-bold text-gradient mb-6 text-center">Learning Philosophy</h3>
+        <div class="learning-philosophy-grid">
+          ${learningPhilosophy.map(item => `
+            <div>
+              <div class="learning-icon">${item.icon || ''}</div>
+              <h4 class="font-semibold mb-2">${item.title || ''}</h4>
+              <p class="text-sm text-muted-foreground">${item.description || ''}</p>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
     function getLevelClass(level) {
       switch (level) {
         case "Expert": return "certification-skill certification-skill-expert";
