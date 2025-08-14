@@ -1,0 +1,2932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio - Dinesh Polavarapu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">  <!-- Updated to use styles.css -->
+</head>
+<body>
+  <div class="cs-ai-entre-bg">
+    <canvas id="csAiEntreCanvas"></canvas>
+    <canvas id="stars-bg"></canvas>
+  </div>
+  <style>
+    .cs-ai-entre-bg {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+      background: linear-gradient(120deg, #181b1f 70%, #23272b 100%);
+    }
+    #stars-bg {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      display: block;
+    }
+    #csAiEntreCanvas {
+      width: 100vw;
+      height: 100vh;
+      display: block;
+    }
+  </style>
+  <script>
+  // Computer Science, AI, and Entrepreneurship Animated Background
+  document.addEventListener('DOMContentLoaded', function() {
+    const canvas = document.getElementById('csAiEntreCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let w = window.innerWidth, h = window.innerHeight;
+    function resize() {
+      w = window.innerWidth; h = window.innerHeight;
+      canvas.width = w; canvas.height = h;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+    // Blinking Stars Animation
+    const starsCanvas = document.getElementById('stars-bg');
+    if (starsCanvas) {
+      const starsCtx = starsCanvas.getContext('2d');
+      let stars = [];
+      function createStars() {
+        const STAR_COUNT = Math.floor((window.innerWidth * window.innerHeight) / 6000);
+        stars = [];
+        for (let i = 0; i < STAR_COUNT; i++) {
+          stars.push({
+            x: Math.random() * starsCanvas.width,
+            y: Math.random() * starsCanvas.height,
+            r: Math.random() * 0.05 + 0.016,
+            blinkSpeed: Math.random() * 0.05 + 0.01,
+            alpha: Math.random(),
+            phase: Math.random() * Math.PI * 2
+          });
+        }
+      }
+      createStars();
+      window.addEventListener('resize', createStars);
+      function drawStars() {
+        starsCtx.clearRect(0, 0, starsCanvas.width, starsCanvas.height);
+        for (let star of stars) {
+          star.phase += star.blinkSpeed;
+          star.alpha = 0.5 + 0.5 * Math.sin(star.phase);
+          starsCtx.save();
+          starsCtx.globalAlpha = star.alpha;
+          starsCtx.beginPath();
+          starsCtx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
+          starsCtx.fillStyle = '#fff';
+          starsCtx.shadowColor = '#fff';
+          starsCtx.shadowBlur = 8;
+          starsCtx.fill();
+          starsCtx.restore();
+        }
+      }
+      function animateStars() {
+        drawStars();
+        requestAnimationFrame(animateStars);
+      }
+      animateStars();
+    }
+
+    // --- Animated Elements ---
+    // 1. Floating code snippets (<> { } AI)
+    // 2. Neural network nodes/links
+    // 3. Circuit lines
+    // 4. Lightbulbs, rockets, graphs
+
+    // --- Helper functions ---
+    function rand(a, b) { return a + Math.random() * (b - a); }
+    function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+    // --- Code Snippets ---
+    const codeSnippets = ['<AI>', '{ }', 'def', 'λ', 'if()', 'while()', 'Σ', 'π', 'data', '1010', '0xFF', '∑', '∫', 'f(x)', 'AI', 'ML', 'NN', 'SaaS', 'API', '🚀', '💡', '📈', '⚙️', '👽'];
+    const codeObjs = Array.from({length: 18}, () => ({
+      x: rand(0, w),
+      y: rand(0, h),
+      vy: rand(0.12, 0.32),
+      vx: rand(-0.08, 0.08),
+      txt: pick(codeSnippets),
+      size: rand(18, 38),
+      color: pick(['#4f8cff','#22c55e','#00e0d3','#7f53ff','#fff','#bfc7d5']),
+      rot: rand(-0.2,0.2),
+      rotSpeed: rand(-0.002,0.002)
+    }));
+
+    // --- Neural Network Nodes ---
+    const nodes = Array.from({length: 13}, (_,i) => ({
+      x: rand(0.12*w, 0.88*w),
+      y: rand(0.12*h, 0.88*h),
+      r: rand(7, 16),
+      vx: rand(-0.09,0.09),
+      vy: rand(-0.09,0.09),
+      color: pick(['#00e0d3','#4f8cff','#22c55e','#7f53ff'])
+    }));
+    // Links between nodes
+    const links = [];
+    for(let i=0;i<nodes.length;i++){
+      for(let j=i+1;j<nodes.length;j++){
+        if(Math.random()<0.32) links.push([i,j]);
+      }
+    }
+
+    // --- Circuit Lines ---
+    const circuits = Array.from({length: 8}, () => ({
+      x: rand(0,w),
+      y: rand(0,h),
+      len: rand(80, 220),
+      angle: rand(0, Math.PI*2),
+      speed: rand(-0.003,0.003),
+      color: pick(['#00e0d3','#4f8cff','#22c55e','#7f53ff','#fff'])
+    }));
+
+    // --- Entrepreneurship Icons ---
+    const icons = [
+      {draw: (x,y,s)=>{ctx.save();ctx.translate(x,y);ctx.scale(s,s);ctx.rotate(-0.1);ctx.beginPath();ctx.arc(0,0,12,0,2*Math.PI);ctx.fillStyle='#ffe066';ctx.shadowColor='#fff8';ctx.shadowBlur=8;ctx.fill();ctx.beginPath();ctx.moveTo(0,12);ctx.lineTo(0,22);ctx.strokeStyle='#bfc7d5';ctx.lineWidth=3;ctx.stroke();ctx.restore();}, vy:0.18, emoji:'💡'}, // lightbulb
+      {draw: (x,y,s)=>{ctx.save();ctx.translate(x,y);ctx.scale(s,s);ctx.rotate(0.1);ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(0,-18);ctx.lineTo(7,-10);ctx.lineTo(0,0);ctx.fillStyle='#4f8cff';ctx.shadowColor='#00e0d3';ctx.shadowBlur=8;ctx.fill();ctx.restore();}, vy:0.22, emoji:'🚀'}, // rocket
+      {draw: (x,y,s)=>{ctx.save();ctx.translate(x,y);ctx.scale(s,s);ctx.beginPath();ctx.moveTo(-10,10);ctx.lineTo(0,-10);ctx.lineTo(10,10);ctx.closePath();ctx.fillStyle='#22c55e';ctx.shadowColor='#4f8cff';ctx.shadowBlur=8;ctx.fill();ctx.restore();}, vy:0.15, emoji:'📈'} // graph
+    ];
+    const iconObjs = Array.from({length: 7}, () => {
+      const icon = pick(icons);
+      return {
+        x: rand(0,w),
+        y: rand(0,h),
+        vy: icon.vy * rand(0.8,1.2),
+        s: rand(0.7,1.2),
+        icon
+      };
+    });
+
+    // --- Animation Loop ---
+    function animate() {
+      ctx.clearRect(0,0,w,h);
+      // Draw circuits
+      for(const c of circuits) {
+        ctx.save();
+        ctx.strokeStyle = c.color;
+        ctx.globalAlpha = 0.18;
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        ctx.moveTo(c.x, c.y);
+        ctx.lineTo(c.x + Math.cos(c.angle)*c.len, c.y + Math.sin(c.angle)*c.len);
+        ctx.stroke();
+        ctx.restore();
+        c.angle += c.speed;
+      }
+      // Draw neural network links
+      ctx.save();
+      ctx.globalAlpha = 0.13;
+      ctx.lineWidth = 2;
+      for(const [i,j] of links) {
+        ctx.strokeStyle = '#00e0d3';
+        ctx.beginPath();
+        ctx.moveTo(nodes[i].x, nodes[i].y);
+        ctx.lineTo(nodes[j].x, nodes[j].y);
+        ctx.stroke();
+      }
+      ctx.restore();
+      // Draw nodes
+      for(const n of nodes) {
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.r, 0, 2*Math.PI);
+        ctx.fillStyle = n.color;
+        ctx.globalAlpha = 0.22;
+        ctx.shadowColor = n.color;
+        ctx.shadowBlur = 12;
+        ctx.fill();
+        ctx.restore();
+        n.x += n.vx; n.y += n.vy;
+        if(n.x < 0.1*w || n.x > 0.9*w) n.vx *= -1;
+        if(n.y < 0.1*h || n.y > 0.9*h) n.vy *= -1;
+      }
+      // Draw code snippets
+      for(const c of codeObjs) {
+        ctx.save();
+        ctx.translate(c.x, c.y);
+        ctx.rotate(c.rot);
+        ctx.font = `bold ${c.size}px Inter, Arial, sans-serif`;
+        ctx.globalAlpha = 0.7;
+        ctx.fillStyle = c.color;
+        ctx.shadowColor = c.color+'88';
+        ctx.shadowBlur = 8;
+        ctx.fillText(c.txt, 0, 0);
+        ctx.restore();
+        c.x += c.vx; c.y += c.vy; c.rot += c.rotSpeed;
+        if(c.x < -60) c.x = w+30;
+        if(c.x > w+60) c.x = -30;
+        if(c.y > h+40) { c.y = -20; c.x = rand(0,w); }
+      }
+      // Draw entrepreneurship icons
+      for(const obj of iconObjs) {
+        obj.icon.draw(obj.x, obj.y, obj.s);
+        obj.y += obj.vy;
+        if(obj.y > h+30) { obj.y = -20; obj.x = rand(0,w); }
+      }
+      requestAnimationFrame(animate);
+    }
+    animate();
+  });
+  </script>
+  <header>
+    <div class="logo"> <span style="font-size:1.2rem;color:#f3f6fa;">Portfolio.</span></div>
+    <button class="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav-menu">
+  <a href="#home" data-section="home">Home</a>
+  <a href="#skills" data-section="skills">Skills</a>
+  <a href="#timeline" data-section="timeline">Journey</a>
+  <a href="#projects" data-section="projects">Projects</a>
+  <a href="#innovation" data-section="innovation">Innovation</a>
+  <a href="#team" data-section="team">Impact</a>
+  <a href="#leadership" data-section="leadership">Leadership</a>
+  <a href="#certifications" data-section="certifications">Learning</a>
+  <a href="#about" data-section="about">About</a>
+  <a href="#contact" data-section="contact">Contact</a>
+    </nav>
+  </header>
+  <script src="script.js"></script> <!-- Added script.js for interactivity -->
+  <script>
+  // --- Section Enable/Disable Logic ---
+  // Map section to its data file
+  const sectionDataFiles = {
+    home: 'data/home.json',
+    skills: 'data/skills.json',
+    timeline: 'data/timeline.json',
+    projects: 'data/projects.json',
+    innovation: 'data/innovation.json',
+    team: 'data/team.json',
+    leadership: 'data/leadership.json',
+    certifications: 'data/certifications.json',
+    about: 'data/about.json',
+    contact: 'data/contact.json'
+  };
+  // Helper to fetch enabled state for all sections
+  async function getSectionEnabledMap() {
+    const entries = await Promise.all(Object.entries(sectionDataFiles).map(async ([section, file]) => {
+      try {
+        const res = await fetch(file);
+        if (!res.ok) return [section, true]; // fallback: enabled
+        const data = await res.json();
+        // If 'enabled' is missing, default to true
+        return [section, data.enabled !== false];
+      } catch {
+        return [section, true];
+      }
+    }));
+    return Object.fromEntries(entries);
+  }
+  // Hide nav links and sections if disabled
+  async function applySectionVisibility() {
+    const enabledMap = await getSectionEnabledMap();
+    // Nav links
+    document.querySelectorAll('nav.nav-menu a[data-section]').forEach(link => {
+      const section = link.getAttribute('data-section');
+      if (!enabledMap[section]) link.style.display = 'none';
+      else link.style.display = '';
+    });
+    // Sections
+    Object.keys(sectionDataFiles).forEach(section => {
+      const el = document.getElementById(section);
+      if (el) {
+        if (!enabledMap[section]) el.style.display = 'none';
+        else el.style.display = '';
+      }
+    });
+  }
+  document.addEventListener('DOMContentLoaded', applySectionVisibility);
+  </script>
+  <style>
+    /* --- Animated Starfield Background --- */
+    .starfield {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .spaceship-container {
+      position: absolute;
+      left: 60vw;
+      top: 32vh;
+      z-index: 1;
+      pointer-events: none;
+      filter: drop-shadow(0 4px 16px #4f8cff44);
+      transition: transform 0.7s cubic-bezier(.4,1.4,.6,1);
+      /* Responsive: shrink on mobile */
+    }
+    @media (max-width: 700px) {
+      .spaceship-container { left: 50vw; top: 18vh; }
+      .spaceship { width: 60px; height: 40px; }
+    }
+    .spaceship {
+      display: block;
+      transform-style: preserve-3d;
+      will-change: transform;
+      animation: spaceship-float 5.5s ease-in-out infinite alternate, spaceship-tilt 7.5s ease-in-out infinite alternate;
+    }
+    @keyframes spaceship-float {
+      0% { transform: translateY(0) rotateZ(-2deg) scale3d(1,1,1); }
+      50% { transform: translateY(-18px) rotateZ(2deg) scale3d(1.04,1.04,1.04); }
+      100% { transform: translateY(0) rotateZ(-2deg) scale3d(1,1,1); }
+    }
+    @keyframes spaceship-tilt {
+      0% { filter: brightness(1) drop-shadow(0 4px 16px #4f8cff44); }
+      50% { filter: brightness(1.08) drop-shadow(0 8px 24px #00e0d388); }
+      100% { filter: brightness(1) drop-shadow(0 4px 16px #4f8cff44); }
+    }
+    .star {
+      position: absolute;
+      border-radius: 50%;
+      background: white;
+      opacity: 0.7;
+      width: 1.5px;
+      height: 1.5px;
+      box-shadow: 0 0 6px 1px #fff8;
+      animation: twinkle 2.2s infinite;
+    }
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 0.2; }
+    }
+    /* Some stars are bigger and twinkle differently */
+    .star.big {
+      width: 2.5px;
+      height: 2.5px;
+      opacity: 0.9;
+      animation-duration: 3.2s;
+    }
+    .star.tiny {
+      width: 1px;
+      height: 1px;
+      opacity: 0.5;
+      animation-duration: 1.7s;
+    }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 44px;
+      height: 44px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 120;
+    }
+    .hamburger span {
+      display: block;
+      width: 28px;
+      height: 3.5px;
+      margin: 4px 0;
+      background: #4f8cff;
+      border-radius: 2px;
+      transition: all 0.3s cubic-bezier(.4,1.4,.6,1);
+    }
+    .hamburger.active span:nth-child(1) {
+      transform: translateY(7.5px) rotate(45deg);
+    }
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.active span:nth-child(3) {
+      transform: translateY(-7.5px) rotate(-45deg);
+    }
+    nav.nav-menu {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+      transition: none;
+    }
+    /* --- Mobile improvements removed: all text, photo, and button sizes now match laptop view --- */
+    @media (max-width: 700px) {
+      .hamburger {
+        display: flex;
+      }
+      nav.nav-menu {
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        width: 220px;
+        background: rgba(28,32,38,0.98);
+        box-shadow: -2px 0 24px 0 rgba(79,140,255,0.13);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 84px 24px 24px 24px;
+        gap: 18px;
+        transform: translateX(100%);
+        transition: transform 0.32s cubic-bezier(.4,1.4,.6,1);
+        z-index: 110;
+      }
+      nav.nav-menu.open {
+        transform: translateX(0);
+      }
+      header nav.nav-menu a {
+        font-size: 1.18rem;
+        color: #f3f6fa;
+        width: 100%;
+        padding: 12px 0;
+        border-bottom: 1px solid #23272b;
+      }
+      header nav.nav-menu a:last-child {
+        border-bottom: none;
+      }
+      header {
+        padding-right: 0;
+      }
+    }
+    @media (max-width: 400px) {
+      nav.nav-menu {
+        width: 100vw;
+        padding: 84px 8vw 24px 8vw;
+      }
+    }
+  </style>
+  <script>
+    // Hamburger menu toggle
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('nav.nav-menu');
+    hamburger.addEventListener('click', function() {
+      const isOpen = navMenu.classList.toggle('open');
+      hamburger.classList.toggle('active');
+      hamburger.setAttribute('aria-expanded', isOpen);
+    });
+    // Close menu on link click (mobile)
+    navMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('open');
+        hamburger.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', false);
+      });
+    });
+  </script>
+  <main>
+    <section class="hero scroll-fade-up" id="home">
+      <div class="hero-content" style="display:flex;flex-direction:column;align-items:flex-start;justify-content:center;min-height:340px;">
+        <h1 id="home-name" style="margin-bottom:10px;">Hello, I'm <span class="fluid-gradient-text"></span></h1>
+        <h2 style="margin-bottom:18px;min-height:32px;">
+          <span id="typed-role" class="typed-cursor"></span>
+        </h2>
+        <p id="home-desc" style="font-size:1.18rem;color:#bfc7d5;margin-bottom:22px;max-width:480px;"></p>
+        <div id="home-social" style="display:flex;gap:24px;margin-bottom:22px;"></div>
+        <div class="hero-actions" id="home-actions"></div>
+      </div>
+      <div class="hero-img" style="display:flex;flex-direction:column;align-items:center;">
+        <div class="hero-img-float">
+          <div class="hero-img-glow"></div>
+          <img id="home-img" src="" alt="Profile Photo" class="hero-img-circle" />
+        </div>
+      </div>
+      <div id="home-scroll" style="width:100%;display:flex;justify-content:center;align-items:end;position:absolute;left:0;bottom:24px;"></div>
+    </section>
+    <script>
+    // Dynamically load home section from home.json
+    fetch('data/home.json')
+      .then(r => r.json())
+      .then(data => {
+        // Name
+        document.querySelector('#home-name .fluid-gradient-text').textContent = data.name;
+        // Roles typing effect
+        const roles = data.roles || [];
+        let roleIndex = 0, charIndex = 0, typing = true;
+        function typeRole() {
+          const typedRole = document.getElementById('typed-role');
+          if (!typedRole) return;
+          const current = roles[roleIndex] || '';
+          if (typing) {
+            typedRole.textContent = current.slice(0, charIndex + 1);
+            charIndex++;
+            if (charIndex === current.length) {
+              typing = false;
+              setTimeout(typeRole, 1200);
+            } else {
+              setTimeout(typeRole, 70);
+            }
+          } else {
+            typedRole.textContent = current.slice(0, charIndex - 1);
+            charIndex--;
+            if (charIndex === 0) {
+              typing = true;
+              roleIndex = (roleIndex + 1) % roles.length;
+              setTimeout(typeRole, 400);
+            } else {
+              setTimeout(typeRole, 30);
+            }
+          }
+        }
+        setTimeout(typeRole, 600);
+        // Description
+        document.getElementById('home-desc').innerHTML = data.description || '';
+        // Social links
+        const social = document.getElementById('home-social');
+        social.innerHTML = '';
+        (data.socialLinks||[]).forEach(link => {
+          let icon = '';
+          if(link.icon==="github") icon = `<svg height="28" width="28" fill="currentColor" viewBox="0 0 16 16"><path d='M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.01.08-2.11 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.91.08 2.11.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.19 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z'/></svg>`;
+          if(link.icon==="linkedin") icon = `<svg height="28" width="28" fill="currentColor" viewBox="0 0 16 16"><path d='M1.146 1.146C.417 1.875.417 3.125 1.146 3.854c.729.729 1.979.729 2.708 0 .729-.729.729-1.979 0-2.708-.729-.729-1.979-.729-2.708 0zM0 5.5h3V16H0V5.5zm5.5 0h2.75v1.43h.04c.38-.72 1.3-1.48 2.68-1.48C14.42 5.45 16 7.13 16 10.08V16h-3V10.5c0-1.31-.02-3-1.83-3-1.83 0-2.11 1.43-2.11 2.9V16h-3V5.5z'/></svg>`;
+          if(link.icon==="facebook") icon = `<svg height="28" width="28" fill="currentColor" viewBox="0 0 24 24"><path d='M22.675 0h-21.35C.595 0 0 .592 0 1.326v21.348C0 23.408.595 24 1.326 24h11.495v-9.294H9.691v-3.622h3.13V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.797.143v3.24l-1.918.001c-1.504 0-1.797.715-1.797 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116C23.406 24 24 23.408 24 22.674V1.326C24 .592 23.406 0 22.675 0'/></svg>`;
+          social.innerHTML += `<a href="${link.url}" target="_blank" rel="noopener" title="${link.title}" style="font-size:1.7rem;${link.icon==='github'?'color:#4f8cff;':link.icon==='linkedin'?'color:#0a66c2;':link.icon==='facebook'?'color:#1877f3;':''}">${icon}</a>`;
+        });
+        // Actions
+        const actions = document.getElementById('home-actions');
+        actions.innerHTML = '';
+        (data.actions||[]).forEach(act => {
+          let extra = '';
+          if(act.style) extra += ` style="${act.style}"`;
+          if(act.download) extra += ' download';
+          actions.innerHTML += `<a href="${act.href}" class="${act.class||''}"${extra}>${act.label}</a>`;
+        });
+        // Image
+        document.getElementById('home-img').src = data.image || '';
+        // Scroll down
+        const scroll = document.getElementById('home-scroll');
+        scroll.innerHTML = `<a href="${(data.scrollDown && data.scrollDown.href) || '#projects'}" class="scroll-down" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;"><span style='color:#4f8cff;font-size:2.2rem;animation:bounce 1.5s infinite alternate;'>&#8595;</span><span style='color:#bfc7d5;font-size:0.98rem;'>${(data.scrollDown && data.scrollDown.label) || 'Scroll Down'}</span></a>`;
+      });
+    </script>
+
+    <!-- Skills & Technology Stack Section (no stray CSS or text) -->
+    <section id="skills" class="skills-section scroll-fade-up">
+      <div class="skills-container">
+        <div class="skills-header">
+          <h2>Skills &amp; Technology Stack</h2>
+          <p>From foundational infrastructure to cutting-edge platform engineering</p>
+        </div>
+        <div class="skills-categories" id="skills-categories"></div>
+        <div class="skills-cards" id="skills-cards"></div>
+<script>
+// Dynamically load and render skills section from skills.json (now with editable description)
+fetch('data/skills.json')
+  .then(r => r.json())
+  .then(skillsData => {
+    // Set section description
+    const descElem = document.querySelector('.skills-header p');
+    if (descElem && skillsData.description) descElem.textContent = skillsData.description;
+    // Render category buttons
+    const categoriesDiv = document.getElementById('skills-categories');
+    categoriesDiv.innerHTML = '';
+    (skillsData.categories || []).forEach((cat, idx) => {
+      const btn = document.createElement('button');
+      btn.className = 'skills-cat-btn' + (idx === 0 ? ' active' : '');
+      btn.dataset.cat = cat.category;
+      btn.textContent = cat.title;
+      categoriesDiv.appendChild(btn);
+    });
+    // Render skill cards
+    const cardsDiv = document.getElementById('skills-cards');
+    function renderCards(activeCat) {
+      cardsDiv.innerHTML = '';
+      (skillsData.categories || []).forEach(cat => {
+        const group = document.createElement('div');
+        group.className = 'skills-card-group';
+        group.dataset.cat = cat.category;
+        group.style.display = (cat.category === activeCat) ? 'block' : 'none';
+        const card = document.createElement('div');
+        card.className = 'skills-card';
+        card.innerHTML = `<div class="skills-card-title"><span class="skills-icon">${cat.icon}</span> ${cat.title}</div><div class="skills-list"></div>`;
+        const list = card.querySelector('.skills-list');
+        cat.skills.forEach(skill => {
+          const item = document.createElement('div');
+          item.className = 'skill-item';
+          let badgeClass = skill.level.toLowerCase();
+          item.innerHTML = `<span>${skill.name}</span><span class="badge ${badgeClass}">${skill.level}</span><span class="years">${skill.years}</span><div class="bar ${badgeClass}"></div>`;
+          list.appendChild(item);
+        });
+        card.appendChild(list);
+        group.appendChild(card);
+        cardsDiv.appendChild(group);
+      });
+    }
+    // Initial render
+    if (skillsData.categories && skillsData.categories.length > 0) {
+      renderCards(skillsData.categories[0].category);
+    }
+    // Category button click
+    categoriesDiv.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', function() {
+        categoriesDiv.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderCards(btn.dataset.cat);
+      });
+    });
+  });
+</script>
+      </div>
+    </section>
+</main>
+<style>
+/* --- Skills & Technology Stack Section --- */
+.skills-section {
+  padding: 64px 0 48px 0;
+  position: relative;
+  z-index: 1;
+}
+.skills-container {
+  width: 95vw;
+  max-width: 1700px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0 24px;
+}
+.skills-header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+.skills-header h2 {
+  font-size: 2.3rem;
+  font-weight: 800;
+  background: linear-gradient(90deg, #4f8cff 10%, #7f53ff 50%, #00e0d3 90%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  margin-bottom: 10px;
+}
+.skills-header p {
+  color: #bfc7d5;
+  font-size: 1.18rem;
+  max-width: 520px;
+  margin: 0 auto;
+}
+.skills-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+.skills-cat-btn {
+  background: #181b1f;
+  color: #4f8cff;
+  border: 1.5px solid #4f8cff;
+  border-radius: 8px;
+  padding: 8px 20px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+  outline: none;
+}
+.skills-cat-btn.active, .skills-cat-btn:hover {
+  background: linear-gradient(90deg, #4f8cff 10%, #00e0d3 90%);
+  color: #fff;
+  box-shadow: 0 2px 12px 0 rgba(79,140,255,0.13);
+}
+.skills-cards {
+  min-height: 340px;
+  width: 95vw;
+  max-width: 1700px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.skills-card-group {
+  display: none;
+  width: 100%;
+}
+.skills-card-group[style*="display:block"] {
+  display: block;
+}
+.skills-card {
+  background: rgba(35,39,43,0.98);
+  border-radius: 18px;
+  box-shadow: 0 4px 32px 0 rgba(79,140,255,0.10), 0 1.5px 8px 0 rgba(0,0,0,0.10);
+  padding: 32px 24px 24px 24px;
+  margin: 0;
+  width: 100%;
+  position: relative;
+  box-sizing: border-box;
+  border: 2.5px solid #22c55e;
+}
+.skills-card-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #4f8cff;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.skills-icon {
+  font-size: 1.5rem;
+  background: linear-gradient(90deg, #4f8cff 10%, #00e0d3 90%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+.skills-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 18px 24px;
+}
+@media (max-width: 700px) {
+  .skills-list {
+    grid-template-columns: 1fr;
+  }
+}
+.skill-item {
+  background: rgba(79,140,255,0.07);
+  border-radius: 10px;
+  padding: 14px 16px 10px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  position: relative;
+  box-shadow: 0 1px 4px 0 rgba(79,140,255,0.07);
+  transition: background 0.18s;
+}
+.skill-item .badge {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.93rem;
+  font-weight: 700;
+  margin: 0;
+  white-space: nowrap;
+  z-index: 2;
+  min-width: unset;
+  max-width: 90%;
+  text-align: right;
+}
+.skill-item:hover {
+  background: rgba(79,140,255,0.13);
+}
+.skill-item span {
+  font-size: 1.07rem;
+  font-weight: 600;
+  color: #f3f6fa;
+}
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.93rem;
+  font-weight: 700;
+  margin: 0;
+}
+.badge.expert {
+  background: linear-gradient(90deg, #4f8cff 10%, #00e0d3 90%);
+  color: #fff;
+}
+.badge.advanced {
+  background: linear-gradient(90deg, #7f53ff 10%, #4f8cff 90%);
+  color: #fff;
+}
+.badge.intermediate {
+  background: #23272b;
+  color: #4f8cff;
+}
+.badge.beginner {
+  background: #23272b;
+  color: #bfc7d5;
+}
+.years {
+  font-size: 0.98rem;
+  color: #bfc7d5;
+  margin-left: auto;
+  font-weight: 500;
+}
+.bar {
+  height: 7px;
+  border-radius: 6px;
+  margin-top: 7px;
+  background: #23272b;
+  width: 0;
+  transition: width 1.1s cubic-bezier(.4,1.4,.6,1);
+}
+.bar.expert { background: linear-gradient(90deg, #4f8cff 10%, #00e0d3 90%); width: 100%; }
+.bar.advanced { background: linear-gradient(90deg, #7f53ff 10%, #4f8cff 90%); width: 80%; }
+.bar.intermediate { background: #4f8cff; width: 60%; }
+.bar.beginner { background: #bfc7d5; width: 35%; }
+</style>
+<style>
+@keyframes bounce {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(18px); }
+}
+.scroll-down:hover span:first-child {
+  color: #2563eb;
+}
+/* Blinking type cursor for #typed-role */
+#typed-role.typed-cursor::after {
+  content: '|';
+  animation: blink-cursor 0.9s steps(1) infinite;
+  color: #4f8cff;
+  font-weight: 600;
+  margin-left: 2px;
+}
+@keyframes blink-cursor {
+  0%, 60% { opacity: 1; }
+  61%, 100% { opacity: 0; }
+}
+/* Gradient text for name under photo */
+.photo-name-gradient {
+  background: linear-gradient(90deg, #4f8cff 10%, #7f53ff 50%, #00e0d3 90%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+</style>
+    
+     
+        <!-- Professional Journey Timeline Section -->
+    <section id="timeline" class="scroll-fade-up">
+      <div class="projects-section-container">
+        <div class="text-center mb-16 animate-slide-up">
+          <h2 class="projects-title">Professional Journey</h2>
+          <p class="projects-desc" id="timeline-desc"></p>
+          
+        </div>
+        <div class="timeline-relative">
+          <div class="timeline-line"></div>
+          <div class="timeline-list"></div>
+        </div>
+        <div class="mt-16 text-center animate-slide-up">
+          <div class="timeline-summary-card">
+            <h3 class="timeline-summary-title">Career Progression Summary</h3>
+            <div class="timeline-summary-grid">
+              <div>
+                <div class="timeline-summary-num primary" id="summary-years"></div>
+                <div class="timeline-summary-label">Years Experience</div>
+              </div>
+              <div>
+                <div class="timeline-summary-num accent" id="summary-roles"></div>
+                <div class="timeline-summary-label">Role Progressions</div>
+              </div>
+              <div>
+                <div class="timeline-summary-num secondary" id="summary-promotions"></div>
+                <div class="timeline-summary-label">Promotions</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <style>
+      .timeline-relative { position: relative; }
+      .timeline-line {
+        position: absolute;
+        left: -60px;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        background: linear-gradient(180deg, #4f8cff 0%, #00e0d3 100%);
+        opacity: 0.18;
+        border-radius: 2px;
+        display: none;
+      }
+      @media (min-width: 768px) {
+        .timeline-line { display: block; }
+      }
+      .timeline-list { position: relative; z-index: 1; }
+      .timeline-card {
+        background: rgba(35,39,43,0.98);
+        border-radius: 18px;
+        box-shadow: 0 4px 32px 0 rgba(79,140,255,0.10), 0 1.5px 8px 0 rgba(0,0,0,0.10);
+        padding: 28px 22px 32px 22px;
+        margin-bottom: 32px;
+        border-left: 6px solid #4f8cff22;
+        position: relative;
+        transition: box-shadow 0.18s, border-color 0.18s;
+      }
+      .timeline-dot {
+        position: absolute;
+        left: -74px;
+        top: 32px;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: linear-gradient(90deg, #4f8cff 10%, #00e0d3 90%);
+        border: 4px solid #23272b;
+        z-index: 2;
+        display: none;
+        box-sizing: border-box;
+        animation: timeline-dot-blink 1.2s infinite alternate;
+        box-shadow: 0 0 12px 2px #4f8cff66;
+      }
+      @media (min-width: 768px) {
+        .timeline-dot { display: block; }
+      }
+      @keyframes timeline-dot-blink {
+        0% { opacity: 1; box-shadow: 0 0 12px 2px #4f8cff66; }
+        60% { opacity: 1; box-shadow: 0 0 18px 6px #00e0d3cc; }
+        100% { opacity: 0.4; box-shadow: 0 0 6px 1px #4f8cff33; }
+      }
+      .timeline-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 8px;
+      }
+      .timeline-year, .timeline-duration {
+        background: #23272b;
+        color: #4f8cff;
+        border-radius: 8px;
+        padding: 2px 10px;
+        font-size: 0.98rem;
+        font-weight: 600;
+        margin-right: 4px;
+      }
+      .timeline-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #4f8cff;
+        margin-bottom: 8px;
+      }
+      .timeline-meta {
+        display: flex;
+        gap: 18px;
+        color: #bfc7d5;
+        font-size: 1.05rem;
+        margin-bottom: 8px;
+      }
+      .timeline-achievements {
+        margin-bottom: 10px;
+      }
+      .timeline-achievements-title {
+        font-size: 1.08rem;
+        font-weight: 700;
+        color: #22c55e;
+        margin-bottom: 6px;
+      }
+      .timeline-achievements-list {
+        margin: 0 0 10px 0;
+        padding: 0 0 0 18px;
+      }
+      .timeline-achievements-list li {
+        color: #bfc7d5;
+        font-size: 0.98rem;
+        margin-bottom: 4px;
+      }
+      .timeline-techs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+        margin-bottom: 10px;
+      }
+      .timeline-tech {
+        background: #181b1f;
+        color: #4f8cff;
+        border: 1.5px solid #4f8cff;
+        border-radius: 8px;
+        padding: 4px 12px;
+        font-size: 0.98rem;
+        font-weight: 600;
+      }
+      .timeline-summary-card {
+        background: rgba(35,39,43,0.98);
+        border-radius: 18px;
+        box-shadow: 0 4px 32px 0 rgba(79,140,255,0.10), 0 1.5px 8px 0 rgba(0,0,0,0.10);
+        padding: 32px 22px 32px 22px;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+      .timeline-summary-title {
+        font-size: 1.6rem;
+        font-weight: 700;
+        background: linear-gradient(90deg, #4f8cff 10%, #00e0d3 90%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+        text-align: center;
+        margin-bottom: 18px;
+      }
+      .timeline-summary-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 32px;
+      }
+      .timeline-summary-num {
+        font-size: 2.2rem;
+        font-weight: 800;
+        margin-bottom: 6px;
+      }
+      .timeline-summary-num.primary { color: #4f8cff; }
+      .timeline-summary-num.accent { color: #22c55e; }
+      .timeline-summary-num.secondary { color: #ffe156; }
+      .timeline-summary-label { color: #bfc7d5; font-size: 1.08rem; }
+    </style>
+    <script>
+    // Timeline data will be loaded from timeline.json
+    let timelineData = { description: '', summary: {}, entries: [] };
+    function fetchTimelineData() {
+      return fetch('data/timeline.json')
+        .then(r => r.json())
+        .then(data => { timelineData = data; return data; });
+    }
+    function renderTimeline() {
+      // Description
+      document.getElementById('timeline-desc').textContent = timelineData.description || '';
+      // Summary (dynamic rendering for all key-value pairs)
+      const summaryGrid = document.querySelector('.timeline-summary-grid');
+      if (summaryGrid) {
+        summaryGrid.innerHTML = '';
+        if (timelineData.summary && typeof timelineData.summary === 'object') {
+          Object.entries(timelineData.summary).forEach(([key, value], idx) => {
+            // Pick a color class for the number (cycle through known ones)
+            const colorClasses = ['primary', 'accent', 'secondary', 'warning', 'info'];
+            const colorClass = colorClasses[idx % colorClasses.length];
+            // Make label more readable
+            const label = key.replace(/([A-Z])/g, ' $1').replace(/^./, s => s.toUpperCase());
+            summaryGrid.innerHTML += `
+              <div>
+                <div class="timeline-summary-num ${colorClass}">${value}</div>
+                <div class="timeline-summary-label">${label}</div>
+              </div>
+            `;
+          });
+        }
+      }
+      // Entries
+      const list = document.querySelector('.timeline-list');
+      if (!list) return;
+      list.innerHTML = '';
+      (timelineData.entries || []).forEach((item, index) => {
+        const card = document.createElement('div');
+        card.className = 'timeline-card';
+        card.innerHTML = `
+          <div class="timeline-dot"></div>
+          <div class="timeline-header">
+            <span class="timeline-year">${item.year}</span>
+            <span class="timeline-duration">${item.duration}</span>
+          </div>
+          <div class="timeline-title">${item.role}</div>
+          <div class="timeline-meta">
+            <span>${item.company}</span>
+            <span>${item.location}</span>
+          </div>
+          <div class="timeline-achievements">
+            <div class="timeline-achievements-title">Key Achievements</div>
+            <ul class="timeline-achievements-list">
+              ${(item.achievements||[]).map(a=>`<li>${a}</li>`).join('')}
+            </ul>
+          </div>
+          <div class="timeline-techs">
+            ${(item.technologies||[]).map(t=>`<span class=\"timeline-tech\">${t}</span>`).join('')}
+          </div>
+
+        `;
+        list.appendChild(card);
+      });
+
+    }
+
+    // Modal for editing timeline entry
+    function openEditModal(index) {
+      let modal = document.getElementById('timeline-edit-modal');
+      if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'timeline-edit-modal';
+        modal.style.position = 'fixed';
+        modal.style.top = '0';
+        modal.style.left = '0';
+        modal.style.width = '100vw';
+        modal.style.height = '100vh';
+        modal.style.background = 'rgba(0,0,0,0.5)';
+        modal.style.display = 'flex';
+        modal.style.alignItems = 'center';
+        modal.style.justifyContent = 'center';
+        modal.style.zIndex = '9999';
+        modal.innerHTML = `
+          <div style="background:#23272b;padding:32px 24px;border-radius:16px;min-width:320px;max-width:95vw;box-shadow:0 8px 40px #0008;">
+            <h3 style="color:#4f8cff;margin-bottom:18px;">Edit Timeline Entry</h3>
+            <form id="timeline-edit-form" style="display:flex;flex-direction:column;gap:12px;">
+              <input name="year" placeholder="Year" style="padding:8px;border-radius:6px;border:1px solid #4f8cff;" required />
+              <input name="role" placeholder="Role" style="padding:8px;border-radius:6px;border:1px solid #4f8cff;" required />
+              <input name="company" placeholder="Company" style="padding:8px;border-radius:6px;border:1px solid #4f8cff;" required />
+              <input name="location" placeholder="Location" style="padding:8px;border-radius:6px;border:1px solid #4f8cff;" required />
+              <input name="duration" placeholder="Duration" style="padding:8px;border-radius:6px;border:1px solid #4f8cff;" required />
+              <input name="type" placeholder="Type (promotion/role/start)" style="padding:8px;border-radius:6px;border:1px solid #4f8cff;" required />
+              <textarea name="achievements" placeholder="Achievements (comma separated)" style="padding:8px;border-radius:6px;border:1px solid #4f8cff;min-height:48px;" required></textarea>
+              <input name="technologies" placeholder="Technologies (comma separated)" style="padding:8px;border-radius:6px;border:1px solid #4f8cff;" required />
+              <div style="display:flex;gap:12px;justify-content:flex-end;margin-top:8px;">
+                <button type="button" id="timeline-cancel-btn" style="background:#23272b;color:#bfc7d5;border:1px solid #4f8cff;padding:7px 18px;border-radius:8px;">Cancel</button>
+                <button type="submit" style="background:#4f8cff;color:#fff;border:none;padding:7px 18px;border-radius:8px;">Save</button>
+              </div>
+            </form>
+          </div>
+        `;
+        document.body.appendChild(modal);
+      }
+      // Fill form with current data
+      const entry = timelineData.entries[index];
+      const form = modal.querySelector('#timeline-edit-form');
+      form.year.value = entry.year;
+      form.role.value = entry.role;
+      form.company.value = entry.company;
+      form.location.value = entry.location;
+      form.duration.value = entry.duration;
+      form.type.value = entry.type;
+      form.achievements.value = (entry.achievements||[]).join(', ');
+      form.technologies.value = (entry.technologies||[]).join(', ');
+      modal.style.display = 'flex';
+      // Cancel button
+      modal.querySelector('#timeline-cancel-btn').onclick = () => { modal.style.display = 'none'; };
+      // Save handler
+      form.onsubmit = function(e) {
+        e.preventDefault();
+        timelineData.entries[index] = {
+          year: form.year.value,
+          role: form.role.value,
+          company: form.company.value,
+          location: form.location.value,
+          duration: form.duration.value,
+          type: form.type.value,
+          achievements: form.achievements.value.split(',').map(s=>s.trim()).filter(Boolean),
+          technologies: form.technologies.value.split(',').map(s=>s.trim()).filter(Boolean)
+        };
+        if (window.location.protocol === 'file:') {
+          localStorage.setItem('timelineData', JSON.stringify(timelineData));
+        } else {
+          // TODO: send to backend via fetch/POST
+        }
+        modal.style.display = 'none';
+        renderTimeline();
+      };
+    }
+
+    // Modal for editing description and summary
+    function openEditDescModal() {
+      let modal = document.getElementById('timeline-desc-modal');
+      if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'timeline-desc-modal';
+        modal.style.position = 'fixed';
+        modal.style.top = '0';
+        modal.style.left = '0';
+        modal.style.width = '100vw';
+        modal.style.height = '100vh';
+        modal.style.background = 'rgba(0,0,0,0.5)';
+        modal.style.display = 'flex';
+        modal.style.alignItems = 'center';
+        modal.style.justifyContent = 'center';
+        modal.style.zIndex = '9999';
+        modal.innerHTML = `
+          <div style="background:#23272b;padding:32px 24px;border-radius:16px;min-width:320px;max-width:95vw;box-shadow:0 8px 40px #0008;">
+            <h3 style="color:#4f8cff;margin-bottom:18px;">Edit Timeline Description & Summary</h3>
+            <form id="timeline-desc-form" style="display:flex;flex-direction:column;gap:12px;">
+              <textarea name="description" placeholder="Section Description" style="padding:8px;border-radius:6px;border:1px solid #4f8cff;min-height:48px;" required></textarea>
+              <input name="yearsExperience" placeholder="Years Experience (e.g. 8+)" style="padding:8px;border-radius:6px;border:1px solid #4f8cff;" required />
+              <input name="roleProgressions" placeholder="Role Progressions (e.g. 5)" style="padding:8px;border-radius:6px;border:1px solid #4f8cff;" required />
+              <input name="promotions" placeholder="Promotions (e.g. 3)" style="padding:8px;border-radius:6px;border:1px solid #4f8cff;" required />
+              <div style="display:flex;gap:12px;justify-content:flex-end;margin-top:8px;">
+                <button type="button" id="timeline-desc-cancel-btn" style="background:#23272b;color:#bfc7d5;border:1px solid #4f8cff;padding:7px 18px;border-radius:8px;">Cancel</button>
+                <button type="submit" style="background:#4f8cff;color:#fff;border:none;padding:7px 18px;border-radius:8px;">Save</button>
+              </div>
+            </form>
+          </div>
+        `;
+        document.body.appendChild(modal);
+      }
+      // Fill form with current data
+      const form = modal.querySelector('#timeline-desc-form');
+      form.description.value = timelineData.description || '';
+      form.yearsExperience.value = timelineData.summary?.yearsExperience || '';
+      form.roleProgressions.value = timelineData.summary?.roleProgressions || '';
+      form.promotions.value = timelineData.summary?.promotions || '';
+      modal.style.display = 'flex';
+      // Cancel button
+      modal.querySelector('#timeline-desc-cancel-btn').onclick = () => { modal.style.display = 'none'; };
+      // Save handler
+      form.onsubmit = function(e) {
+        e.preventDefault();
+        timelineData.description = form.description.value;
+        timelineData.summary = {
+          yearsExperience: form.yearsExperience.value,
+          roleProgressions: form.roleProgressions.value,
+          promotions: form.promotions.value
+        };
+        if (window.location.protocol === 'file:') {
+          localStorage.setItem('timelineData', JSON.stringify(timelineData));
+        } else {
+          // TODO: send to backend via fetch/POST
+        }
+        modal.style.display = 'none';
+        renderTimeline();
+      };
+    }
+
+    // On load, fetch timeline data and render
+    document.addEventListener('DOMContentLoaded', function() {
+      // For static demo: check localStorage first
+      if (window.location.protocol === 'file:' && localStorage.getItem('timelineData')) {
+        timelineData = JSON.parse(localStorage.getItem('timelineData'));
+        renderTimeline();
+      } else {
+        fetchTimelineData().then(renderTimeline);
+      }
+
+    });
+    </script>
+ 
+
+    <section id="projects" class="scroll-fade-up">
+      <div class="projects-section-container">
+        <div class="text-center mb-16 animate-slide-up">
+          <h2 class="projects-title">Projects &amp; Case Studies</h2>
+          <p class="projects-desc">Real-world implementations showcasing technical expertise and business impact</p>
+        </div>
+        <!-- Featured Projects -->
+        <div class="featured-projects">
+          <h3 class="featured-title">Featured Projects</h3>
+          <div class="featured-projects-grid" id="featured-projects-grid"></div>
+        </div>
+        <!-- Category Filter (moved below featured) -->
+        <div class="projects-categories">
+          <button class="projects-cat-btn active" data-cat="All">All</button>
+          <button class="projects-cat-btn" data-cat="Advanced">Advanced</button>
+          <button class="projects-cat-btn" data-cat="Intermediate">Intermediate</button>
+          <button class="projects-cat-btn" data-cat="Foundational">Foundational</button>
+        </div>
+        <!-- Projects Grid -->
+        <div class="projects-grid" id="projects-grid"></div>
+      </div>
+    </section>
+    <style>
+      .projects-section-container { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
+      .projects-title { font-size: 2.5rem; font-weight: 800; background: linear-gradient(90deg, #4f8cff 10%, #7f53ff 50%, #00e0d3 90%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-fill-color: transparent; margin-bottom: 10px; text-align: center; display: block; }
+      .projects-desc { color: #bfc7d5; font-size: 1.18rem; max-width: 520px; margin: 0 auto 32px auto; }
+      .projects-categories { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-bottom: 32px; }
+      .projects-cat-btn { background: #181b1f; color: #4f8cff; border: 1.5px solid #4f8cff; border-radius: 8px; padding: 8px 20px; font-size: 1.05rem; font-weight: 600; cursor: pointer; transition: background 0.18s, color 0.18s, box-shadow 0.18s; outline: none; }
+      .projects-cat-btn.active, .projects-cat-btn:hover { background: linear-gradient(90deg, #4f8cff 10%, #00e0d3 90%); color: #fff; box-shadow: 0 2px 12px 0 rgba(79,140,255,0.13); }
+      .featured-title { font-size: 1.6rem; font-weight: 700; background: linear-gradient(90deg, #4f8cff 10%, #00e0d3 90%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-fill-color: transparent; text-align: center; margin-bottom: 18px; }
+      .featured-projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 28px; margin-bottom: 32px; }
+      .projects-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 32px !important;
+        flex-wrap: nowrap !important;
+        width: 100%;
+      }
+      .projects-grid > * {
+        width: 100%;
+        max-width: 100%;
+      }
+      .project-card, .featured-project-card {
+        background: rgba(35,39,43,0.98);
+        border-radius: 18px;
+        box-shadow: 0 4px 32px 0 rgba(79,140,255,0.10), 0 1.5px 8px 0 rgba(0,0,0,0.10);
+        padding: 28px 22px 38px 22px;
+        position: relative;
+        border: 2.5px solid #22c55e;
+        transition: box-shadow 0.18s, border-color 0.18s;
+        overflow: visible;
+        min-height: 0;
+      }
+      .project-card.expanded, .featured-project-card.expanded { border-color: #4f8cff; box-shadow: 0 8px 40px 0 rgba(79,140,255,0.18), 0 2px 12px 0 rgba(0,0,0,0.13); }
+      .project-card .badges, .featured-project-card .badges { display: flex; gap: 8px; margin-bottom: 10px; }
+      .badge { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 0.98rem; font-weight: 700; background: linear-gradient(90deg, #4f8cff 10%, #00e0d3 90%); color: #fff; }
+      .badge.outline { background: #181b1f; color: #4f8cff; border: 1.5px solid #4f8cff; }
+      .badge.featured { background: #22c55e; color: #fff; }
+      .project-title { font-size: 1.32rem; font-weight: 700; color: #4f8cff; margin-bottom: 8px; letter-spacing: 0.2px; }
+      .project-context, .project-problem { color: #bfc7d5; font-size: 1.08rem; margin-bottom: 8px; }
+      .project-problem { color: #ff6b6b; font-size: 1.01rem; margin-bottom: 12px; }
+      .project-metrics {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+        margin-bottom: 12px;
+      }
+      .project-metric { background: #23272b; border-radius: 8px; padding: 10px 0; text-align: center; }
+      .project-metric .metric-value { font-size: 1.18rem; font-weight: 700; color: #4f8cff; }
+      .project-metric .metric-label { font-size: 0.93rem; color: #bfc7d5; }
+      .project-techs { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 10px; }
+      .project-tech { background: #181b1f; color: #4f8cff; border: 1.5px solid #4f8cff; border-radius: 8px; padding: 4px 12px; font-size: 0.98rem; font-weight: 600; }
+      .project-details { border-top: 1.5px solid #23272b; margin-top: 16px; padding-top: 16px; }
+      .project-details h4 { font-size: 1.08rem; font-weight: 700; color: #22c55e; margin-bottom: 6px; }
+      .project-details ul { margin: 0 0 10px 0; padding: 0 0 0 18px; }
+      .project-details li { color: #bfc7d5; font-size: 0.98rem; margin-bottom: 4px; }
+      .project-details .impact-title { color: #4f8cff; font-size: 1.01rem; font-weight: 700; margin-bottom: 4px; }
+      .project-btn { width: 100%; margin-top: 10px; background: #181b1f; color: #4f8cff; border: 1.5px solid #4f8cff; border-radius: 8px; padding: 8px 0; font-size: 1.05rem; font-weight: 600; cursor: pointer; transition: background 0.18s, color 0.18s; }
+      .project-btn:hover { background: #4f8cff; color: #fff; }
+      @media (max-width: 900px) { .projects-grid, .featured-projects-grid { grid-template-columns: 1fr; gap: 22px; } }
+    </style>
+    <script>
+    // Project data (from your React code, adapted for JS)
+    const projects = [
+      {
+        id: "platform-engineering",
+        category: "Advanced",
+        title: "Enterprise Developer Platform",
+        context: "50+ development teams struggling with inconsistent deployment processes and infrastructure complexity",
+        problem: "Developers spending 40% of time on infrastructure concerns instead of feature development",
+        solution: "Built comprehensive platform-as-a-product using Backstage, ArgoCD, and custom automation",
+        technologies: ["Kubernetes", "ArgoCD", "Backstage", "Terraform", "AWS", "GitLab", "Helm"],
+        impact: {
+          business: ["Reduced time-to-market by 60%", "Saved $2M annually in operational costs", "Increased developer productivity by 75%"],
+          technical: ["99.95% platform uptime", "Sub-minute deployments", "Zero-downtime releases", "Automated security compliance"]
+        },
+        metrics: {
+          deployments: "50x faster",
+          uptime: "99.95%",
+          cost_savings: "$2M/year",
+          teams_served: "50+"
+        },
+        featured: true
+      },
+      {
+        id: "cloud-migration",
+        category: "Intermediate",
+        title: "Multi-Cloud Migration & Modernization",
+        context: "Legacy monolithic application running on on-premises infrastructure with scaling limitations",
+        problem: "Manual deployments taking 6+ hours, frequent outages, inability to scale during peak traffic",
+        solution: "Migrated to cloud-native microservices architecture with automated CI/CD and infrastructure as code",
+        technologies: ["AWS", "Docker", "Kubernetes", "Terraform", "Jenkins", "Prometheus", "Grafana"],
+        impact: {
+          business: ["Reduced infrastructure costs by 40%", "Improved application performance by 300%", "Enabled 24/7 global availability"],
+          technical: ["Achieved 99.9% uptime", "Automated scaling", "Comprehensive monitoring", "Security compliance"]
+        },
+        metrics: {
+          cost_reduction: "40%",
+          performance: "3x faster",
+          uptime: "99.9%",
+          deployment_time: "6h → 30min"
+        },
+        featured: true
+      },
+      {
+        id: "gitops-implementation",
+        category: "Advanced",
+        title: "GitOps at Scale Implementation",
+        context: "Multiple teams deploying applications inconsistently across different environments",
+        problem: "Configuration drift, manual deployments, lack of audit trail, and environment inconsistencies",
+        solution: "Implemented GitOps workflow with ArgoCD, standardized deployment patterns, and automated environment synchronization",
+        technologies: ["ArgoCD", "Kubernetes", "Helm", "Kustomize", "Git", "Vault", "RBAC"],
+        impact: {
+          business: ["Improved deployment reliability by 95%", "Reduced rollback time from hours to minutes", "Enhanced security posture"],
+          technical: ["Complete deployment audit trail", "Automated environment sync", "Self-healing infrastructure", "Policy as code"]
+        },
+        metrics: {
+          reliability: "95% improvement",
+          rollback_time: "4h → 5min",
+          environments: "10+ managed",
+          audit_coverage: "100%"
+        },
+        featured: false
+      },
+      {
+        id: "devsecops-pipeline",
+        category: "Advanced",
+        title: "DevSecOps Pipeline & Compliance Automation",
+        context: "Financial services company requiring SOC2 and PCI DSS compliance with rapid development cycles",
+        problem: "Manual security reviews creating bottlenecks, compliance gaps, and delayed releases",
+        solution: "Built automated security pipeline with policy as code, vulnerability scanning, and compliance reporting",
+        technologies: ["Terraform", "OPA/Gatekeeper", "Trivy", "SonarQube", "Vault", "Falco", "AWS Security Hub"],
+        impact: {
+          business: ["Achieved SOC2 compliance", "Reduced security review time by 80%", "Zero security incidents"],
+          technical: ["Automated vulnerability scanning", "Policy enforcement", "Real-time compliance monitoring", "Secure secrets management"]
+        },
+        metrics: {
+          compliance: "SOC2 + PCI DSS",
+          review_time: "80% faster",
+          vulnerabilities: "0 critical",
+          policy_coverage: "100%"
+        },
+        featured: false
+      },
+      {
+        id: "observability-stack",
+        category: "Intermediate",
+        title: "Comprehensive Observability Platform",
+        context: "Microservices architecture with limited visibility into system behavior and performance issues",
+        problem: "High MTTR during incidents, difficulty debugging distributed systems, lack of proactive monitoring",
+        solution: "Implemented full observability stack with metrics, logs, traces, and automated alerting",
+        technologies: ["Prometheus", "Grafana", "Jaeger", "OpenTelemetry", "ELK Stack", "PagerDuty", "Kubernetes"],
+        impact: {
+          business: ["Reduced MTTR from 4 hours to 15 minutes", "Prevented 50+ potential outages", "Improved customer satisfaction"],
+          technical: ["Distributed tracing", "Proactive alerting", "Performance optimization", "Capacity planning"]
+        },
+        metrics: {
+          mttr: "4h → 15min",
+          incidents_prevented: "50+",
+          monitoring_coverage: "100%",
+          sla_compliance: "99.95%"
+        },
+        featured: false
+      },
+      {
+        id: "automation-foundation",
+        category: "Foundational",
+        title: "Infrastructure Automation Foundation",
+        context: "Manual server provisioning and configuration management across multiple environments",
+        problem: "Inconsistent configurations, manual errors, slow provisioning times, and scaling limitations",
+        solution: "Implemented infrastructure as code with automated provisioning, configuration management, and monitoring",
+        technologies: ["Terraform", "Ansible", "Packer", "AWS", "Python", "Bash", "Nagios"],
+        impact: {
+          business: ["Reduced provisioning time from days to minutes", "Eliminated configuration drift", "Improved system reliability"],
+          technical: ["Immutable infrastructure", "Automated backups", "Consistent environments", "Self-healing systems"]
+        },
+        metrics: {
+          provisioning: "3 days → 10min",
+          configuration_drift: "0%",
+          automation: "95%",
+          reliability: "99.5%"
+        },
+        featured: false
+      }
+    ];
+    const categories = ["All", "Advanced", "Intermediate", "Foundational"];
+    let activeCategory = "All";
+    let expandedProjectId = null;
+
+    function renderProjects() {
+      // Featured
+      const featuredGrid = document.getElementById('featured-projects-grid');
+      featuredGrid.innerHTML = '';
+      const featured = projects.filter(p => p.featured);
+      featured.forEach(project => {
+        const card = document.createElement('div');
+        card.className = 'featured-project-card' + (expandedProjectId === project.id ? ' expanded' : '');
+        card.innerHTML = `
+          <div class="badges">
+            <span class="badge">${project.category}</span>
+            <span class="badge featured">Featured</span>
+          </div>
+          <div class="project-title">${project.title}</div>
+          <div class="project-context">${project.context}</div>
+          <div class="project-metrics">
+            <div class="project-metric"><div class="metric-value">${Object.values(project.metrics)[0]}</div><div class="metric-label">${Object.keys(project.metrics)[0].replace('_',' ')}</div></div>
+            <div class="project-metric"><div class="metric-value">${Object.values(project.metrics)[1]}</div><div class="metric-label">${Object.keys(project.metrics)[1].replace('_',' ')}</div></div>
+          </div>
+          <button class="project-btn" data-id="${project.id}">${expandedProjectId === project.id ? 'Hide Details' : 'View Details'}</button>
+          <div class="project-details" style="display:${expandedProjectId === project.id ? 'block' : 'none'}">
+            <h4>Solution Approach</h4>
+            <div class="project-context">${project.solution}</div>
+            <div class="impact-title">Business Impact</div>
+            <ul>${project.impact.business.map(i=>`<li>${i}</li>`).join('')}</ul>
+            <div class="impact-title">Technical Achievements</div>
+            <ul>${project.impact.technical.map(i=>`<li>${i}</li>`).join('')}</ul>
+            <div class="impact-title">Technologies</div>
+            <div class="project-techs">${project.technologies.map(t=>`<span class="project-tech">${t}</span>`).join('')}</div>
+          </div>
+        `;
+        featuredGrid.appendChild(card);
+      });
+      // Projects
+      const grid = document.getElementById('projects-grid');
+      grid.innerHTML = '';
+      let filtered = activeCategory === 'All' ? projects : projects.filter(p => p.category === activeCategory);
+      filtered.forEach(project => {
+        const card = document.createElement('div');
+        card.className = 'project-card' + (expandedProjectId === project.id ? ' expanded' : '');
+        const githubUrl = project.githubUrl || 'https://github.com/';
+        card.innerHTML = `
+          <div class="project-github-icon" style="position:absolute;top:18px;right:18px;cursor:pointer;z-index:2;">
+            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub" style="width:28px;height:28px;filter:invert(0.7);" />
+          </div>
+          <div class="badges">
+            <span class="badge">${project.category}</span>
+          </div>
+          <div class="project-title">${project.title}</div>
+          <div class="project-context">${project.context}</div>
+          <div class="project-problem">${project.problem}</div>
+          <div class="project-metrics">
+            ${Object.entries(project.metrics).map(([k,v])=>`<div class="project-metric"><div class="metric-value">${v}</div><div class="metric-label">${k.replace('_',' ')}</div></div>`).join('')}
+          </div>
+          <div class="project-techs">${project.technologies.map(t=>`<span class="project-tech">${t}</span>`).join('')}</div>
+          <button class="project-btn" data-id="${project.id}">${expandedProjectId === project.id ? 'Hide Details' : 'View Full Case Study'}</button>
+          <div class="project-details" style="display:${expandedProjectId === project.id ? 'block' : 'none'}">
+            <h4>Solution Approach</h4>
+            <div class="project-context">${project.solution}</div>
+            <div class="impact-title">Business Impact</div>
+            <ul>${project.impact.business.map(i=>`<li>${i}</li>`).join('')}</ul>
+            <div class="impact-title">Technical Achievements</div>
+            <ul>${project.impact.technical.map(i=>`<li>${i}</li>`).join('')}</ul>
+          </div>
+        `;
+        card.querySelector('.project-github-icon').onclick = () => {
+          window.open(githubUrl, '_blank');
+        };
+        grid.appendChild(card);
+      });
+      // Button listeners
+      document.querySelectorAll('.project-btn').forEach(btn => {
+        btn.onclick = function() {
+          const id = this.getAttribute('data-id');
+          expandedProjectId = expandedProjectId === id ? null : id;
+          renderProjects();
+        };
+      });
+    }
+    // Category filter
+    document.addEventListener('DOMContentLoaded', function() {
+      renderProjects();
+      document.querySelectorAll('.projects-cat-btn').forEach(btn => {
+        btn.onclick = function() {
+          document.querySelectorAll('.projects-cat-btn').forEach(b=>b.classList.remove('active'));
+          btn.classList.add('active');
+          activeCategory = btn.getAttribute('data-cat');
+          expandedProjectId = null;
+          renderProjects();
+        };
+      });
+    });
+    </script>
+
+        <!-- Innovation & Emerging Tech Section -->
+    <section id="innovation" class="scroll-fade-up">
+      <div class="projects-section-container">
+        <div class="text-center mb-16 animate-slide-up">
+          <h2 class="projects-title">Innovation &amp; Emerging Tech</h2>
+          <p class="projects-desc" id="innovation-desc"></p>
+        </div>
+        <div class="innovation-grid"></div>
+        <div class="mt-16 text-center animate-slide-up">
+          <div class="innovation-philosophy-card" id="innovation-philosophy-card"></div>
+        </div>
+      </div>
+    </section>
+
+    <style>
+      .innovation-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+        gap: 32px;
+        margin-bottom: 32px;
+      }
+      .innovation-card {
+        background: rgba(35,39,43,0.98);
+        border-radius: 18px;
+        box-shadow: 0 4px 32px 0 rgba(79,140,255,0.10), 0 1.5px 8px 0 rgba(0,0,0,0.10);
+        padding: 28px 22px 32px 22px;
+        position: relative;
+        border: 2.5px solid #4f8cff22;
+        transition: box-shadow 0.18s, border-color 0.18s;
+        overflow: visible;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+      .innovation-card .innovation-badges {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 10px;
+        align-items: center;
+      }
+      .innovation-badge {
+        display: inline-block;
+        padding: 2px 10px;
+        border-radius: 12px;
+        font-size: 0.98rem;
+        font-weight: 700;
+        background: linear-gradient(90deg, #4f8cff 10%, #00e0d3 90%);
+        color: #fff;
+      }
+      .innovation-badge.status {
+        background: #23272b;
+        color: #4f8cff;
+        border: 1.5px solid #4f8cff;
+      }
+      .innovation-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #4f8cff;
+        margin-bottom: 8px;
+      }
+      .innovation-desc {
+        color: #bfc7d5;
+        font-size: 1.05rem;
+        margin-bottom: 8px;
+      }
+      .innovation-techs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+        margin-bottom: 10px;
+      }
+      .innovation-tech {
+        background: #181b1f;
+        color: #4f8cff;
+        border: 1.5px solid #4f8cff;
+        border-radius: 8px;
+        padding: 4px 12px;
+        font-size: 0.98rem;
+        font-weight: 600;
+      }
+      .innovation-outcomes {
+        margin-bottom: 8px;
+      }
+      .innovation-outcomes ul {
+        margin: 0 0 10px 0;
+        padding: 0 0 0 18px;
+      }
+      .innovation-outcomes li {
+        color: #bfc7d5;
+        font-size: 0.98rem;
+        margin-bottom: 4px;
+      }
+      .innovation-future {
+        padding: 12px;
+        border-radius: 10px;
+        background: linear-gradient(90deg, #4f8cff11 10%, #00e0d311 90%);
+        border: 1.5px solid #4f8cff22;
+        margin-top: 8px;
+      }
+      .innovation-future-title {
+        color: #4f8cff;
+        font-size: 1.01rem;
+        font-weight: 700;
+        margin-bottom: 4px;
+      }
+      .innovation-philosophy-card {
+        background: rgba(35,39,43,0.98);
+        border-radius: 18px;
+        box-shadow: 0 4px 32px 0 rgba(79,140,255,0.10), 0 1.5px 8px 0 rgba(0,0,0,0.10);
+        padding: 32px 22px 32px 22px;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+      .innovation-philosophy-title {
+        font-size: 1.6rem;
+        font-weight: 700;
+        background: linear-gradient(90deg, #4f8cff 10%, #00e0d3 90%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+        text-align: center;
+        margin-bottom: 18px;
+      }
+      .innovation-philosophy-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 32px;
+      }
+      .innovation-philosophy-item {
+        text-align: center;
+      }
+      .innovation-icon {
+        font-size: 2.2rem;
+        width: 56px;
+        height: 56px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 12px auto;
+        border-radius: 50%;
+        background: linear-gradient(90deg, #4f8cff 10%, #00e0d3 90%);
+        color: #fff;
+      }
+      .innovation-icon-zap { background: linear-gradient(90deg, #ffe156 10%, #ff6ec4 90%); color: #23272b; }
+      .innovation-icon-brain { background: linear-gradient(90deg, #7f53ff 10%, #00e0d3 90%); color: #fff; }
+    </style>
+    <script>
+    // --- Innovation Section Dynamic Data ---
+    let innovationData = { description: '', entries: [] };
+    function fetchInnovationData() {
+      return fetch('data/innovation.json')
+        .then(r => r.json())
+        .then(data => { innovationData = data; return data; })
+        .catch(() => { innovationData = { description: '', entries: [] }; return innovationData; });
+    }
+    function getStatusBadge(status) {
+      switch (status) {
+        case "Production": return '<span class="innovation-badge status" style="background:linear-gradient(90deg,#22c55e 10%,#4f8cff 90%);color:#fff;">'+status+'</span>';
+        case "In Development": return '<span class="innovation-badge status" style="background:linear-gradient(90deg,#4f8cff 10%,#00e0d3 90%);color:#fff;">'+status+'</span>';
+        case "Pilot": return '<span class="innovation-badge status" style="background:#ffe156;color:#23272b;">'+status+'</span>';
+        case "Implementation": return '<span class="innovation-badge status" style="background:linear-gradient(90deg,#ff6ec4 10%,#ffe156 90%);color:#23272b;">'+status+'</span>';
+        case "Research": return '<span class="innovation-badge status" style="background:linear-gradient(90deg,#7f53ff 10%,#00e0d3 90%);color:#fff;">'+status+'</span>';
+        case "Proof of Concept": return '<span class="innovation-badge status" style="background:#23272b;color:#4f8cff;border:1.5px solid #4f8cff;">'+status+'</span>';
+        default: return '<span class="innovation-badge status">'+status+'</span>';
+      }
+    }
+    function getCategoryIcon(category) {
+      switch (category) {
+        case "Emerging Tech": return '🖥️';
+        case "MLOps": return '🧠';
+        case "Supply Chain Security": return '🛡️';
+        case "Platform Engineering": return '🔧';
+        case "Edge Technologies": return '⚡';
+        case "Reliability Engineering": return '💡';
+        default: return '💡';
+      }
+    }
+    function renderInnovations() {
+      document.getElementById('innovation-desc').textContent = innovationData.description || '';
+      const grid = document.querySelector('.innovation-grid');
+      if (!grid) return;
+      grid.innerHTML = '';
+      (innovationData.entries || []).forEach((innovation, idx) => {
+        const card = document.createElement('div');
+        card.className = 'innovation-card';
+        card.innerHTML = `
+          <div class="innovation-badges">
+            <span class="innovation-badge">${getCategoryIcon(innovation.category)} ${innovation.category}</span>
+            ${getStatusBadge(innovation.status)}
+          </div>
+          <div class="innovation-title">${innovation.title}</div>
+          <div class="innovation-desc">${innovation.description}</div>
+          <div class="innovation-techs">${(innovation.technologies||[]).map(t=>`<span class=\"innovation-tech\">${t}</span>`).join('')}</div>
+          <div class="innovation-outcomes">
+            <div class="innovation-future-title">Current Outcomes</div>
+            <ul>${(innovation.outcomes||[]).map(o=>`<li>${o}</li>`).join('')}</ul>
+          </div>
+          <div class="innovation-future">
+            <div class="innovation-future-title">Future Impact</div>
+            <div>${innovation.futureImpact||''}</div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+      // Render Innovation Philosophy Card dynamically
+      const philosophyCard = document.getElementById('innovation-philosophy-card');
+      if (philosophyCard) {
+        // Only use innovationData.philosophy from innovation.json
+        if (Array.isArray(innovationData.philosophy) && innovationData.philosophy.length > 0) {
+          philosophyCard.innerHTML = `
+            <h3 class="innovation-philosophy-title">Innovation Philosophy</h3>
+            <div class="innovation-philosophy-grid">
+              ${innovationData.philosophy.map(item => `
+                <div class="innovation-philosophy-item">
+                  <div class="innovation-icon">${item.icon || ''}</div>
+                  <h4>${item.title || ''}</h4>
+                  <p>${item.description || ''}</p>
+                </div>
+              `).join('')}
+            </div>
+          `;
+        } else {
+          philosophyCard.innerHTML = '';
+        }
+      }
+    }
+    // --- Edit Modal for Innovation Section ---
+    function openInnovationEditModal() {
+      let modal = document.getElementById('innovation-edit-modal');
+      if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'innovation-edit-modal';
+        modal.style.position = 'fixed';
+        modal.style.top = '0';
+        modal.style.left = '0';
+        modal.style.width = '100vw';
+        modal.style.height = '100vh';
+        modal.style.background = 'rgba(0,0,0,0.5)';
+        modal.style.display = 'flex';
+        modal.style.alignItems = 'center';
+        modal.style.justifyContent = 'center';
+        modal.style.zIndex = '9999';
+        modal.innerHTML = `
+          <div style="background:#23272b;padding:32px 24px;border-radius:16px;min-width:340px;max-width:98vw;box-shadow:0 8px 40px #0008;max-height:90vh;overflow:auto;">
+            <h3 style="color:#4f8cff;margin-bottom:18px;">Edit Innovation Section</h3>
+            <form id="innovation-edit-form" style="display:flex;flex-direction:column;gap:16px;">
+              <label style="color:#bfc7d5;">Section Description</label>
+              <textarea name="description" style="padding:8px;border-radius:6px;border:1px solid #4f8cff;min-height:48px;">${innovationData.description||''}</textarea>
+              <div style="margin-top:10px;margin-bottom:6px;color:#22c55e;font-weight:700;">Innovation Entries</div>
+              <div id="innovation-entries-edit"></div>
+              <button type="button" id="add-innovation-btn" style="background:#22c55e;color:#fff;border:none;padding:7px 18px;border-radius:8px;">Add Entry</button>
+              <div style="display:flex;gap:12px;justify-content:flex-end;margin-top:8px;">
+                <button type="button" id="innovation-cancel-btn" style="background:#23272b;color:#bfc7d5;border:1px solid #4f8cff;padding:7px 18px;border-radius:8px;">Cancel</button>
+                <button type="submit" style="background:#4f8cff;color:#fff;border:none;padding:7px 18px;border-radius:8px;">Save</button>
+              </div>
+            </form>
+          </div>
+        `;
+        document.body.appendChild(modal);
+      }
+      // Render entries edit UI
+      function renderEntriesEdit() {
+        const entriesDiv = modal.querySelector('#innovation-entries-edit');
+        entriesDiv.innerHTML = '';
+        (innovationData.entries||[]).forEach((entry, idx) => {
+          const entryDiv = document.createElement('div');
+          entryDiv.style = 'border:1px solid #4f8cff22;padding:10px 8px;border-radius:8px;margin-bottom:10px;background:#181b1f;';
+          entryDiv.innerHTML = `
+            <input name="title" placeholder="Title" value="${entry.title||''}" style="width:100%;margin-bottom:6px;padding:6px;border-radius:6px;border:1px solid #4f8cff;" required />
+            <input name="category" placeholder="Category" value="${entry.category||''}" style="width:100%;margin-bottom:6px;padding:6px;border-radius:6px;border:1px solid #4f8cff;" required />
+            <input name="status" placeholder="Status" value="${entry.status||''}" style="width:100%;margin-bottom:6px;padding:6px;border-radius:6px;border:1px solid #4f8cff;" required />
+            <input name="icon" placeholder="Icon (emoji)" value="${entry.icon||''}" style="width:100%;margin-bottom:6px;padding:6px;border-radius:6px;border:1px solid #4f8cff;" />
+            <textarea name="description" placeholder="Description" style="width:100%;margin-bottom:6px;padding:6px;border-radius:6px;border:1px solid #4f8cff;min-height:32px;">${entry.description||''}</textarea>
+            <input name="technologies" placeholder="Technologies (comma separated)" value="${(entry.technologies||[]).join(', ')}" style="width:100%;margin-bottom:6px;padding:6px;border-radius:6px;border:1px solid #4f8cff;" />
+            <textarea name="outcomes" placeholder="Outcomes (comma separated)" style="width:100%;margin-bottom:6px;padding:6px;border-radius:6px;border:1px solid #4f8cff;min-height:32px;">${(entry.outcomes||[]).join(', ')}</textarea>
+            <input name="futureImpact" placeholder="Future Impact" value="${entry.futureImpact||''}" style="width:100%;margin-bottom:6px;padding:6px;border-radius:6px;border:1px solid #4f8cff;" />
+            <button type="button" data-idx="${idx}" class="remove-innovation-btn" style="background:#ff6b6b;color:#fff;border:none;padding:4px 12px;border-radius:8px;float:right;">Remove</button>
+          `;
+          entriesDiv.appendChild(entryDiv);
+        });
+        // Remove handlers
+        entriesDiv.querySelectorAll('.remove-innovation-btn').forEach(btn => {
+          btn.onclick = function() {
+            const idx = +this.getAttribute('data-idx');
+            innovationData.entries.splice(idx, 1);
+            renderEntriesEdit();
+          };
+        });
+      }
+      renderEntriesEdit();
+      // Add entry handler
+      modal.querySelector('#add-innovation-btn').onclick = function() {
+        innovationData.entries.push({ title:'', category:'', status:'', icon:'', description:'', technologies:[], outcomes:[], futureImpact:'' });
+        renderEntriesEdit();
+      };
+      // Cancel button
+      modal.querySelector('#innovation-cancel-btn').onclick = () => { modal.style.display = 'none'; };
+      // Save handler
+      modal.querySelector('#innovation-edit-form').onsubmit = function(e) {
+        e.preventDefault();
+        // Save description
+        innovationData.description = this.description.value;
+        // Save entries
+        const entryDivs = modal.querySelectorAll('#innovation-entries-edit > div');
+        innovationData.entries = Array.from(entryDivs).map(div => {
+          return {
+            title: div.querySelector('input[name="title"]').value,
+            category: div.querySelector('input[name="category"]').value,
+            status: div.querySelector('input[name="status"]').value,
+            icon: div.querySelector('input[name="icon"]').value,
+            description: div.querySelector('textarea[name="description"]').value,
+            technologies: div.querySelector('input[name="technologies"]').value.split(',').map(s=>s.trim()).filter(Boolean),
+            outcomes: div.querySelector('textarea[name="outcomes"]').value.split(',').map(s=>s.trim()).filter(Boolean),
+            futureImpact: div.querySelector('input[name="futureImpact"]').value
+          };
+        });
+        // Save to localStorage if file://, else POST to backend (not implemented)
+        if (window.location.protocol === 'file:') {
+          localStorage.setItem('innovationData', JSON.stringify(innovationData));
+        } else {
+          // TODO: send to backend via fetch/POST
+        }
+        modal.style.display = 'none';
+        renderInnovations();
+      };
+      modal.style.display = 'flex';
+    }
+    // On load, fetch innovation data and render
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.location.protocol === 'file:' && localStorage.getItem('innovationData')) {
+        innovationData = JSON.parse(localStorage.getItem('innovationData'));
+        renderInnovations();
+      } else {
+        fetchInnovationData().then(renderInnovations);
+      }
+      // Edit button
+      document.getElementById('innovation-edit-btn').onclick = openInnovationEditModal;
+    });
+    </script>
+
+        <!-- Team Impact & Cultural Contribution Section -->
+    <section id="team" class="scroll-fade-up">
+      <div class="projects-section-container">
+        <div class="text-center mb-16 animate-slide-up">
+          <h2 class="projects-title">Team Impact &amp; Cultural Contribution</h2>
+          <p class="projects-desc">Building high-performing teams through mentorship, cultural transformation, and enabling others to succeed</p>
+        </div>
+
+        <!-- Culture Initiatives -->
+        <div class="space-y-8 mb-16">
+          <h3 class="text-2xl font-bold text-gradient text-center">Cultural Transformation Initiatives</h3>
+          <div class="team-culture-list"></div>
+        </div>
+
+        <!-- Team Enablement Activities -->
+        <div class="mb-16">
+          <h3 class="text-2xl font-bold text-gradient text-center mb-8">Team Enablement Activities</h3>
+          <div class="team-activities-grid"></div>
+        </div>
+
+        <!-- Testimonials -->
+        <div class="mb-16">
+          <h3 class="text-2xl font-bold text-gradient text-center mb-8">Team Member Testimonials</h3>
+          <div class="team-testimonials-grid"></div>
+        </div>
+
+        <!-- Impact Summary -->
+        <div class="animate-slide-up" style="margin-top: 56px;">
+          <div class="timeline-summary-card" id="overall-team-impact-card"></div>
+        </div>
+      </div>
+    </section>
+
+    <style>
+      .team-culture-list {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .team-culture-card {
+        background: rgba(35,39,43,0.98);
+        border-radius: 18px;
+        box-shadow: 0 4px 32px 0 rgba(79,140,255,0.10), 0 1.5px 8px 0 rgba(0,0,0,0.10);
+        padding: 28px 22px 32px 22px;
+        position: relative;
+        border: 2.5px solid #4f8cff22;
+        transition: box-shadow 0.18s, border-color 0.18s;
+        overflow: visible;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+      .team-culture-header {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        margin-bottom: 8px;
+      }
+      .team-culture-icon {
+        font-size: 1.6rem;
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        background: linear-gradient(90deg, #4f8cff 10%, #00e0d3 90%);
+        color: #fff;
+      }
+      .team-culture-badges {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+      .team-culture-badge {
+        background: #23272b;
+        color: #4f8cff;
+        border-radius: 8px;
+        padding: 2px 10px;
+        font-size: 0.98rem;
+        font-weight: 600;
+        margin-bottom: 2px;
+        display: inline-block;
+      }
+      .team-culture-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #4f8cff;
+        margin-bottom: 8px;
+      }
+      .team-culture-desc {
+        color: #bfc7d5;
+        font-size: 1.05rem;
+        margin-bottom: 8px;
+      }
+      .team-culture-achievements, .team-culture-metrics {
+        margin-bottom: 8px;
+      }
+      .team-culture-achievements-title, .team-culture-metrics-title {
+        font-size: 1.08rem;
+        font-weight: 700;
+        color: #22c55e;
+        margin-bottom: 6px;
+      }
+      .team-culture-achievements-list, .team-culture-metrics-list {
+        margin: 0 0 10px 0;
+        padding: 0 0 0 18px;
+      }
+      .team-culture-achievements-list li, .team-culture-metrics-list li {
+        color: #bfc7d5;
+        font-size: 0.98rem;
+        margin-bottom: 4px;
+      }
+      .team-culture-metrics-list {
+        list-style: none;
+        padding-left: 0;
+      }
+      .team-culture-metric-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 6px 0;
+        border-bottom: 1px solid #23272b;
+      }
+      .team-culture-metric-label {
+        font-size: 0.98rem;
+        color: #bfc7d5;
+      }
+      .team-culture-metric-value {
+        font-size: 0.98rem;
+        font-weight: 700;
+        color: #4f8cff;
+      }
+      .team-activities-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+        gap: 28px;
+      }
+      .team-activities-card {
+        background: rgba(35,39,43,0.98);
+        border-radius: 18px;
+        box-shadow: 0 4px 32px 0 rgba(79,140,255,0.10), 0 1.5px 8px 0 rgba(0,0,0,0.10);
+        padding: 24px 20px 24px 20px;
+        position: relative;
+        border: 2.5px solid #4f8cff22;
+        transition: box-shadow 0.18s, border-color 0.18s;
+        overflow: visible;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .team-activities-title {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: #4f8cff;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .team-activities-icon {
+        font-size: 1.2rem;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        background: linear-gradient(90deg, #22c55e 10%, #4f8cff 90%);
+        color: #fff;
+      }
+      .team-activities-list {
+        margin: 0;
+        padding: 0 0 0 18px;
+      }
+      .team-activities-list li {
+        color: #bfc7d5;
+        font-size: 0.98rem;
+        margin-bottom: 4px;
+      }
+      .team-testimonials-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 24px;
+      }
+      .team-testimonial-card {
+        background: rgba(35,39,43,0.98);
+        border-radius: 18px;
+        box-shadow: 0 4px 32px 0 rgba(79,140,255,0.10), 0 1.5px 8px 0 rgba(0,0,0,0.10);
+        padding: 24px 20px 24px 20px;
+        position: relative;
+        border: 2.5px solid #4f8cff22;
+        transition: box-shadow 0.18s, border-color 0.18s;
+        overflow: visible;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .team-testimonial-quote {
+        color: #bfc7d5;
+        font-style: italic;
+        margin-bottom: 8px;
+      }
+      .team-testimonial-meta {
+        border-top: 1px solid #23272b;
+        padding-top: 8px;
+        margin-top: 8px;
+      }
+      .team-testimonial-name {
+        font-weight: 700;
+        color: #4f8cff;
+      }
+      .team-testimonial-role {
+        font-size: 0.98rem;
+        color: #bfc7d5;
+      }
+      .team-testimonial-impact {
+        background: linear-gradient(90deg, #22c55e 10%, #4f8cff 90%);
+        color: #fff;
+        border-radius: 8px;
+        padding: 2px 10px;
+        font-size: 0.92rem;
+        font-weight: 600;
+        display: inline-block;
+        margin-top: 4px;
+      }
+    </style>
+    <script>
+    // Data for team impact section (from your React code, adapted for JS)
+    // --- Impact Section: Load from team.json ---
+    let cultureInitiatives = [];
+    let teamEnablementActivities = [];
+    let testimonials = [];
+
+    let overallTeamImpact = {};
+    function loadTeamData() {
+      fetch('data/team.json')
+        .then(r => r.json())
+        .then(data => {
+          cultureInitiatives = data.cultureInitiatives || [];
+          teamEnablementActivities = data.teamEnablementActivities || [];
+          testimonials = data.testimonials || [];
+          overallTeamImpact = data.overallTeamImpact || {};
+          renderTeamCulture();
+          renderTeamActivities();
+          renderTestimonials();
+          renderOverallTeamImpact();
+        });
+    }
+    function renderOverallTeamImpact() {
+      const card = document.getElementById('overall-team-impact-card');
+      if (!card || !overallTeamImpact) return;
+      card.innerHTML = `
+        <h3 class="timeline-summary-title">${overallTeamImpact.emoji ? overallTeamImpact.emoji + ' ' : ''}${overallTeamImpact.title || 'Overall Team Impact'}</h3>
+        <div class="timeline-summary-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">
+          ${(overallTeamImpact.summary || []).map(item => `
+            <div>
+              <div class="timeline-summary-num primary">${item.emoji ? item.emoji + ' ' : ''}${item.value}</div>
+              <div class="timeline-summary-label">${item.label}</div>
+            </div>
+          `).join('')}
+        </div>
+        <div class="p-6 rounded-lg bg-gradient-primary/10 border border-primary/20 mt-6">
+          <h4 class="font-semibold text-primary mb-3">Leadership Philosophy</h4>
+          <p class="text-muted-foreground text-center">${overallTeamImpact.leadershipPhilosophy || ''}</p>
+        </div>
+      `;
+    }
+
+    // Save changes to team.json (localStorage fallback for file://)
+    function saveTeamData() {
+      const teamData = {
+        cultureInitiatives,
+        teamEnablementActivities,
+        testimonials
+      };
+      if (window.location.protocol === 'file:') {
+        localStorage.setItem('teamData', JSON.stringify(teamData));
+        loadTeamDataFromLocal();
+      } else {
+        fetch('data/team.json', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(teamData)
+        }).then(loadTeamData);
+      }
+    }
+
+    function loadTeamDataFromLocal() {
+      const teamData = JSON.parse(localStorage.getItem('teamData') || '{}');
+      cultureInitiatives = teamData.cultureInitiatives || [];
+      teamEnablementActivities = teamData.teamEnablementActivities || [];
+      testimonials = teamData.testimonials || [];
+      renderTeamCulture();
+      renderTeamActivities();
+      renderTestimonials();
+    }
+
+    // --- Editing UI ---
+    function openEditImpactModal(type, index = null) {
+      // Modal creation code here (not shown for brevity)
+      // On save, update the relevant array and call saveTeamData()
+    }
+
+    // --- Rendering Functions ---
+    function renderTeamCulture() {
+      const list = document.querySelector('.team-culture-list');
+      if (!list) return;
+      list.innerHTML = '';
+      cultureInitiatives.forEach(initiative => {
+        const card = document.createElement('div');
+        card.className = 'team-culture-card';
+        card.innerHTML = `
+          <div class="team-culture-header">
+            <span class="team-culture-icon">${initiative.icon}</span>
+            <span class="team-culture-badges">
+              <span class="team-culture-badge">${initiative.impact}</span>
+              <span class="team-culture-badge">${initiative.timeframe}</span>
+            </span>
+          </div>
+          <div class="team-culture-title">${initiative.title}</div>
+          <div class="team-culture-desc">${initiative.description}</div>
+          <div class="team-culture-achievements">
+            <div class="team-culture-achievements-title">Key Achievements</div>
+            <ul class="team-culture-achievements-list">
+              ${initiative.achievements.map(a=>`<li>${a}</li>`).join('')}
+            </ul>
+          </div>
+          <div class="team-culture-metrics">
+            <div class="team-culture-metrics-title">Impact Metrics</div>
+            <ul class="team-culture-metrics-list">
+              ${Object.entries(initiative.metrics).map(([k,v])=>`<li class=\"team-culture-metric-row\"><span class=\"team-culture-metric-label\">${k}</span><span class=\"team-culture-metric-value\">${v}</span></li>`).join('')}
+            </ul>
+          </div>
+
+        `;
+        list.appendChild(card);
+      });
+    }
+    function renderTeamActivities() {
+      const grid = document.querySelector('.team-activities-grid');
+      if (!grid) return;
+      grid.innerHTML = '';
+      teamEnablementActivities.forEach(category => {
+        const card = document.createElement('div');
+        card.className = 'team-activities-card';
+        card.innerHTML = `
+          <div class="team-activities-title"><span class="team-activities-icon">${category.icon}</span>${category.category}</div>
+          <ul class="team-activities-list">
+            ${category.activities.map(a=>`<li>${a}</li>`).join('')}
+          </ul>
+
+        `;
+        grid.appendChild(card);
+      });
+    }
+    function renderTestimonials() {
+      const grid = document.querySelector('.team-testimonials-grid');
+      if (!grid) return;
+      grid.innerHTML = '';
+      testimonials.forEach(testimonial => {
+        const card = document.createElement('div');
+        card.className = 'team-testimonial-card';
+        card.innerHTML = `
+          <div class="team-testimonial-quote">"${testimonial.quote}"</div>
+          <div class="team-testimonial-meta">
+            <div class="team-testimonial-name">${testimonial.name}</div>
+            <div class="team-testimonial-role">${testimonial.role}</div>
+            <span class="team-testimonial-impact">${testimonial.impact}</span>
+          </div>
+
+        `;
+        grid.appendChild(card);
+      });
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.location.protocol === 'file:' && localStorage.getItem('teamData')) {
+        const teamData = JSON.parse(localStorage.getItem('teamData') || '{}');
+        cultureInitiatives = teamData.cultureInitiatives || [];
+        teamEnablementActivities = teamData.teamEnablementActivities || [];
+        testimonials = teamData.testimonials || [];
+        overallTeamImpact = teamData.overallTeamImpact || {};
+        renderTeamCulture();
+        renderTeamActivities();
+        renderTestimonials();
+        renderOverallTeamImpact();
+      } else {
+        loadTeamData();
+      }
+    });
+    </script>
+
+        <!-- Thought Leadership & Community Section -->
+    <section id="leadership" class="scroll-fade-up">
+      <div class="projects-section-container">
+        <div class="text-center mb-16 animate-slide-up">
+          <h2 class="projects-title">Thought Leadership &amp; Community</h2>
+          <p class="projects-desc">Sharing knowledge, contributing to the community, and advancing the field through content creation and mentorship</p>
+        </div>
+        <div class="leadership-categories-list"></div>
+        <div class="mt-32 animate-slide-up">
+          <div class="timeline-summary-card" id="community-impact-card"></div>
+        </div>
+      </div>
+    </section>
+
+    <style>
+      .leadership-categories-list {
+        display: flex;
+        flex-direction: column;
+        gap: 48px;
+        margin-bottom: 48px;
+      }
+      .leadership-category-card {
+        background: rgba(35,39,43,0.98);
+        border-radius: 18px;
+        box-shadow: 0 4px 32px 0 rgba(79,140,255,0.10), 0 1.5px 8px 0 rgba(0,0,0,0.10);
+        padding: 28px 22px 32px 22px;
+        position: relative;
+        border: 2.5px solid #4f8cff22;
+        transition: box-shadow 0.18s, border-color 0.18s;
+        overflow: visible;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+      .leadership-category-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #4f8cff;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .leadership-category-icon {
+        font-size: 1.4rem;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        background: linear-gradient(90deg, #4f8cff 10%, #00e0d3 90%);
+        color: #fff;
+      }
+      .leadership-items-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 24px;
+      }
+      .leadership-item-card {
+        background: #23272b;
+        border-radius: 12px;
+        box-shadow: 0 2px 12px 0 rgba(79,140,255,0.08);
+        padding: 20px 18px 18px 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        border: 1.5px solid #4f8cff22;
+        transition: box-shadow 0.18s, border-color 0.18s;
+      }
+      .leadership-item-title {
+        font-size: 1.08rem;
+        font-weight: 700;
+        color: #f3f6fa;
+        margin-bottom: 2px;
+      }
+      .leadership-item-meta {
+        display: flex;
+        gap: 12px;
+        font-size: 0.98rem;
+        color: #bfc7d5;
+        margin-bottom: 2px;
+      }
+      .leadership-item-desc {
+        color: #bfc7d5;
+        font-size: 0.98rem;
+        margin-bottom: 2px;
+      }
+      .leadership-item-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+      }
+      .leadership-item-tag {
+        background: #181b1f;
+        color: #4f8cff;
+        border: 1.2px solid #4f8cff;
+        border-radius: 8px;
+        padding: 2px 8px;
+        font-size: 0.92rem;
+        font-weight: 600;
+      }
+    </style>
+    <script>
+    // Leadership section: fetch and render from leadership.json
+    let leadershipData = { contentCategories: [], communityImpact: {} };
+    function fetchLeadershipData() {
+      return fetch('data/leadership.json')
+        .then(r => r.json())
+        .then(data => { leadershipData = data; return data; })
+        .catch(() => { leadershipData = { contentCategories: [], communityImpact: {} }; return leadershipData; });
+    }
+    function renderLeadershipSection() {
+      // Categories
+      const list = document.querySelector('.leadership-categories-list');
+      if (list) {
+        list.innerHTML = '';
+        (leadershipData.contentCategories || []).forEach(category => {
+          const card = document.createElement('div');
+          card.className = 'leadership-category-card';
+          card.innerHTML = `
+            <div class="leadership-category-title"><span class="leadership-category-icon">${category.icon || ''}</span>${category.title || ''}</div>
+            <div class="leadership-items-grid">
+              ${(category.items || []).map(item => `
+                <div class="leadership-item-card">
+                  <div class="leadership-item-title">${item.title || ''}</div>
+                  <div class="leadership-item-meta">
+                    <span>${item.platform || ''}</span>
+                    <span>${item.date || ''}</span>
+                    <span>${item.views || item.audience || item.stars || item.downloads || item.impact || ''}</span>
+                    <span>${item.emoji || ''}</span>
+                  </div>
+                  <div class="leadership-item-desc">${item.description || ''}</div>
+                  <div class="leadership-item-tags">
+                    ${(item.tags||[]).map(tag=>`<span class='leadership-item-tag'>${tag}</span>`).join('')}
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          `;
+          list.appendChild(card);
+        });
+      }
+      // Community Impact
+      const impactCard = document.getElementById('community-impact-card');
+      if (impactCard && leadershipData.communityImpact) {
+        const ci = leadershipData.communityImpact;
+        impactCard.innerHTML = `
+          <h3 class="timeline-summary-title">${ci.emoji ? ci.emoji + ' ' : ''}${ci.title || 'Community Impact'}</h3>
+          <div class="timeline-summary-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">
+            ${(ci.summary || []).map(item => `
+              <div>
+                <div class="timeline-summary-num ${item.class || ''}">${item.value || ''}</div>
+                <div class="timeline-summary-label">${item.label || ''}</div>
+              </div>
+            `).join('')}
+          </div>
+          <div class="mt-8 p-6 rounded-lg bg-gradient-primary/10 border border-primary/20">
+            <h4 class="font-semibold text-primary mb-3">${ci.philosophyTitle || 'Speaking & Content Strategy'}</h4>
+            <div class="grid md:grid-cols-2 gap-4 text-sm text-muted-foreground">
+              ${(ci.philosophy || []).map(line => `<div>• ${line}</div>`).join('')}
+            </div>
+          </div>
+        `;
+      }
+    }
+    // On load, fetch and render leadership section
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.location.protocol === 'file:' && localStorage.getItem('leadershipData')) {
+        leadershipData = JSON.parse(localStorage.getItem('leadershipData'));
+        renderLeadershipSection();
+      } else {
+        fetchLeadershipData().then(renderLeadershipSection);
+      }
+    });
+    </script>
+
+        <!-- Certifications & Continuous Learning Section -->
+    <section id="certifications" class="scroll-fade-up">
+      <div class="projects-section-container">
+        <div class="text-center mb-16 animate-slide-up">
+          <h2 class="projects-title">Certifications &amp; Continuous Learning</h2>
+          <p class="projects-desc">Professional certifications and ongoing learning initiatives to stay current with evolving technologies</p>
+        </div>
+        <div class="mb-16">
+          <h3 class="text-2xl font-bold text-gradient mb-8 text-center">Professional Certifications</h3>
+          <div class="certifications-grid"></div>
+        </div>
+        <div class="space-y-8">
+          <h3 class="text-2xl font-bold text-gradient text-center">Continuous Learning Journey</h3>
+          <div class="learning-grid"></div>
+        </div>
+        <div class="mt-16 animate-slide-up">
+          <div class="learning-philosophy-card" id="learning-philosophy-card"></div>
+        </div>
+      </div>
+    </section>
+    <style>
+      .certifications-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+        gap: 28px;
+      }
+      .certification-card {
+        background: rgba(35,39,43,0.98);
+        border-radius: 18px;
+        box-shadow: 0 4px 32px 0 rgba(79,140,255,0.10), 0 1.5px 8px 0 rgba(0,0,0,0.10);
+        padding: 28px 22px 32px 22px;
+        border: 2.5px solid #4f8cff22;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        min-height: 0;
+      }
+      .certification-title {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: #4f8cff;
+        margin-bottom: 4px;
+      }
+      .certification-provider {
+        font-size: 0.98rem;
+        color: #bfc7d5;
+        margin-bottom: 6px;
+      }
+      .certification-description {
+        color: #bfc7d5;
+        font-size: 0.98rem;
+        margin-bottom: 6px;
+      }
+      .certification-meta {
+        display: flex;
+        gap: 24px;
+        font-size: 0.97rem;
+        color: #bfc7d5;
+        margin-bottom: 6px;
+      }
+      .certification-skills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-bottom: 6px;
+      }
+      .certification-skill {
+        background: #181b1f;
+        color: #4f8cff;
+        border: 1.2px solid #4f8cff;
+        border-radius: 8px;
+        padding: 2px 8px;
+        font-size: 0.92rem;
+        font-weight: 600;
+      }
+      .certification-id {
+        font-size: 0.92rem;
+        color: #bfc7d5;
+        font-family: monospace;
+      }
+      .learning-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+        gap: 28px;
+      }
+      .learning-card {
+        background: rgba(35,39,43,0.98);
+        border-radius: 18px;
+        box-shadow: 0 4px 32px 0 rgba(79,140,255,0.10), 0 1.5px 8px 0 rgba(0,0,0,0.10);
+        padding: 24px 20px 24px 20px;
+        border: 2.5px solid #4f8cff22;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        min-height: 0;
+      }
+      .learning-category-title {
+        font-size: 1.08rem;
+        font-weight: 700;
+        color: #22c55e;
+        margin-bottom: 8px;
+      }
+      .learning-items-list {
+        margin: 0;
+        padding: 0 0 0 18px;
+      }
+      .learning-item {
+        color: #bfc7d5;
+        font-size: 0.98rem;
+        margin-bottom: 4px;
+      }
+      .learning-status {
+        font-size: 0.92rem;
+        font-weight: 600;
+        margin-left: 8px;
+      }
+      .learning-status.completed { color: #22c55e; }
+      .learning-status.inprogress { color: #4f8cff; }
+      .learning-status.planned { color: #bfc7d5; }
+      .learning-philosophy-card {
+        background: rgba(35,39,43,0.98);
+        border-radius: 18px;
+        box-shadow: 0 4px 32px 0 rgba(79,140,255,0.10), 0 1.5px 8px 0 rgba(0,0,0,0.10);
+        padding: 32px 22px 32px 22px;
+        max-width: 900px;
+        margin: 64px auto 0 auto;
+      }
+      .learning-philosophy-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 32px;
+      }
+      .learning-icon {
+        font-size: 2.2rem;
+        width: 56px;
+        height: 56px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 12px auto;
+        border-radius: 50%;
+        background: linear-gradient(90deg, #4f8cff 10%, #00e0d3 90%);
+        color: #fff;
+      }
+      .learning-icon-target { background: linear-gradient(90deg, #ffe156 10%, #ff6ec4 90%); color: #23272b; }
+      .learning-icon-star { background: linear-gradient(90deg, #7f53ff 10%, #00e0d3 90%); color: #fff; }
+      .learning-icon-award { background: linear-gradient(90deg, #22c55e 10%, #4f8cff 90%); color: #fff; }
+    </style>
+    <script>
+    // Fetch certifications, continuous learning, and philosophy data from certifications.json
+    let certifications = [];
+    let continuousLearning = [];
+    let learningPhilosophy = [];
+    fetch('data/certifications.json')
+      .then(r => r.json())
+      .then(data => {
+        certifications = data.certifications || [];
+        continuousLearning = data.continuousLearning || [];
+        learningPhilosophy = data["Learning Philosophy"] || [];
+        renderCertifications();
+        renderLearning();
+        renderLearningPhilosophy();
+      });
+    function renderLearningPhilosophy() {
+      const card = document.getElementById('learning-philosophy-card');
+      if (!card) return;
+      if (!learningPhilosophy.length) {
+        card.innerHTML = '';
+        return;
+      }
+      card.innerHTML = `
+        <h3 class="text-2xl font-bold text-gradient mb-6 text-center">Learning Philosophy</h3>
+        <div class="learning-philosophy-grid">
+          ${learningPhilosophy.map(item => `
+            <div>
+              <div class="learning-icon">${item.icon || ''}</div>
+              <h4 class="font-semibold mb-2">${item.title || ''}</h4>
+              <p class="text-sm text-muted-foreground">${item.description || ''}</p>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+    function getLevelClass(level) {
+      switch (level) {
+        case "Expert": return "certification-skill certification-skill-expert";
+        case "Professional": return "certification-skill certification-skill-professional";
+        case "Associate": return "certification-skill certification-skill-associate";
+        default: return "certification-skill";
+      }
+    }
+    function getStatusClass(status) {
+      switch (status) {
+        case "Completed": return "learning-status completed";
+        case "In Progress": return "learning-status inprogress";
+        case "Planned": return "learning-status planned";
+        default: return "learning-status";
+      }
+    }
+    function renderCertifications() {
+      const grid = document.querySelector('.certifications-grid');
+      if (!grid) return;
+      grid.innerHTML = '';
+      certifications.forEach(cert => {
+        const card = document.createElement('div');
+        card.className = 'certification-card';
+        card.innerHTML = `
+          <div class="certification-title">${cert.title}</div>
+          <div class="certification-provider">${cert.provider}</div>
+          <div class="certification-description">${cert.description}</div>
+          <div class="certification-meta">
+            <span><b>Level:</b> ${cert.level}</span>
+            <span><b>Earned:</b> ${cert.earned}</span>
+            <span><b>Expires:</b> ${cert.expires}</span>
+          </div>
+          <div class="certification-skills">
+            ${cert.skills.map(skill => `<span class="certification-skill">${skill}</span>`).join('')}
+          </div>
+          <div class="certification-id">ID: ${cert.credentialId}</div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+    function renderLearning() {
+      const grid = document.querySelector('.learning-grid');
+      if (!grid) return;
+      grid.innerHTML = '';
+      continuousLearning.forEach(section => {
+        const card = document.createElement('div');
+        card.className = 'learning-card';
+        card.innerHTML = `
+          <div class="learning-category-title">${section.category}</div>
+          <ul class="learning-items-list">
+            ${section.items.map(item => `<li class="learning-item">${item.title} <span class="learning-status ${getStatusClass(item.status)}">${item.status}</span> <span style="color:#bfc7d5;font-size:0.95em;">${item.provider ? item.provider : (item.author || '')}</span></li>`).join('')}
+          </ul>
+        `;
+        grid.appendChild(card);
+      });
+    }
+    // Render on DOMContentLoaded only if data already loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      // If data already loaded, render; else wait for fetch above
+      if (certifications.length && continuousLearning.length) {
+        renderCertifications();
+        renderLearning();
+      }
+    });
+    </script>
+
+
+
+
+
+    <section id="about" class="scroll-fade-up">
+      <div class="section-title">About</div>
+      <div class="about"></div>
+    </section>
+    <section id="contact" class="scroll-fade-up">
+  <script src="script.js"></script> <!-- Added script.js for interactivity -->
+  <script>
+    // Starfield animation
+    document.addEventListener('DOMContentLoaded', function() {
+      const starfield = document.querySelector('.starfield');
+      if (!starfield) return;
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      const numStars = Math.floor((w * h) / 1800); // density
+      for (let i = 0; i < numStars; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        // Random size
+        const r = Math.random();
+        if (r > 0.92) star.classList.add('big');
+        else if (r < 0.18) star.classList.add('tiny');
+        // Random position
+        star.style.left = (Math.random() * 100) + 'vw';
+        star.style.top = (Math.random() * 100) + 'vh';
+        // Random animation delay
+        star.style.animationDelay = (Math.random() * 2.5) + 's';
+        starfield.appendChild(star);
+      }
+
+      // Spaceship custom path movement on scroll (avoids main content area)
+      const spaceship = document.querySelector('.spaceship-container');
+      if (spaceship) {
+        function moveSpaceship() {
+          // Get scroll progress (0 = top, 1 = bottom)
+          const scrollY = window.scrollY;
+          const docHeight = document.body.scrollHeight - window.innerHeight;
+          const t = docHeight > 0 ? scrollY / docHeight : 0;
+          // Path: top-right (start), right-middle (mid), bottom-right (end)
+          // We'll use a quadratic Bezier curve for a smooth arc
+          // P0 (start): (90vw, 8vh), P1 (control): (98vw, 50vh), P2 (end): (90vw, 92vh)
+          function bezier(t, p0, p1, p2) {
+            return (
+              (1 - t) * (1 - t) * p0 +
+              2 * (1 - t) * t * p1 +
+              t * t * p2
+            );
+          }
+          const x = bezier(t, 90, 98, 90); // vw
+          const y = bezier(t, 8, 50, 92);  // vh
+          spaceship.style.left = x + 'vw';
+          spaceship.style.top = y + 'vh';
+          spaceship.style.transform = '';
+        }
+        moveSpaceship();
+        window.addEventListener('scroll', moveSpaceship);
+        window.addEventListener('resize', moveSpaceship);
+      }
+    });
+  </script>
+  <script>
+    // Scroll fade-in-up animation for sections
+    function revealOnScroll() {
+      const reveals = document.querySelectorAll('.scroll-fade-up');
+      const windowHeight = window.innerHeight;
+      for (const el of reveals) {
+        const top = el.getBoundingClientRect().top;
+        if (top < windowHeight - 80) {
+          el.classList.add('visible');
+        } else {
+          el.classList.remove('visible');
+        }
+      }
+    }
+    window.addEventListener('scroll', revealOnScroll);
+    window.addEventListener('DOMContentLoaded', revealOnScroll);
+  </script>
+      <div class="section-title">Contact</div>
+      <div style="display:flex;justify-content:center;align-items:center;min-height:120px;">
+        <a href="mailto:dineshpolavarapu66@gmail.com" class="btn-primary" style="padding:16px 40px;font-size:1.15rem;border-radius:8px;text-decoration:none;">Email Me</a>
+      </div>
+    </section>
+  </main>
+  <footer>
+    &copy; 2025 Dinesh Polavarapu. All rights reserved. | <a href="https://www.linkedin.com/in/dinesh-polavarapu-134029306" style="color:#4f8cff;text-decoration:none;" target="_blank" rel="noopener">LinkedIn</a> | <a href="https://github.com/WentiQ" style="color:#4f8cff;text-decoration:none;" target="_blank" rel="noopener">GitHub</a>
+  </footer>
+</body>
+<style>
+/* --- Featured Projects Block Modern UI --- */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 32px;
+  margin-bottom: 32px;
+}
+.project-card {
+  background: linear-gradient(120deg, #23272b 80%, #2e3540 100%);
+  border-radius: 18px;
+  box-shadow: 0 4px 32px 0 rgba(79,140,255,0.10), 0 1.5px 8px 0 rgba(0,0,0,0.10);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.18s cubic-bezier(.4,1.4,.6,1), box-shadow 0.18s;
+  position: relative;
+  min-height: 370px;
+}
+.project-card:hover {
+  transform: translateY(-8px) scale(1.025);
+  box-shadow: 0 8px 40px 0 rgba(79,140,255,0.18), 0 2px 12px 0 rgba(0,0,0,0.13);
+}
+.project-img-placeholder {
+  background: linear-gradient(90deg, #4f8cff 10%, #7f53ff 90%);
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  border-bottom: 1.5px solid #23272b;
+}
+.project-card-content {
+  padding: 24px 22px 20px 22px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.project-title {
+  font-size: 1.32rem;
+  font-weight: 700;
+  color: #4f8cff;
+  margin-bottom: 8px;
+  letter-spacing: 0.2px;
+}
+.project-desc {
+  color: #bfc7d5;
+  font-size: 1.08rem;
+  margin-bottom: 18px;
+  min-height: 48px;
+}
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+.project-tag {
+  background: linear-gradient(90deg, #4f8cff 10%, #00e0d3 90%);
+  color: #fff;
+  font-size: 0.98rem;
+  font-weight: 600;
+  padding: 4px 14px;
+  border-radius: 16px;
+  letter-spacing: 0.2px;
+  box-shadow: 0 1px 4px 0 rgba(79,140,255,0.10);
+}
+.project-links {
+  display: flex;
+  gap: 18px;
+  margin-top: auto;
+}
+.project-links a {
+  color: #4f8cff;
+  background: #181b1f;
+  border: 1.5px solid #4f8cff;
+  border-radius: 8px;
+  padding: 7px 18px;
+  font-size: 1.01rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.18s, color 0.18s;
+}
+.project-links a:hover {
+  background: #4f8cff;
+  color: #fff;
+}
+@media (max-width: 900px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+  .project-card {
+    min-height: 320px;
+  }
+}
+</style>
+<script>
+// Skills section tab switching and bar animation
+document.addEventListener('DOMContentLoaded', function() {
+  const catBtns = document.querySelectorAll('.skills-cat-btn');
+  const cardGroups = document.querySelectorAll('.skills-card-group');
+  catBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      catBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = btn.getAttribute('data-cat');
+      cardGroups.forEach(group => {
+        if (group.getAttribute('data-cat') === cat) {
+          group.style.display = 'block';
+          // Animate bars
+          setTimeout(() => {
+            group.querySelectorAll('.bar').forEach(bar => {
+              bar.style.width = '';
+              // force reflow
+              void bar.offsetWidth;
+              if (bar.classList.contains('expert')) bar.style.width = '100%';
+              else if (bar.classList.contains('advanced')) bar.style.width = '80%';
+              else if (bar.classList.contains('intermediate')) bar.style.width = '60%';
+              else if (bar.classList.contains('beginner')) bar.style.width = '35%';
+            });
+          }, 50);
+        } else {
+          group.style.display = 'none';
+        }
+      });
+    });
+  });
+  // Animate bars on load for first group
+  setTimeout(() => {
+    document.querySelectorAll('.skills-card-group[data-cat="foundational"] .bar').forEach(bar => {
+      if (bar.classList.contains('expert')) bar.style.width = '100%';
+      else if (bar.classList.contains('advanced')) bar.style.width = '80%';
+      else if (bar.classList.contains('intermediate')) bar.style.width = '60%';
+      else if (bar.classList.contains('beginner')) bar.style.width = '35%';
+    });
+  }, 200);
+});
+</script>
+</html>

@@ -1,0 +1,12 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"label": "Run local web server",
+			"command": "powershell -Command \"Start-Process powershell -ArgumentList '-NoExit','-Command','cd c:\\Users\\dines\\OneDrive\\Desktop\\WebNotes; python -m http.server 8000'\"",
+			"group": "build",
+			"isBackground": true
+		}
+	]
+}

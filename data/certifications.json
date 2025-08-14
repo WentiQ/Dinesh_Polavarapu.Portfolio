@@ -1,0 +1,183 @@
+{
+  "enabled": true,
+  "certifications": [
+    {
+      "id": "aws-devops-pro",
+      "title": "AWS Certified DevOps Engineer - Professional",
+      "provider": "Amazon Web Services",
+      "level": "Professional",
+      "earned": "2023-08",
+      "expires": "2026-08",
+      "credentialId": "AWS-DEVOPS-2023-001",
+      "skills": [
+        "AWS",
+        "CI/CD",
+        "Infrastructure as Code",
+        "Monitoring",
+        "Security"
+      ],
+      "description": "Advanced certification covering deployment, management, and operations on AWS platform"
+    },
+    {
+      "id": "cka",
+      "title": "Certified Kubernetes Administrator (CKA)",
+      "provider": "Cloud Native Computing Foundation",
+      "level": "Professional",
+      "earned": "2023-03",
+      "expires": "2026-03",
+      "credentialId": "CKA-2023-001",
+      "skills": [
+        "Kubernetes",
+        "Container Orchestration",
+        "Cluster Management",
+        "Troubleshooting"
+      ],
+      "description": "Hands-on certification demonstrating Kubernetes administration and troubleshooting skills"
+    },
+    {
+      "id": "terraform-associate",
+      "title": "HashiCorp Certified: Terraform Associate",
+      "provider": "HashiCorp",
+      "level": "Associate",
+      "earned": "2022-11",
+      "expires": "2024-11",
+      "credentialId": "TERRA-2022-001",
+      "skills": [
+        "Infrastructure as Code",
+        "Terraform",
+        "State Management",
+        "Modules"
+      ],
+      "description": "Demonstrates proficiency in Terraform for infrastructure automation and management"
+    },
+    {
+      "id": "azure-devops",
+      "title": "Microsoft Certified: Azure DevOps Engineer Expert",
+      "provider": "Microsoft",
+      "level": "Expert",
+      "earned": "2022-06",
+      "expires": "2025-06",
+      "credentialId": "AZ-400-2022-001",
+      "skills": [
+        "Azure",
+        "DevOps",
+        "CI/CD",
+        "Application Monitoring",
+        "Security"
+      ],
+      "description": "Expert-level certification for implementing DevOps practices using Microsoft Azure"
+    },
+    {
+      "id": "docker-certified",
+      "title": "Docker Certified Associate (DCA)",
+      "provider": "Docker Inc.",
+      "level": "Associate",
+      "earned": "2021-09",
+      "expires": "2024-09",
+      "credentialId": "DCA-2021-001",
+      "skills": [
+        "Docker",
+        "Containerization",
+        "Image Management",
+        "Networking",
+        "Security"
+      ],
+      "description": "Certification validating skills in Docker containerization platform"
+    },
+    {
+      "id": "gcp-ace",
+      "title": "Google Cloud Associate Cloud Engineer",
+      "provider": "Google Cloud",
+      "level": "Associate",
+      "earned": "2021-04",
+      "expires": "2024-04",
+      "credentialId": "GCP-ACE-2021-001",
+      "skills": [
+        "Google Cloud Platform",
+        "Compute Engine",
+        "Kubernetes Engine",
+        "Cloud Storage"
+      ],
+      "description": "Foundational certification for Google Cloud Platform services and operations"
+    }
+  ],
+  "continuousLearning": [
+    {
+      "category": "Current Learning (2024)",
+      "items": [
+        {
+          "title": "Platform Engineering Fundamentals",
+          "provider": "Linux Foundation",
+          "status": "In Progress"
+        },
+        {
+          "title": "eBPF for System Observability",
+          "provider": "Isovalent",
+          "status": "In Progress"
+        },
+        {
+          "title": "AI/ML Operations (MLOps)",
+          "provider": "Coursera",
+          "status": "Planned"
+        }
+      ]
+    },
+    {
+      "category": "Recent Completions (2023)",
+      "items": [
+        {
+          "title": "GitOps with ArgoCD",
+          "provider": "CNCF",
+          "status": "Completed"
+        },
+        {
+          "title": "Advanced Kubernetes Security",
+          "provider": "Aqua Security",
+          "status": "Completed"
+        },
+        {
+          "title": "FinOps Certified Practitioner",
+          "provider": "FinOps Foundation",
+          "status": "Completed"
+        }
+      ]
+    },
+    {
+      "category": "Books & Resources",
+      "items": [
+        {
+          "title": "Platform Engineering: Patterns and Practices",
+          "author": "Charity Majors",
+          "status": "Completed"
+        },
+        {
+          "title": "Learning eBPF",
+          "author": "Liz Rice",
+          "status": "In Progress"
+        },
+        {
+          "title": "The Phoenix Project",
+          "author": "Gene Kim",
+          "status": "Completed"
+        }
+      ]
+    }
+  ],
+  "Learning Philosophy": [
+    {
+      "icon": "🎯",
+      "title": "Stay Current",
+      "description": "Continuously learning emerging technologies and industry best practices"
+    },
+    {
+      "icon": "⭐",
+      "title": "Hands-On Learning",
+      "description": "Prefer practical, project-based learning over theoretical knowledge"
+    },
+    {
+      "icon": "🏆",
+      "title": "Share Knowledge",
+      "description": "Teaching others reinforces learning and contributes to the community"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "enabled": true,
+  "name": "Dinesh Polavarapu",
+  "roles": [
+    "Full Stack Developer",
+    "UI/UX Enthusiast",
+    "Web App Architect",
+    "Creative Coder"
+  ],
+  "description": "I build beautiful, performant web apps and digital experiences.<br>I love solving real-world problems with code, design, and a touch of creativity.",
+  "image": "images/dinesh.webp",
+  "socialLinks": [
+    {
+      "title": "GitHub",
+      "url": "https://github.com/WentiQ",
+      "icon": "github"
+    },
+    {
+      "title": "LinkedIn",
+      "url": "https://www.linkedin.com/in/dinesh-polavarapu-134029306",
+      "icon": "linkedin"
+    },
+    {
+      "title": "Facebook",
+      "url": "https://facebook.com/",
+      "icon": "facebook"
+    }
+  ],
+  "actions": [
+    { "label": "View Projects", "href": "#projects", "class": "btn-primary" },
+    { "label": "Contact Me", "href": "#contact", "class": "btn-outline" },
+    { "label": "Download Resume", "href": "resume.pdf", "class": "btn-primary", "style": "background:#23272b;color:#4f8cff;border:2px solid #4f8cff;", "download": true }
+  ],
+  "scrollDown": {
+    "label": "Scroll Down",
+    "href": "#projects"
+  }
+}

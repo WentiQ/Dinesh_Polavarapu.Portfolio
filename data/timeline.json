@@ -1,0 +1,87 @@
+{
+  "enabled": true,
+  "description": "Career timeline showcasing growth from systems administration to platform engineering leadership",
+  "entries": [
+    {
+      "year": "2024",
+      "role": "Senior Platform Engineer",
+      "company": "TechCorp Enterprise",
+      "location": "San Francisco, CA",
+      "duration": "Present",
+      "type": "promotion",
+      "achievements": [
+        "Leading platform engineering initiative for 50+ development teams",
+        "Architected multi-cloud GitOps platform reducing deployment time by 80%",
+        "Implemented comprehensive observability stack with 99.95% uptime",
+        "Established FinOps practices saving $2M annually"
+      ],
+      "technologies": ["Kubernetes", "ArgoCD", "Terraform", "AWS", "Backstage"]
+    },
+    {
+      "year": "2022",
+      "role": "DevOps Engineer III",
+      "company": "TechCorp Enterprise",
+      "location": "San Francisco, CA",
+      "duration": "2 years",
+      "type": "promotion",
+      "achievements": [
+        "Migrated legacy monolith to microservices on Kubernetes",
+        "Built self-service developer platform using Backstage",
+        "Implemented comprehensive CI/CD pipelines for 30+ services",
+        "Reduced MTTR from 4 hours to 15 minutes through automation"
+      ],
+      "technologies": ["Docker", "Kubernetes", "Jenkins", "Terraform", "Prometheus"]
+    },
+    {
+      "year": "2020",
+      "role": "DevOps Engineer II",
+      "company": "CloudScale Solutions",
+      "location": "Austin, TX",
+      "duration": "2 years",
+      "type": "role",
+      "achievements": [
+        "Designed and implemented multi-region AWS infrastructure",
+        "Automated deployment processes reducing manual effort by 90%",
+        "Led security initiatives implementing DevSecOps practices",
+        "Mentored junior engineers and established best practices"
+      ],
+      "technologies": ["AWS", "Ansible", "GitLab CI", "Docker", "Terraform"]
+    },
+    {
+      "year": "2018",
+      "role": "DevOps Engineer",
+      "company": "StartupTech Inc",
+      "location": "Denver, CO",
+      "duration": "2 years",
+      "type": "role",
+      "achievements": [
+        "Built first CI/CD pipeline reducing deployment time from 6 hours to 30 minutes",
+        "Containerized applications and orchestrated with Docker Swarm",
+        "Implemented monitoring and alerting stack using ELK and Prometheus",
+        "Established infrastructure as code practices with Terraform"
+      ],
+      "technologies": ["Linux", "Docker", "Jenkins", "AWS", "Python"]
+    },
+    {
+      "year": "2016",
+      "role": "Systems Administrator",
+      "company": "Enterprise Solutions LLC",
+      "location": "Chicago, IL",
+      "duration": "2 years",
+      "type": "start",
+      "achievements": [
+        "Managed hybrid cloud infrastructure supporting 500+ users",
+        "Automated server provisioning and configuration management",
+        "Implemented backup and disaster recovery procedures",
+        "Optimized system performance improving response times by 40%"
+      ],
+      "technologies": ["Linux", "VMware", "Bash", "Nagios", "MySQL"]
+    }
+    
+  ],
+  "summary": {
+    "yearsExperience": "7+",
+    "roleProgressions": "5",
+    "promotions": "3"
+  }
+}
